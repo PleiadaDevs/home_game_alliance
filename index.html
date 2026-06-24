@@ -506,6 +506,32 @@ class Component extends DCLogic {
     this._tries = 0;
     this._renderIcons();
     this._setupLoopVideos();
+    this._setupEmbedHeight();
+  }
+
+  _setupEmbedHeight() {
+    const post = () => {
+      try {
+        const h = Math.max(
+          document.documentElement.scrollHeight,
+          document.body ? document.body.scrollHeight : 0
+        );
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({ type: "ga-embed-height", height: h }, "*");
+        }
+      } catch (e) {}
+    };
+    this._postHeight = post;
+    post();
+    window.addEventListener("load", post);
+    window.addEventListener("resize", post);
+    if ("ResizeObserver" in window) {
+      this._ro = new ResizeObserver(() => post());
+      this._ro.observe(document.documentElement);
+      if (document.body) this._ro.observe(document.body);
+    }
+    let n = 0;
+    this._hi = setInterval(() => { post(); if (++n > 20) clearInterval(this._hi); }, 600);
   }
 
   _setupLoopVideos() {
@@ -540,6 +566,12 @@ class Component extends DCLogic {
   componentDidUpdate() { this._renderIcons(); }
   componentWillUnmount() {
     if (this._onScroll) window.removeEventListener("scroll", this._onScroll);
+    if (this._postHeight) {
+      window.removeEventListener("load", this._postHeight);
+      window.removeEventListener("resize", this._postHeight);
+    }
+    if (this._ro) this._ro.disconnect();
+    if (this._hi) clearInterval(this._hi);
   }
   _renderIcons() {
     const run = () => {
