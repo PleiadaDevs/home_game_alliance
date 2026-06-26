@@ -36,6 +36,23 @@
       var p=(s.src&&exec)?new Promise(function(res){s.onload=s.onerror=res;}):null;
       old.replaceWith(s); if(p) await p;
     }
+    // --- embed bridge: report height + relay #anchor clicks to a listening Framer parent ---
+    try{
+      function gaH(){try{var h=Math.max(document.documentElement.scrollHeight||0,(document.body&&document.body.scrollHeight)||0);if(h)parent.postMessage({__gaEmbed:1,type:'height',height:h},'*');}catch(_){}}
+      addEventListener('load',gaH);addEventListener('resize',gaH);
+      try{new ResizeObserver(gaH).observe(document.documentElement);}catch(_){}
+      setInterval(gaH,1200);gaH();
+      document.addEventListener('click',function(e){
+        var a=e.target;while(a&&a!==document&&a.tagName!=='A')a=a.parentNode;
+        if(!a||a===document)return;
+        var href=(a.getAttribute&&a.getAttribute('href'))||'';
+        if(href.charAt(0)==='#'&&href.length>1){
+          var el=document.getElementById(href.slice(1));
+          if(el){var y=el.getBoundingClientRect().top+(window.pageYOffset||document.documentElement.scrollTop||0)-78;
+            try{parent.postMessage({__gaEmbed:1,type:'scroll',y:y},'*');}catch(_){}}
+        }
+      },true);
+    }catch(_){}
   }catch(e){fail(e&&e.message||e);}
 })();
 </script></body></html>
