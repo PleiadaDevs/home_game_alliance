@@ -65,20 +65,20 @@
   <!-- ===================== HEADER ===================== -->
   <header data-screen-label="Header" style="position:{{ headerPosition }}; left:0; right:0; top:0; z-index:50; background:{{ navBg }}; border-bottom:1px solid var(--line); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); transition:background 240ms cubic-bezier(0.22,1,0.36,1);">
     <div style="max-width:1180px; margin:0 auto; padding:14px 24px; display:flex; align-items:center; gap:24px;">
-      <a href="https://pleiada.ai/" target="_blank" rel="noopener" aria-label="Pleiada" style="display:flex; align-items:center; text-decoration:none; flex:none;">
-        <img src="assets/pleiada.png" alt="Pleiada" style="height:26px; width:auto; display:block;">
+      <a href="/" aria-label="Gameplay Alliance — Inicio" style="display:flex; align-items:center; text-decoration:none; flex:none;">
+        <img src="assets/ga-wordmark.png" alt="Gameplay Alliance" style="height:32px; width:auto; display:block;">
       </a>
       <nav class="ga-navlinks" style="margin-left:18px; align-items:center; gap:20px;">
         <a href="#dos-formas" style="text-decoration:none; font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); white-space:nowrap;" style-hover="color:var(--ink)">Programa</a>
         <a href="#como-funciona" style="text-decoration:none; font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); white-space:nowrap;" style-hover="color:var(--ink)">Cómo Funciona</a>
         <a href="#playgrounds" style="text-decoration:none; font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); white-space:nowrap;" style-hover="color:var(--ink)">Playgrounds</a>
-        <a href="https://gameplayalliance.gg/gamescatalog" target="_top" style="text-decoration:none; font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); white-space:nowrap;" style-hover="color:var(--ink)">Catálogo</a>
-        <a href="https://gameplayalliance.gg/pleiada_recorder" target="_top" style="text-decoration:none; font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); white-space:nowrap;" style-hover="color:var(--ink)">Recorder</a>
+        <a href="https://pleiadadevs.github.io/catalogo-juegos/" target="_top" style="text-decoration:none; font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); white-space:nowrap;" style-hover="color:var(--ink)">Catálogo</a>
+        <a href="https://pleiadadevs.github.io/pleiada_recorder_tutorial/" target="_top" style="text-decoration:none; font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); white-space:nowrap;" style-hover="color:var(--ink)">Recorder</a>
         <a href="#faq" style="text-decoration:none; font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); white-space:nowrap;" style-hover="color:var(--ink)">FAQ</a>
         <a href="https://gameplayalliance.gg/dashboard" target="_top" style="text-decoration:none; font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); white-space:nowrap;" style-hover="color:var(--ink)">Dashboard</a>
       </nav>
       <div style="margin-left:auto; display:flex; align-items:center; gap:12px;">
-        <a class="ga-navlinks" href="https://gameplayalliance.gg/join" target="_blank" rel="noopener" style="align-items:center; gap:8px; padding:11px 20px; border-radius:11px; border:1px solid var(--violet); background:linear-gradient(180deg,var(--violet),#6d28d9); color:#fff; text-decoration:none; font-family:var(--display); font-weight:800; letter-spacing:.06em; text-transform:uppercase; font-size:13px; box-shadow:0 16px 36px -16px var(--violet-glow);">Unite Ahora</a>
+        <a class="ga-navlinks" href="https://web.miniextensions.com/W32TyrnaWMUHtnazd4oT" target="_blank" rel="noopener" style="align-items:center; gap:8px; padding:11px 20px; border-radius:11px; border:1px solid var(--violet); background:linear-gradient(180deg,var(--violet),#6d28d9); color:#fff; text-decoration:none; font-family:var(--display); font-weight:800; letter-spacing:.06em; text-transform:uppercase; font-size:13px; box-shadow:0 16px 36px -16px var(--violet-glow);">Unite Ahora</a>
         <button class="ga-burger" onclick="{{ toggleMenu }}" aria-label="Abrir menú" style="align-items:center; justify-content:center; width:44px; height:44px; border-radius:10px; background:rgba(139,92,246,0.07); border:1px solid var(--line); color:var(--ink); cursor:pointer;">
           <i data-lucide="menu" style="width:22px; height:22px;"></i>
         </button>
@@ -88,21 +88,23 @@
       <a href="#dos-formas" onclick="{{ closeMenu }}" style="text-decoration:none; padding:13px 0; font-family:var(--display); font-weight:700; font-size:15px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); border-bottom:1px solid var(--line);">Programa</a>
       <a href="#como-funciona" onclick="{{ closeMenu }}" style="text-decoration:none; padding:13px 0; font-family:var(--display); font-weight:700; font-size:15px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); border-bottom:1px solid var(--line);">Cómo Funciona</a>
       <a href="#playgrounds" onclick="{{ closeMenu }}" style="text-decoration:none; padding:13px 0; font-family:var(--display); font-weight:700; font-size:15px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); border-bottom:1px solid var(--line);">Playgrounds</a>
-      <a href="https://gameplayalliance.gg/gamescatalog" target="_top" onclick="{{ closeMenu }}" style="text-decoration:none; padding:13px 0; font-family:var(--display); font-weight:700; font-size:15px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); border-bottom:1px solid var(--line);">Catálogo</a>
-      <a href="https://gameplayalliance.gg/pleiada_recorder" target="_top" onclick="{{ closeMenu }}" style="text-decoration:none; padding:13px 0; font-family:var(--display); font-weight:700; font-size:15px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); border-bottom:1px solid var(--line);">Recorder</a>
+      <a href="https://pleiadadevs.github.io/catalogo-juegos/" target="_top" onclick="{{ closeMenu }}" style="text-decoration:none; padding:13px 0; font-family:var(--display); font-weight:700; font-size:15px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); border-bottom:1px solid var(--line);">Catálogo</a>
+      <a href="https://pleiadadevs.github.io/pleiada_recorder_tutorial/" target="_top" onclick="{{ closeMenu }}" style="text-decoration:none; padding:13px 0; font-family:var(--display); font-weight:700; font-size:15px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); border-bottom:1px solid var(--line);">Recorder</a>
       <a href="#faq" onclick="{{ closeMenu }}" style="text-decoration:none; padding:13px 0; font-family:var(--display); font-weight:700; font-size:15px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); border-bottom:1px solid var(--line);">FAQ</a>
       <a href="https://gameplayalliance.gg/dashboard" target="_top" onclick="{{ closeMenu }}" style="text-decoration:none; padding:13px 0; font-family:var(--display); font-weight:700; font-size:15px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); border-bottom:1px solid var(--line);">Dashboard</a>
-      <a href="https://gameplayalliance.gg/join" target="_blank" rel="noopener" onclick="{{ closeMenu }}" style="margin-top:16px; text-align:center; text-decoration:none; padding:14px 0; font-family:var(--display); font-weight:800; font-size:16px; letter-spacing:.06em; text-transform:uppercase; color:#fff; background:linear-gradient(180deg,var(--violet),#6d28d9); border-radius:12px; box-shadow:0 16px 36px -16px var(--violet-glow);">Unite Ahora</a>
+      <a href="https://web.miniextensions.com/W32TyrnaWMUHtnazd4oT" target="_blank" rel="noopener" onclick="{{ closeMenu }}" style="margin-top:16px; text-align:center; text-decoration:none; padding:14px 0; font-family:var(--display); font-weight:800; font-size:16px; letter-spacing:.06em; text-transform:uppercase; color:#fff; background:linear-gradient(180deg,var(--violet),#6d28d9); border-radius:12px; box-shadow:0 16px 36px -16px var(--violet-glow);">Unite Ahora</a>
     </div>
   </header>
 
   <!-- ===================== HERO ===================== -->
   <section data-screen-label="Hero" style="position:relative; overflow:hidden;">
     <div style="position:relative; max-width:920px; margin:0 auto; padding:74px 24px 92px; display:flex; flex-direction:column; align-items:center; text-align:center;">
-      <p style="margin:0 0 26px; font-family:var(--mono); font-size:12px; font-weight:500; letter-spacing:.26em; text-transform:uppercase; color:var(--ink-3);">PLEIADA PRESENTA:</p>
-
-      <div style="display:flex; flex-direction:column; align-items:center; margin:0 0 8px;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:18px; margin:0 0 4px;">
         <img src="assets/ga-wordmark.png" alt="Gameplay Alliance" style="width:min(460px,84vw); height:auto; display:block; filter:drop-shadow(0 10px 32px rgba(139,92,246,0.42));">
+        <a href="https://pleiada.ai/" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink-3); font-family:var(--mono); font-size:11px; letter-spacing:.22em; text-transform:uppercase;" style-hover="color:var(--ink-2)">
+          <span>Powered by</span>
+          <img src="assets/pleiada.png" alt="Pleiada" style="height:16px; width:auto; display:block; opacity:0.9;">
+        </a>
       </div>
 
       <h1 style="font-family:var(--display); font-weight:900; font-size:clamp(40px,6.2vw,76px); line-height:0.98; letter-spacing:.005em; text-transform:uppercase; color:var(--ink); margin:30px 0 0; text-wrap:balance;">
@@ -110,7 +112,7 @@
       </h1>
       <p style="font-size:clamp(15px,1.6vw,17px); line-height:1.6; color:var(--ink-2); max-width:740px; margin:24px auto 0; text-wrap:pretty;"><b>Gameplay Alliance</b> es el programa de comunidad de Pleiada, con dos formas de participar: En el <strong style="color: var(--ink); font-weight: 600;">Marketplace</strong> grabás tu gameplay de juegos AAA,<br>lo subís y, cuando se vende, cobrás tu parte.<br>En los <strong style="color: var(--ink); font-weight: 600;">Pleiada Labs</strong> entrás a desafíos single o multiplayer<br>que se abren por tiempo limitado y se pagan fijo por completarlos.&nbsp;</p>
       <div style="display:flex; justify-content:center; margin-top:36px;">
-        <a href="https://gameplayalliance.gg/join" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:11px; padding:15px 28px; border-radius:13px; border:1px solid var(--violet); background:linear-gradient(180deg,var(--violet),#6d28d9); color:#fff; text-decoration:none; font-family:var(--display); font-weight:800; letter-spacing:.06em; text-transform:uppercase; font-size:16px; box-shadow:0 22px 50px -18px var(--violet-glow);">Registrate gratis <i data-lucide="arrow-right" style="width:18px;height:18px;"></i></a>
+        <a href="https://web.miniextensions.com/W32TyrnaWMUHtnazd4oT" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:11px; padding:15px 28px; border-radius:13px; border:1px solid var(--violet); background:linear-gradient(180deg,var(--violet),#6d28d9); color:#fff; text-decoration:none; font-family:var(--display); font-weight:800; letter-spacing:.06em; text-transform:uppercase; font-size:16px; box-shadow:0 22px 50px -18px var(--violet-glow);">Registrate gratis <i data-lucide="arrow-right" style="width:18px;height:18px;"></i></a>
       </div>
     </div>
   </section>
@@ -284,7 +286,7 @@
           <h2 style="font-family:var(--display); font-weight:900; text-transform:uppercase; font-size:clamp(30px,5vw,54px); line-height:1.0; letter-spacing:.005em; color:var(--ink); margin:16px 0 0;">Los mejores momentos del gaming son en equipo</h2>
           <p style="font-size:clamp(16px,2vw,19px); line-height:1.6; color:var(--ink-2); margin:22px 0 0; text-wrap:pretty;">En Gameplay Alliance, los challenges de coordinación —jugar, comunicar, ganar juntos— son de los que más valen. Armá tu equipo y sumate.</p>
           <div style="margin-top:32px;">
-            <a href="https://gameplayalliance.gg/join" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:11px; padding:15px 28px; border-radius:13px; border:1px solid var(--violet); background:linear-gradient(180deg,var(--violet),#6d28d9); color:#fff; text-decoration:none; font-family:var(--display); font-weight:800; letter-spacing:.06em; text-transform:uppercase; font-size:16px; box-shadow:0 22px 50px -18px var(--violet-glow);">Armá tu equipo <i data-lucide="arrow-right" style="width:18px;height:18px;"></i></a>
+            <a href="https://web.miniextensions.com/W32TyrnaWMUHtnazd4oT" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:11px; padding:15px 28px; border-radius:13px; border:1px solid var(--violet); background:linear-gradient(180deg,var(--violet),#6d28d9); color:#fff; text-decoration:none; font-family:var(--display); font-weight:800; letter-spacing:.06em; text-transform:uppercase; font-size:16px; box-shadow:0 22px 50px -18px var(--violet-glow);">Armá tu equipo <i data-lucide="arrow-right" style="width:18px;height:18px;"></i></a>
           </div>
         </div>
       </div>
@@ -329,7 +331,7 @@
           <div style="width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.12); border:1px solid var(--line-strong); color:var(--violet-2);"><i data-lucide="monitor-play" style="width:24px;height:24px;"></i></div>
           <h3 style="font-family:var(--display); font-weight:700; font-size:19px; text-transform:uppercase; letter-spacing:.02em; color:var(--ink); margin:14px 0 7px;">Pleiada Recorder</h3>
           <p style="margin:0; font-size:14px; line-height:1.5; color:var(--ink-3);">Registra los frames del video a través del OBS, junto con las teclas usadas en tu teclado y el mouse durante tu sesión de partida. Ya está disponible en beta y es de <strong style="color:var(--ink-2); font-weight:600;">código abierto</strong>, para que sepas exactamente cómo funciona.</p>
-          <a href="https://gameplayalliance.gg/pleiada_recorder" target="_top" rel="noopener" style="display:inline-flex; align-items:center; justify-content:center; gap:9px; margin-top:18px; padding:12px 18px; border-radius:11px; border:1px solid var(--violet); background:linear-gradient(180deg,var(--violet),#6d28d9); color:#fff; text-decoration:none; font-family:var(--display); font-weight:800; letter-spacing:.05em; text-transform:uppercase; font-size:13px; box-shadow:0 16px 36px -16px var(--violet-glow);">Conocé más sobre el Pleiada Recorder <i data-lucide="arrow-right" style="width:16px;height:16px;"></i></a>
+          <a href="https://pleiadadevs.github.io/pleiada_recorder_tutorial/" target="_top" rel="noopener" style="display:inline-flex; align-items:center; justify-content:center; gap:9px; margin-top:18px; padding:12px 18px; border-radius:11px; border:1px solid var(--violet); background:linear-gradient(180deg,var(--violet),#6d28d9); color:#fff; text-decoration:none; font-family:var(--display); font-weight:800; letter-spacing:.05em; text-transform:uppercase; font-size:13px; box-shadow:0 16px 36px -16px var(--violet-glow);">Conocé más sobre el Pleiada Recorder <i data-lucide="arrow-right" style="width:16px;height:16px;"></i></a>
         </div>
         <div class="ga-reveal" style="padding:30px 26px; background:var(--panel); border:1px solid var(--line); border-radius:16px; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
           <div style="width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.12); border:1px solid var(--line-strong); color:var(--violet-2);"><i data-lucide="layout-dashboard" style="width:24px;height:24px;"></i></div>
@@ -428,7 +430,7 @@
       <h2 style="font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: clamp(34px,5.6vw,66px); line-height: 0.98; letter-spacing: .005em; color: #ffffff; margin: 0; text-wrap: balance">Tus habilidades gamer AHORA <span style="color: var(--violet-2); text-shadow: 0 0 34px var(--violet-glow);">ENTRENAN</span>&nbsp;<span style="color: var(--violet-2); text-shadow: 0 0 34px var(--violet-glow);">&nbsp;IA</span></h2>
       <p style="font-size:clamp(17px,2.2vw,21px); line-height:1.5; color:var(--ink-2); margin:24px auto 0; max-width:520px;">Sumate a la Gameplay Alliance.</p>
       <div style="display:flex; justify-content:center; margin-top:36px;">
-        <a href="https://gameplayalliance.gg/join" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:11px; padding:16px 30px; border-radius:13px; border:1px solid var(--violet); background:linear-gradient(180deg,var(--violet),#6d28d9); color:#fff; text-decoration:none; font-family:var(--display); font-weight:800; letter-spacing:.06em; text-transform:uppercase; font-size:17px; box-shadow:0 22px 50px -18px var(--violet-glow);">Unite Ahora <i data-lucide="arrow-right" style="width:18px;height:18px;"></i></a>
+        <a href="https://web.miniextensions.com/W32TyrnaWMUHtnazd4oT" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:11px; padding:16px 30px; border-radius:13px; border:1px solid var(--violet); background:linear-gradient(180deg,var(--violet),#6d28d9); color:#fff; text-decoration:none; font-family:var(--display); font-weight:800; letter-spacing:.06em; text-transform:uppercase; font-size:17px; box-shadow:0 22px 50px -18px var(--violet-glow);">Unite Ahora <i data-lucide="arrow-right" style="width:18px;height:18px;"></i></a>
       </div>
     </div>
   </section>
@@ -444,7 +446,7 @@
           <span style="font-family:var(--display); font-size:11px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-4);">Programa</span>
           <a href="#como-funciona" style="text-decoration:none; font-size:14px; color:var(--ink-3);">Cómo funciona</a>
           <a href="#playgrounds" style="text-decoration:none; font-size:14px; color:var(--ink-3);">Playgrounds</a>
-          <a href="https://gameplayalliance.gg/join" target="_blank" rel="noopener" style="text-decoration:none; font-size:14px; color:var(--ink-3);">Registrate</a>
+          <a href="https://web.miniextensions.com/W32TyrnaWMUHtnazd4oT" target="_blank" rel="noopener" style="text-decoration:none; font-size:14px; color:var(--ink-3);">Registrate</a>
         </div>
         <div style="display:flex; flex-direction:column; gap:12px;">
           <span style="font-family:var(--display); font-size:11px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-4);">Legal</span>
