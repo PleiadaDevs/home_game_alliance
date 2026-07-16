@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es"><head>
 <meta charset="utf-8">
-<title>Gameplay Alliance — Dashboard · Open Calls</title>
+<title>Gameplay Alliance — Dashboard · Órdenes abiertas</title>
 <style>
 /* Fuentes self-hosted: reutiliza los mismos woff2 del root del site */
 @font-face {
@@ -1193,8 +1193,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 28px; gap: 40px;">
         <div>
           <div class="eyebrow">Gameplay Alliance</div>
-          <h1 class="h1">OPEN <em>CALLS</em>.</h1>
-          <p class="sub">Los Open Calls son pedidos de contenido abiertos para la comunidad Gameplay Alliance. Inscribite en un call que esté activo, grabá cualquiera de los juegos que entran en el pedido con el <strong style="color:var(--violet-2)">Pleiada Recorder</strong> y subí tus sesiones. Solo el contenido de juegos elegibles, y de los calls en los que te inscribiste, son los que van a poder subirse a través del Recorder.</p>
+          <h1 class="h1">ÓRDENES <em>ABIERTAS</em>.</h1>
+          <p class="sub">Las órdenes abiertas son pedidos de contenido para la comunidad Gameplay Alliance. Inscribite en una orden que esté activa, grabá cualquiera de los juegos que entran en el pedido con el <strong style="color:var(--violet-2)">Pleiada Recorder</strong> y subí tus sesiones. Solo el contenido de juegos elegibles, y de las órdenes en las que te inscribiste, son los que van a poder subirse a través del Recorder.</p>
           <p class="sub" style="margin-top:8px;color:var(--ink-3);">¿Todavía no sos parte? <a href="https://gameplayalliance.gg/join" style="color:var(--violet-2);text-decoration:none;font-weight:600;">Registrate gratis ya!</a></p>
         </div>
         <div style="display:flex; flex-direction:column; gap:18px; align-items:flex-end; flex:0 0 auto;">
@@ -1223,14 +1223,14 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
       <div class="stats-row">
         <div class="stat">
-          <div class="label">Calls activos</div>
+          <div class="label">Órdenes activas</div>
           <div class="value" id="stat-calls">—</div>
           <div class="meta" id="stat-calls-meta">Marketplace abierto</div>
         </div>
         <div class="stat">
           <div class="label">Horas pedidas</div>
           <div class="value" id="stat-hours">—</div>
-          <div class="meta">entre todos los calls</div>
+          <div class="meta">entre todas las órdenes</div>
         </div>
         <div class="stat accent">
           <div class="label">Tus horas subidas</div>
@@ -1263,7 +1263,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
           <div id="auth-logged" style="display:none;">
             <div class="eyebrow">Acceso</div>
             <h2 style="font-family:var(--display);font-weight:800;font-size:26px;text-transform:uppercase;margin:8px 0 0;">SESIÓN <em style="font-style:normal;color:var(--violet-2);">INICIADA</em></h2>
-            <p class="sub" style="font-size:14px;">Ingresaste como <strong id="logged-email" style="color:var(--ink);"></strong>. Ya podés inscribirte en los calls abiertos y seguir tus subidas en <em style="font-style:normal;color:var(--violet-2);">Mis Calls</em>.</p>
+            <p class="sub" style="font-size:14px;">Ingresaste como <strong id="logged-email" style="color:var(--ink);"></strong>. Ya podés inscribirte en las órdenes abiertas y seguir tus subidas en <em style="font-style:normal;color:var(--violet-2);">Mis Órdenes</em>.</p>
             <div class="field-row"><button class="btn ghost" onclick="auth.logout()">Cerrar sesión</button></div>
           </div>
         </div>
@@ -1271,8 +1271,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
           <div class="c-bl"></div><div class="c-br"></div>
           <div class="eyebrow">Cómo funciona</div>
           <div style="display:flex;flex-direction:column;gap:14px;margin-top:14px;">
-            <div class="row" style="gap:14px;align-items:flex-start;"><span class="tag hot" style="flex:0 0 auto;">01</span><span style="color:var(--ink-2);font-size:13.5px;">Inscribite en un Open Call activo desde este dashboard.</span></div>
-            <div class="row" style="gap:14px;align-items:flex-start;"><span class="tag hot" style="flex:0 0 auto;">02</span><span style="color:var(--ink-2);font-size:13.5px;">Grabá con el Pleiada Recorder cualquiera de los juegos elegibles del call.</span></div>
+            <div class="row" style="gap:14px;align-items:flex-start;"><span class="tag hot" style="flex:0 0 auto;">01</span><span style="color:var(--ink-2);font-size:13.5px;">Inscribite en una orden abierta desde este dashboard.</span></div>
+            <div class="row" style="gap:14px;align-items:flex-start;"><span class="tag hot" style="flex:0 0 auto;">02</span><span style="color:var(--ink-2);font-size:13.5px;">Grabá con el Pleiada Recorder cualquiera de los juegos elegibles de la orden.</span></div>
             <div class="row" style="gap:14px;align-items:flex-start;"><span class="tag hot" style="flex:0 0 auto;">03</span><span style="color:var(--ink-2);font-size:13.5px;">Subí tus sesiones desde el Recorder y seguí acá su estado y tus horas.</span></div>
           </div>
           <div style="margin-top:20px;padding-top:18px;border-top:1px solid var(--line);">
@@ -1304,7 +1304,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         <div>
           <div class="eyebrow">Sección 01 · Contenido de juegos</div>
           <h1 class="h1" style="font-size:36px;">MARKET<em>PLACE</em>.</h1>
-          <p class="sub">Abrimos calls para que subas tus contenido de gameplay grabado con el Pleiada Recorder. Nosotros le buscamos un comprador entre las empresas de IA. <strong style="color:var(--violet-2)">Recordá que si bien estamos siempre a la búsqueda de nuevas oportunidades comerciales, la venta de tu contenido no está garantizada</strong>: cobrás cuando tu contenido se comercializa, al precio informado en el call.</p>
+          <p class="sub">Abrimos órdenes para que subas tu contenido de gameplay grabado con el Pleiada Recorder. Nosotros le buscamos un comprador entre las empresas de IA. <strong style="color:var(--violet-2)">Recordá que si bien estamos siempre a la búsqueda de nuevas oportunidades comerciales, la venta de tu contenido no está garantizada</strong>: cobrás cuando tu contenido se comercializa, al precio informado en la orden.</p>
         </div>
         <a href="https://catalogo.gameplayalliance.gg" target="_blank" style="font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--violet-2);text-decoration:none;">Catálogo de juegos →</a>
       </div>
@@ -1313,7 +1313,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
         <!-- Contenido dinámico (list_calls). Los siguientes son placeholders
              de diseño: el script los reemplaza al cargar. -->
-        <!-- Call por categorías, precio publicado, NO inscripto -->
+        <!-- Orden por categorías, precio publicado, NO inscripto -->
         <article class="card corners pedido glow" style="grid-column:1 / -1;">
           <div class="c-bl"></div><div class="c-br"></div>
           <span class="tag hot" style="position:absolute; top:18px; right:20px;">Nuevo</span>
@@ -1326,7 +1326,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
               <div class="title-row">
                 <div>
                   <h3>Shooters PvP</h3>
-                  <div class="platform">Open Call GA-2026-001 · Marketplace · PC · teclado y mouse</div>
+                  <div class="platform">Orden GA-2026-001 · Marketplace · PC · teclado y mouse</div>
                   <div class="chips">
                     <span class="goal">Categoría: Shooter</span>
                     <span class="goal">Categoría: Battle Royale</span>
@@ -1346,7 +1346,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                 <span style="margin-left:auto" class="muted">· 24% completado</span>
               </div>
               <div class="pb-wrap">
-                <div class="pb-track" aria-label="Progreso del call">
+                <div class="pb-track" aria-label="Progreso de la orden">
                   <div class="pb-seg"><div class="pb-fill shine" data-fill="97"></div></div>
                   <div class="pb-seg"><div class="pb-fill" data-fill="0"></div></div>
                   <div class="pb-seg"><div class="pb-fill" data-fill="0"></div></div>
@@ -1364,7 +1364,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
           </div>
         </article>
 
-        <!-- Call por juegos específicos, sin precio publicado, YA inscripto -->
+        <!-- Orden por juegos específicos, sin precio publicado, YA inscripto -->
         <article class="card corners pedido" style="grid-column:1 / -1;">
           <div class="c-bl"></div><div class="c-br"></div>
           <span class="status ok" style="position:absolute; top:18px; right:20px;"><span class="pip"></span>Inscripto</span>
@@ -1377,7 +1377,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
               <div class="title-row">
                 <div>
                   <h3>RPG de mundo abierto</h3>
-                  <div class="platform">Open Call GA-2026-003 · Marketplace · PC · teclado y mouse</div>
+                  <div class="platform">Orden GA-2026-003 · Marketplace · PC · teclado y mouse</div>
                   <div class="chips">
                     <span class="goal">Juego: Elden Ring</span>
                     <span class="goal">Juego: Baldur's Gate 3</span>
@@ -1397,7 +1397,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                 <span style="margin-left:auto" class="muted">· 78% completado</span>
               </div>
               <div class="pb-wrap">
-                <div class="pb-track" aria-label="Progreso del call">
+                <div class="pb-track" aria-label="Progreso de la orden">
                   <div class="pb-seg"><div class="pb-fill" data-fill="100"></div></div>
                   <div class="pb-seg"><div class="pb-fill" data-fill="100"></div></div>
                   <div class="pb-seg"><div class="pb-fill" data-fill="100"></div></div>
@@ -1414,7 +1414,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
           </div>
         </article>
 
-        <div class="pg-empty show" style="grid-column:1 / -1;">No hay Open Calls activos en este momento. Apenas se abra uno, te avisaremos por mail y por las redes sociales.</div>
+        <div class="pg-empty show" style="grid-column:1 / -1;">No hay órdenes activas en este momento. Apenas se abra una, te avisaremos por mail y por las redes sociales.</div>
       </div>
     </section>
 
@@ -1424,7 +1424,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         <div>
           <div class="eyebrow">Sección 02 · Pago por resolución</div>
           <h2>PLAY<em>GROUNDS</em>.</h2>
-          <p>Cada tanto abrimos Open Calls para jugar <strong style="color:var(--violet-2)">Playgrounds diseñados por nosotros</strong>: entornos 3D con físicas reales, pensados para entrenar IA. Se paga por cada resolución completada y grabada con el Recorder.</p>
+          <p>Cada tanto abrimos órdenes para jugar <strong style="color:var(--violet-2)">Playgrounds diseñados por nosotros</strong>: entornos 3D con físicas reales, pensados para entrenar IA. Se paga por cada resolución completada y grabada con el Recorder.</p>
           <div class="chips" style="margin-top:16px;">
             <span class="tag hot">Disponible próximamente</span>
           </div>
@@ -1448,7 +1448,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         <div>
           <div class="eyebrow">Sección 03 · Pago por resolución</div>
           <h2>MIND<em>SETS</em>.</h2>
-          <p><strong style="color:var(--violet-2)">Experiencias de conversación con AI.</strong> Se comercializan de la misma manera que los Playgrounds: abrimos Open Calls cada tanto y se paga por resolución completada.</p>
+          <p><strong style="color:var(--violet-2)">Experiencias de conversación con AI.</strong> Se comercializan de la misma manera que los Playgrounds: abrimos órdenes cada tanto y se paga por resolución completada.</p>
           <div class="chips" style="margin-top:16px;">
             <span class="tag hot">Beta</span>
             <span class="tag hot">Disponible próximamente</span>
@@ -1466,8 +1466,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       <div class="section-head">
         <div>
           <div class="eyebrow">Historial</div>
-          <h1 class="h1" style="font-size:32px;">MIS <em>CALLS</em>.</h1>
-          <p class="sub">Tus inscripciones, las sesiones que subiste para cada call y su estado.</p>
+          <h1 class="h1" style="font-size:32px;">MIS <em>ÓRDENES</em>.</h1>
+          <p class="sub">Tus inscripciones, las sesiones que subiste para cada orden y su estado.</p>
         </div>
         <div class="filter-tabs" id="mis-calls-tabs"></div>
       </div>
@@ -1477,7 +1477,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         <table class="table">
           <thead>
             <tr>
-              <th style="width:30%;">Open Call</th>
+              <th style="width:30%;">Orden</th>
               <th>Juego</th>
               <th>Enviado</th>
               <th>Duración</th>
@@ -1564,14 +1564,14 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         <div>
           <div class="eyebrow">Preguntas frecuentes</div>
           <h1 class="h1" style="font-size:32px;">FAQ<em>S</em>.</h1>
-          <p class="sub">Todo lo que necesitás saber antes de inscribirte en un Open Call.</p>
+          <p class="sub">Todo lo que necesitás saber antes de inscribirte en una orden abierta.</p>
         </div>
       </div>
 
       <div class="faq-list">
         <details class="faq" open="">
-          <summary><span class="q-num">01</span>¿Qué es un Open Call?<span class="caret">›</span></summary>
-          <div class="a">Un Open Call es un pedido de contenido que abrimos a la comunidad de Gameplay Alliance: especifica qué juegos o categorías buscamos, cuántas horas necesitamos y, si corresponde, el pago por hora. Te inscribís, grabás con el Pleiada Recorder y subís tus sesiones desde la misma app.</div>
+          <summary><span class="q-num">01</span>¿Qué es una orden abierta?<span class="caret">›</span></summary>
+          <div class="a">Una orden abierta es un pedido de contenido que abrimos a la comunidad de Gameplay Alliance: especifica qué juegos o categorías buscamos, cuántas horas necesitamos y, si corresponde, el pago por hora. Te inscribís, grabás con el Pleiada Recorder y subís tus sesiones desde la misma app.</div>
         </details>
         <details class="faq">
           <summary><span class="q-num">02</span>¿Quién puede participar?<span class="caret">›</span></summary>
@@ -1579,31 +1579,31 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         </details>
         <details class="faq">
           <summary><span class="q-num">03</span>¿Cuál es la diferencia entre Marketplace, Playgrounds y Mindsets?<span class="caret">›</span></summary>
-          <div class="a"><strong>Marketplace:</strong> subís gameplay de juegos comerciales grabado con el Recorder; nosotros le buscamos comprador entre empresas de IA. La venta no está garantizada: cobrás si tu contenido se comercializa. <strong>Playgrounds:</strong> cada tanto abrimos calls para jugar playgrounds diseñados por nosotros, y se paga por resolución completada (disponible próximamente). <strong>Mindsets:</strong> experiencias de conversación con AI, se comercializan igual que los Playgrounds; está en Beta (disponible próximamente).</div>
+          <div class="a"><strong>Marketplace:</strong> subís gameplay de juegos comerciales grabado con el Recorder; nosotros le buscamos comprador entre empresas de IA. La venta no está garantizada: cobrás si tu contenido se comercializa. <strong>Playgrounds:</strong> cada tanto abrimos órdenes para jugar playgrounds diseñados por nosotros, y se paga por resolución completada (disponible próximamente). <strong>Mindsets:</strong> experiencias de conversación con AI, se comercializan igual que los Playgrounds; está en Beta (disponible próximamente).</div>
         </details>
         <details class="faq">
-          <summary><span class="q-num">04</span>¿Cómo sé qué juegos puedo grabar para un call?<span class="caret">›</span></summary>
-          <div class="a">Cada call indica los juegos puntuales que acepta, o las categorías aceptadas. Si es por categoría, podés filtrar el catálogo por esa categoría para ver todos los juegos que entran. El Recorder también te muestra, antes de subir, en qué call entra tu grabación.</div>
+          <summary><span class="q-num">04</span>¿Cómo sé qué juegos puedo grabar para una orden?<span class="caret">›</span></summary>
+          <div class="a">Cada orden indica los juegos puntuales que acepta, o las categorías aceptadas. Si es por categoría, podés filtrar el catálogo por esa categoría para ver todos los juegos que entran. El Recorder también te muestra, antes de subir, en qué orden entra tu grabación.</div>
         </details>
         <details class="faq">
           <summary><span class="q-num">05</span>¿Cómo se cuentan las horas que subo?<span class="caret">›</span></summary>
-          <div class="a">Por la duración de cada sesión grabada y subida. Las horas se computan al confirmarse cada subida, y las ves en "Mis Calls" junto con tu cupo restante si el call tiene máximo por usuario.</div>
+          <div class="a">Por la duración de cada sesión grabada y subida. Las horas se computan al confirmarse cada subida, y las ves en "Mis Órdenes" junto con tu cupo restante si la orden tiene máximo por usuario.</div>
         </details>
         <details class="faq">
           <summary><span class="q-num">06</span>¿Cuándo y cuánto cobro?<span class="caret">›</span></summary>
-          <div class="a">Depende del tipo de call. En Marketplace, cobrás cuando tu contenido se comercializa, al precio por hora informado en el call al momento de tu inscripción (la venta no está garantizada). En Playgrounds y Mindsets, el pago es por resolución completada y aprobada. Los montos siempre están visibles antes de inscribirte, si el call los publica.</div>
+          <div class="a">Depende del tipo de orden. En Marketplace, cobrás cuando tu contenido se comercializa, al precio por hora informado en la orden al momento de tu inscripción (la venta no está garantizada). En Playgrounds y Mindsets, el pago es por resolución completada y aprobada. Los montos siempre están visibles antes de inscribirte, si la orden los publica.</div>
         </details>
         <details class="faq">
           <summary><span class="q-num">07</span>¿Qué significan los estados de mis subidas?<span class="caret">›</span></summary>
-          <div class="a"><strong>Subido:</strong> tu sesión llegó correctamente y quedó registrada. <strong>Disponible para Comercializar:</strong> pasó los controles y está en el pool que ofrecemos a compradores. <strong>Comercializado:</strong> se vendió — se libera tu pago según los términos del call. Un contenido comercializado puede seguir disponible para nuevas ventas.</div>
+          <div class="a"><strong>Subido:</strong> tu sesión llegó correctamente y quedó registrada. <strong>Disponible para Comercializar:</strong> pasó los controles y está en el pool que ofrecemos a compradores. <strong>Comercializado:</strong> se vendió — se libera tu pago según los términos de la orden. Un contenido comercializado puede seguir disponible para nuevas ventas.</div>
         </details>
         <details class="faq">
-          <summary><span class="q-num">08</span>¿Puedo subir contenido sin estar inscripto en un call?<span class="caret">›</span></summary>
-          <div class="a">No. Las subidas solo se habilitan para juegos elegibles de un call en el que estés inscripto. Si tu juego no entra en ninguno de tus calls, el Recorder te lo indica antes de subir.</div>
+          <summary><span class="q-num">08</span>¿Puedo subir contenido sin estar inscripto en una orden?<span class="caret">›</span></summary>
+          <div class="a">No. Las subidas solo se habilitan para juegos elegibles de una orden en la que estés inscripto. Si tu juego no entra en ninguna de tus órdenes, el Recorder te lo indica antes de subir.</div>
         </details>
         <details class="faq">
-          <summary><span class="q-num">09</span>¿Qué pasa si el call se completa mientras estoy grabando?<span class="caret">›</span></summary>
-          <div class="a">Al llegar al 100% de las horas pedidas se cierran las inscripciones y las grabaciones nuevas, pero las sesiones que empezaste a grabar antes del cierre podés subirlas igual (el call admite un margen para no dejarte afuera con la sesión empezada).</div>
+          <summary><span class="q-num">09</span>¿Qué pasa si la orden se completa mientras estoy grabando?<span class="caret">›</span></summary>
+          <div class="a">Al llegar al 100% de las horas pedidas se cierran las inscripciones y las grabaciones nuevas, pero las sesiones que empezaste a grabar antes del cierre podés subirlas igual (la orden admite un margen para no dejarte afuera con la sesión empezada).</div>
         </details>
         <details class="faq">
           <summary><span class="q-num">10</span>¿Qué necesito para grabar y qué pasa con mis datos?<span class="caret">›</span></summary>
@@ -1672,7 +1672,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 <script>
 "use strict";
 // ════════════════════════════════════════════════════════════════════════════
-//  Dashboard Open Calls — lógica funcional (habla con la Lambda pleiada-api).
+//  Dashboard de Órdenes abiertas — lógica funcional (habla con la Lambda pleiada-api).
 //  El gate real vive en el backend; acá solo mostramos y facilitamos.
 //  ?mock=1 en la URL usa datos de ejemplo (para QA sin backend deployado).
 // ════════════════════════════════════════════════════════════════════════════
@@ -1803,13 +1803,13 @@ function callCard(c) {
     ? `<div class="deadline"><strong style="color:var(--ok);font-weight:700;">✓ Inscripto</strong> — <strong>Grabá con el Pleiada Recorder y subí tus sesiones.</strong></div>
        <div class="row" style="gap:10px;"><a class="btn ghost" href="${RECORDER_URL}" target="_blank" rel="noopener" style="text-decoration:none;">Abrir Recorder</a></div>`
     : c.completo
-      ? `<div class="deadline">Este Open Call ya completó las horas pedidas.</div>`
+      ? `<div class="deadline">Esta orden ya completó las horas pedidas.</div>`
       : `<div class="deadline">Chequeá qué juegos entran en el <a href="https://catalogo.gameplayalliance.gg" target="_blank" style="color:var(--violet-2);text-decoration:none;"><strong>catálogo</strong></a> filtrando por categoría.</div>
        <div class="row" style="gap:10px;">${auth.token()
           ? `<button class="btn primary" onclick="enroll.open('${esc(c.call_id)}')">Inscribirme</button>`
           : `<button class="btn ghost" onclick="scrollToLogin()">Iniciá sesión para inscribirte</button>`}</div>`;
   const pbar = (pct !== null)
-    ? `<div class="pb-wrap"><div class="pb-track" aria-label="Progreso del call">${segsHtml(pct)}</div></div>` : "";
+    ? `<div class="pb-wrap"><div class="pb-track" aria-label="Progreso de la orden">${segsHtml(pct)}</div></div>` : "";
   return `<article class="card corners pedido${enrolled?"":" glow"}" style="grid-column:1 / -1;">
     <div class="c-bl"></div><div class="c-br"></div>${badge}
     <div class="row1">
@@ -1821,7 +1821,7 @@ function callCard(c) {
         <div class="title-row">
           <div>
             <h3>${esc(c.titulo)}</h3>
-            <div class="platform">Open Call ${esc(c.call_id)} · ${esc(c.tipo)} · PC · teclado y mouse</div>
+            <div class="platform">Orden ${esc(c.call_id)} · ${esc(c.tipo)} · PC · teclado y mouse</div>
             <div class="chips">${chips}${maxChip}</div>
           </div>
           ${reward}
@@ -1837,7 +1837,7 @@ function callCard(c) {
 function renderCalls() {
   const grid = document.getElementById("calls-grid");
   if (!state.calls.length) {
-    grid.innerHTML = `<div class="pg-empty show" style="grid-column:1 / -1;">No hay Open Calls activos en este momento. Apenas se abra uno, te avisaremos por mail y por las redes sociales.</div>`;
+    grid.innerHTML = `<div class="pg-empty show" style="grid-column:1 / -1;">No hay órdenes activas en este momento. Apenas se abra una, te avisaremos por mail y por las redes sociales.</div>`;
   } else {
     grid.innerHTML = state.calls.map(callCard).join("");
   }
@@ -1898,10 +1898,10 @@ function renderMine() {
         const subidas = fmtHoras((m.used_seconds||0)/3600);
         const rest = (m.remaining_seconds !== null && m.remaining_seconds !== undefined)
           ? "restante: " + fmtHoras(m.remaining_seconds/3600) : "sin tope";
-        const cerrado = m.call_activo ? "" : ` · <span style="color:var(--warn)">call cerrado</span>`;
+        const cerrado = m.call_activo ? "" : ` · <span style="color:var(--warn)">orden cerrada</span>`;
         return `${esc(m.titulo)}: <strong style="color:var(--ink)">${subidas} subidas · ${rest}</strong>${cerrado}`;
       }).join(" &nbsp;·&nbsp; ")
-    : `<span class="muted">Todavía no estás inscripto en ningún call. Inscribite en uno de arriba para empezar.</span>`;
+    : `<span class="muted">Todavía no estás inscripto en ninguna orden. Inscribite en una de arriba para empezar.</span>`;
 }
 window.setTab = k => { state.tab = k; renderMine(); };
 
@@ -1917,7 +1917,7 @@ function renderStats() {
   if (auth.token()) {
     const sec = state.mine.reduce((s,m) => s + (m.used_seconds||0), 0);
     up.innerHTML = nf(sec/3600) + `<small style="font-family:var(--mono);font-weight:500;font-size:13px;color:var(--ink-3);margin-left:6px">hs</small>`;
-    meta.textContent = state.mine.length + (state.mine.length === 1 ? " call activo" : " calls activos");
+    meta.textContent = state.mine.length + (state.mine.length === 1 ? " orden activa" : " órdenes activas");
   } else { up.textContent = "—"; meta.textContent = "iniciá sesión para ver"; }
 }
 
@@ -1934,7 +1934,7 @@ const enroll = {
        · Tipo: <strong>${esc(c.tipo)}</strong><br>
        · Contenido pedido: ${pedido}${c.max_horas_por_usuario>0?` (máx. ${fmtHoras(c.max_horas_por_usuario)} por usuario)`:""}<br>
        ${c.precio_hora_usd?`· Pago por hora de contenido: <strong>${fmtUSD(c.precio_hora_usd)}</strong> (si se comercializa)<br>`:""}
-       · Solo se aceptan sesiones de juegos elegibles para este call, grabadas con el Pleiada Recorder.<br>
+       · Solo se aceptan sesiones de juegos elegibles para esta orden, grabadas con el Pleiada Recorder.<br>
        · Las horas se computan al confirmarse cada subida.<br><br>
        Al inscribirte aceptás estas condiciones bajo los <a href="https://gameplayalliance.gg/terminos-condiciones" target="_blank">Términos y Condiciones</a> del programa.`;
     document.getElementById("modal-err").textContent = "";
