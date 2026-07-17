@@ -1144,6 +1144,10 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 .modal-actions{display:flex;gap:10px;justify-content:flex-end;}
 .btn[disabled]{opacity:.5;cursor:not-allowed;}
 .session-bar{display:flex;align-items:center;gap:10px;justify-content:flex-end;font-family:var(--mono);font-size:12px;color:var(--ink-3);}
+/* Icono de categoria en el recuadro de la orden (mismo set que el catalogo) */
+.cover .cat-ico{width:88px;height:88px;color:var(--violet-2);position:relative;z-index:2;filter:drop-shadow(0 4px 14px rgba(139,92,246,.45));}
+/* Orden completada: la palabra bien grande, senal a la comunidad */
+.reward-now.completed-badge{color:var(--violet-2);font-family:var(--display);font-weight:900;font-size:30px;line-height:.95;text-transform:uppercase;letter-spacing:.01em;}
 </style>
 </head>
 <body>
@@ -1429,15 +1433,9 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             <span class="tag hot">Disponible próximamente</span>
           </div>
         </div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; align-items:center;">
-          <div style="position:relative; aspect-ratio:16/9; overflow:hidden; border-radius:12px; border:1px solid var(--line-strong); background:#07060d; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
-            <video src="assets/playground-01.webm" autoplay="" loop="" muted="" playsinline="" preload="metadata" style="position:static; width:100%; height:100%; object-fit:cover; display:block;"></video>
-            <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(7,6,13,0) 55%, rgba(16,12,31,0.55) 100%); pointer-events:none;"></div>
-          </div>
-          <div style="position:relative; aspect-ratio:16/9; overflow:hidden; border-radius:12px; border:1px solid var(--line-strong); background:#07060d; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
-            <video src="assets/playground-02.webm" autoplay="" loop="" muted="" playsinline="" preload="metadata" style="position:static; width:100%; height:100%; object-fit:cover; display:block;"></video>
-            <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(7,6,13,0) 55%, rgba(16,12,31,0.55) 100%); pointer-events:none;"></div>
-          </div>
+        <div style="position:relative; aspect-ratio:16/9; overflow:hidden; border-radius:12px; border:1px solid var(--line-strong); background:#07060d; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
+          <video src="assets/playgrounds.webm" autoplay="" loop="" muted="" playsinline="" preload="metadata" style="position:static; width:100%; height:100%; object-fit:cover; display:block;"></video>
+          <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(7,6,13,0) 55%, rgba(16,12,31,0.55) 100%); pointer-events:none;"></div>
         </div>
       </div>
     </section>
@@ -1763,7 +1761,7 @@ function applySession() {
   const logged = !!auth.token();
   document.getElementById("auth-form").style.display = logged ? "none" : "";
   document.getElementById("auth-logged").style.display = logged ? "" : "none";
-  document.getElementById("mis-calls-section").style.display = logged ? "" : "none";
+  document.getElementById("mis-calls-section").style.display = "";  // siempre visible; vacía si no hay sesión
   if (logged) document.getElementById("logged-email").textContent = auth.email() || "";
 }
 
@@ -1776,6 +1774,16 @@ function segsHtml(pct) {
     out += `<div class="pb-seg"><div class="pb-fill${shine}" data-fill="${f.toFixed(0)}"></div></div>`;
   }
   return out;
+}
+
+const GENRE_ICONS={"Action Adventure":`<circle cx="12" cy="12" r="9"/><path d="M14.8 9.2l-2 4.6-4.6 2 2-4.6 4.6-2z"/>`,"Action RPG":`<path d="M14.5 4.5l5 5-8.5 8.5-2.5.5.5-2.5L14.5 4.5z"/><path d="M5 19l2.5-2.5M4 14l1.5 1.5M9 5l1.5 1.5"/>`,"FPS":`<circle cx="12" cy="12" r="7.5"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="1.6"/>`,"Survival":`<path d="M12 3l8 16H4l8-16z"/><path d="M12 9v10"/><path d="M12 12l3.5-2M12 14.5l-3.5-2"/>`,"Survival Horror":`<path d="M12 2.5c-4.4 0-7.5 3.2-7.5 7.3 0 2.6 1.3 4 2.5 5v3.4h10v-3.4c1.2-1 2.5-2.4 2.5-5C19.5 5.7 16.4 2.5 12 2.5z"/><circle cx="9" cy="10.5" r="1.4"/><circle cx="15" cy="10.5" r="1.4"/><path d="M10 21v-2M12 21v-2.5M14 21v-2"/>`,"Narrative Adventure":`<path d="M12 6c-1.8-1.4-4-1.8-6.5-1.5v12C8 16.2 10.2 16.6 12 18c1.8-1.4 4-1.8 6.5-1.5v-12C16 4.2 13.8 4.6 12 6z"/><path d="M12 6v12"/>`,"Souls-like":`<path d="M12 2v9"/><path d="M9 4l3-2 3 2"/><path d="M5 20c0-3 3-4 7-4s7 1 7 4"/><path d="M8.5 13.5l-1 2M15.5 13.5l1 2M12 12.5v3.5"/>`,"City Builder":`<path d="M3 21h18"/><path d="M5 21V9l5-3v15M14 21V11l5 3v7"/><path d="M7.5 12v0M7.5 15v0M16.5 17v0"/>`,"JRPG":`<path d="M12 2.5l2.3 5 5.2.5-4 3.4 1.3 5.1L12 19l-4.8 2.5 1.3-5.1-4-3.4 5.2-.5L12 2.5z"/>`,"MMORPG":`<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 6 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-6-3.8-9S9.5 5.5 12 3z"/>`,"Racing":`<path d="M5 4v17"/><path d="M5 5c3-1.5 5 1.5 8 0s4-1.5 6 0v8c-2 1.5-3 0-6 0s-5 1.5-8 0V5z"/><path d="M9 5.5v3.5M13 6.5v3.5M5 9h4M9 9h4M13 9.5h6"/>`,"Metroidvania":`<rect x="3" y="4" width="7" height="6" rx="1"/><rect x="14" y="4" width="7" height="6" rx="1"/><rect x="8.5" y="14" width="7" height="6" rx="1"/><path d="M10 7h4M6.5 10v4l5.5 0M17.5 10v4l-5.5 0"/>`,"Puzzle":`<path d="M9 4h6v3a2 2 0 1 1 4 0v3h-3a2 2 0 1 0 0 4h3v3H9v-3a2 2 0 1 1-4 0V8h4V4z"/>`,"Shooter":`<path d="M3 9h12l1.5 4H5z"/><path d="M15 9V7h4l2 2v2M9 13v3M7 16h4"/>`,"Adventure":`<path d="M9 3l6 2 6-2v15l-6 2-6-2-6 2V5l6-2z"/><path d="M9 3v15M15 5v15"/>`,"Horror":`<path d="M5 11a7 7 0 0 1 14 0v9l-2.3-1.5L14.4 20 12 18.5 9.6 20 7.3 18.5 5 20z"/><circle cx="9.5" cy="11" r="1.3"/><circle cx="14.5" cy="11" r="1.3"/>`,"Tactical Shooter":`<path d="M12 3v3.5M12 17.5V21M3 12h3.5M17.5 12H21"/><path d="M6 4h-2v2M20 4h-2v2M6 20h-2v-2M20 20h-2v-2"/><circle cx="12" cy="12" r="3"/>`,"Action":`<path d="M13 2L4 13h6l-1 9 9-12h-6l1-8z"/>`,"Exploration":`<circle cx="11" cy="11" r="7"/><path d="M11 7l2 4-2 4-2-4 2-4z"/><path d="M16.5 16.5L21 21"/>`,"Fighting":`<path d="M7 11V7.5a1.5 1.5 0 0 1 3 0V10M10 10V6.5a1.5 1.5 0 0 1 3 0V10M13 10V7.5a1.5 1.5 0 0 1 3 0V12c0 4-2.5 7-6 7s-6-2.5-6-6v-2a1.5 1.5 0 0 1 3 0v1"/>`,"Sandbox":`<path d="M12 3l8 4v10l-8 4-8-4V7l8-4z"/><path d="M12 3v18M4 7l8 4 8-4M8 5l8 4"/>`,"Sports":`<circle cx="12" cy="12" r="9"/><path d="M12 6l3 2.2-1.1 3.5h-3.8L9 8.2 12 6z"/><path d="M12 6V3M14.8 11.7l3 1M9.2 11.7l-3 1M13.6 15.5l1.5 2.7M10.4 15.5l-1.5 2.7"/>`,"Driving Sim":`<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/><path d="M12 9.5V4M9.8 13.5l-4.6 3M14.2 13.5l4.6 3"/>`,"Immersive Sim":`<path d="M2 12l10-6 10 6-10 6-10-6z"/><path d="M2 12l10 6 10-6M6 14v3M18 14v3"/><circle cx="12" cy="12" r="1.5"/>`,"4X Strategy":`<path d="M5 8l3.5 2L5 12M5 8v8l3.5 2M5 16l3.5-2M8.5 6l3.5 2 3.5-2M8.5 6v8l3.5 2 3.5-2V6M15.5 8L19 6v8l-3.5 2"/>`,"Roguelike":`<rect x="4" y="4" width="16" height="16" rx="2.5"/><circle cx="8.5" cy="8.5" r="1.2"/><circle cx="15.5" cy="8.5" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="8.5" cy="15.5" r="1.2"/><circle cx="15.5" cy="15.5" r="1.2"/>`,"Platformer":`<path d="M3 20h5v-4h5v-4h5V8"/><path d="M16 5l2 3 2-3"/><circle cx="5.5" cy="13" r="1.5"/>`,"Racing Sim":`<path d="M4 18a8 8 0 1 1 16 0"/><path d="M12 18l4-5"/><circle cx="12" cy="18" r="1.4"/><path d="M5 18h.5M19 18h-.5M7 11l.4.4M17 11l-.4.4M12 9v.5"/>`,"Simulation":`<path d="M5 7h14M5 12h14M5 17h14"/><circle cx="9" cy="7" r="1.8"/><circle cx="15" cy="12" r="1.8"/><circle cx="8" cy="17" r="1.8"/>`,"RPG":`<path d="M12 2l9 5v10l-9 5-9-5V7l9-5z"/><path d="M12 2v20M3 7l9 5 9-5M12 12l-4.5 2.5M12 12l4.5 2.5"/>`,"Roguelike Shooter":`<circle cx="12" cy="12" r="7.5"/><path d="M12 4.5v3M12 16.5v3M4.5 12h3M16.5 12h3"/><circle cx="10" cy="10" r="1"/><circle cx="14" cy="14" r="1"/><circle cx="14" cy="10" r="1"/>`,"Stealth":`<path d="M4 7c2-2 5-3 8-3s6 1 8 3c-1.5 1-3 1.5-3 1.5"/><path d="M3 12c2.5 3 6 4.5 9 4.5s6.5-1.5 9-4.5c-2.5-3-6-4.5-9-4.5S5.5 9 3 12z"/><circle cx="12" cy="12" r="2"/>`,"Grand Strategy":`<path d="M4 8l3 3 5-5 5 5 3-3v9H4V8z"/><path d="M4 20h16"/><circle cx="4" cy="7" r="1"/><circle cx="20" cy="7" r="1"/><circle cx="12" cy="4.5" r="1"/>`,"Strategy":`<path d="M9 21h6M12 21v-4"/><path d="M9 17h6l1-3H8l1 3z"/><path d="M10 14V7.5a2 2 0 1 1 4 0V14"/><circle cx="12" cy="5" r="2"/>`,"RTS":`<circle cx="12" cy="12" r="8.5"/><path d="M12 12V4.5M12 12l6 4"/><circle cx="12" cy="12" r="1.5"/><path d="M12 12l-5 3"/>`,"Extraction Shooter":`<rect x="5" y="10" width="14" height="9" rx="1.5"/><path d="M5 13h14"/><path d="M12 8V2.5M9 5l3-2.5L15 5"/>`,"Vehicle Combat":`<rect x="3" y="12" width="14" height="6" rx="1.5"/><circle cx="7" cy="19" r="1.5"/><circle cx="13" cy="19" r="1.5"/><path d="M6 12V9h6v3M12 10h9M19 10v-2"/>`,"Survival Action":`<path d="M14 3l3 3-7 7-1.5 4.5L5 21l3.5-3.5L13 16l-3-3-7-7"/><path d="M16 6l3-3"/><path d="M9 9l-4 1 1 4"/>`,"Flight Sim":`<path d="M12 2l1.5 8L21 14v2l-7.5-2.5L13 19l2.5 1.5V22L12 21l-3.5 1.5V20.5L11 19l-.5-5.5L3 16v-2l7.5-4L12 2z"/>`,"Management Sim":`<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 3v-.5a3 3 0 0 1 6 0V3"/><path d="M8 14v3M12 11v6M16 13v4"/>`,"Farming Sim":`<path d="M12 21v-7"/><path d="M12 14c0-3-2-5-5-5 0 3 2 5 5 5z"/><path d="M12 12c0-3 2-5 5-5 0 3-2 5-5 5z"/><path d="M7 21h10"/>`,"Hero Shooter":`<path d="M12 2.5l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L4.2 8.2l5.4-.8L12 2.5z"/><circle cx="12" cy="11" r="2"/>`,"Colony Sim":`<path d="M3 20h18"/><path d="M5 20l3-7 3 7M13 20l3-6 3 6"/><path d="M8 13v-2M16 14v-2"/>`,"Life Sim":`<path d="M4 11l8-6 8 6v9H4v-9z"/><path d="M12 20v-5h0"/><path d="M12 12.5c-.8-1.2-2.6-1-2.6.4 0 1 1.2 1.8 2.6 2.8 1.4-1 2.6-1.8 2.6-2.8 0-1.4-1.8-1.6-2.6-.4z"/>`,"Driving Survival":`<path d="M3 16h2m14 0h2M5 16v-3l2-4h8l2 4v3"/><circle cx="8" cy="16" r="1.5"/><circle cx="15" cy="16" r="1.5"/><path d="M12 3l-1.5 3h3L12 9"/>`,"Battle Royale":`<path d="M5 4l4 5M19 4l-4 5"/><path d="M5 4h4M19 4h-4"/><path d="M7 9c0 3 2.2 4.5 5 4.5S17 12 17 9"/><path d="M12 13.5V21M9.5 21h5"/>`,"Hunting Sim":`<path d="M12 21a4 4 0 0 0 4-4c0-2-1-3-1-5"/><path d="M12 21a4 4 0 0 1-4-4c0-2 1-3 1-5"/><path d="M9 12c-1-1-1.5-2.5-1.5-4M9 12c-1.5 0-3-.5-4-1.5M15 12c1-1 1.5-2.5 1.5-4M15 12c1.5 0 3-.5 4-1.5"/>`,"Tactics":`<rect x="4" y="4" width="16" height="16" rx="1.5"/><path d="M4 9h16M4 14h16M9 4v16M14 4v16"/><circle cx="6.5" cy="6.5" r="1.2"/><circle cx="16.5" cy="16.5" r="1.2"/>`,"Simulator":`<path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/><path d="M12 2v3M12 19v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>`};
+// Icono de la primera categoria (mismo set que el catalogo). Si es orden por
+// juegos o la categoria no tiene icono, cae a las 2-3 letras del titulo.
+function catCover(c) {
+  const cat = (c.targeting_mode !== "juegos_especificos" && (c.categorias||[])[0]) || "";
+  const paths = GENRE_ICONS[cat];
+  if (paths) return `<svg class="cat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-label="${esc(cat)}">${paths}</svg>`;
+  return `<span class="glyph">${esc(glyph(c.titulo))}</span>`;
 }
 
 function callCard(c) {
@@ -1791,24 +1799,25 @@ function callCard(c) {
     : (c.categorias||[]).map(x => `<span class="goal">Categoría: ${esc(x)}</span>`).join("");
   const maxChip = c.max_horas_por_usuario > 0
     ? `<span class="diff media"><span class="pip"></span>Máx. ${nf(c.max_horas_por_usuario)} h por usuario</span>` : "";
-  const reward = (c.precio_hora_usd)
-    ? `<div class="reward-now">${fmtUSD(c.precio_hora_usd)} / h<span class="unit">si se comercializa</span></div>`
-    : `<div class="reward-now" style="color:var(--ink-3);font-size:16px;">Precio a confirmar<span class="unit">al comercializarse</span></div>`;
+  const reward = c.completo
+    ? `<div class="reward-now completed-badge">COMPLETADA<span class="unit" style="color:var(--ok)">✓ orden cumplida</span></div>`
+    : (c.precio_hora_usd)
+      ? `<div class="reward-now">${fmtUSD(c.precio_hora_usd)} / h<span class="unit">si se comercializa</span></div>`
+      : `<div class="reward-now" style="color:var(--ink-3);font-size:16px;">Precio a confirmar<span class="unit">al comercializarse</span></div>`;
   const hoursRow = c.completo
-    ? `<span class="big">${nf(c.horas_subidas)}</span><span>horas recibidas</span><span style="margin-left:auto" class="muted">· Completada</span>`
+    ? `<span class="big">100%</span><span>de horas recibidas</span>`
     : c.sin_limite
       ? `<span class="big">${nf(c.horas_subidas)}</span><span>horas subidas</span><span style="margin-left:auto" class="muted">· sin límite</span>`
       : `<span class="big">${nf(c.horas_subidas)}</span><span>de</span><span class="big" style="color:var(--ink-3)">${nf(c.horas_totales)}</span><span>horas pedidas</span>${pct!==null?`<span style="margin-left:auto" class="muted">· ${pct}% completado</span>`:""}`;
   // Al 100% el call cierra inscripciones. Los ya inscriptos lo siguen viendo normal
   // (pueden subir lo que estaban grabando: el backend acepta hasta el margen).
-  const badge = enrolled
-    ? `<span class="status ok" style="position:absolute; top:18px; right:20px;"><span class="pip"></span>Inscripto</span>`
-    : c.completo
-      ? `<span class="status warn" style="position:absolute; top:18px; right:20px;"><span class="pip"></span>Completo</span>`
+  const badge = c.completo
+    ? ""
+    : enrolled
+      ? `<span class="status ok" style="position:absolute; top:18px; right:20px;"><span class="pip"></span>Inscripto</span>`
       : `<span class="tag hot" style="position:absolute; top:18px; right:20px;">Abierto</span>`;
   const foot = enrolled
-    ? `<div class="deadline"><strong style="color:var(--ok);font-weight:700;">✓ Inscripto</strong> — <strong>Grabá con el Pleiada Recorder y subí tus sesiones.</strong></div>
-       <div class="row" style="gap:10px;"><a class="btn ghost" href="${RECORDER_URL}" target="_blank" rel="noopener" style="text-decoration:none;">Abrir Recorder</a></div>`
+    ? `<div class="deadline"><strong style="color:var(--ok);font-weight:700;">✓ Inscripto</strong> — <strong>Grabá con el Pleiada Recorder y subí tus sesiones.</strong></div>`
     : c.completo
       ? `<div class="deadline">Esta orden ya completó las horas pedidas.</div>`
       : `<div class="deadline">Chequeá qué juegos entran en el <a href="https://catalogo.gameplayalliance.gg" target="_blank" style="color:var(--violet-2);text-decoration:none;"><strong>catálogo</strong></a> filtrando por categoría.</div>
@@ -1821,7 +1830,7 @@ function callCard(c) {
     <div class="c-bl"></div><div class="c-br"></div>${badge}
     <div class="row1">
       <div class="cover" style="width:140px;height:140px;flex-basis:140px;border-radius:12px;">
-        <span class="glyph">${esc(glyph(c.titulo))}</span>
+        ${catCover(c)}
         <span class="serial-badge">${esc(c.call_id)}</span>
       </div>
       <div class="meta-col">
@@ -1865,42 +1874,70 @@ function statusCat(u) {
   return "subidos";
 }
 
+function mineRow(m) {
+  // Fila cuando una orden inscripta todavía NO tiene subidas (antes no aparecía).
+  const est = !m.call_activo ? "Orden cerrada" : "Sin subidas aún";
+  return `<tr>
+    <td><div class="game-cell"><div class="mini-cover">${esc(glyph(m.titulo))}</div>
+      <div><div class="gname">${esc(m.titulo)}</div><div class="gsub">${esc(m.call_id)} · ${esc(m.tipo||"")}</div></div></div></td>
+    <td class="mono muted" colspan="3">Inscripto — todavía no subiste sesiones para esta orden.</td>
+    <td><span class="status warn"><span class="pip"></span>${est}</span></td>
+    <td style="text-align:right;" class="amount-cell">${m.precio_hora_usd?fmtUSD(m.precio_hora_usd):"—"}</td>
+  </tr>`;
+}
+
 function renderMine() {
   const body = document.getElementById("mis-calls-body");
-  const byCall = {}; state.mine.forEach(m => byCall[m.call_id] = m);
-  let rows = [];
-  state.mine.forEach(m => (m.uploads||[]).forEach(u => rows.push({ m, u })));
-  rows.sort((a,b) => (b.u.uploaded_at||0) - (a.u.uploaded_at||0));
+  const tabsEl = document.getElementById("mis-calls-tabs");
+  const footEl = document.getElementById("mis-calls-foot");
 
-  const counts = { todos: rows.length, subidos:0, disponibles:0, comercializados:0 };
-  rows.forEach(r => counts[statusCat(r.u)]++);
+  // Deslogueado: la sección se ve igual, pero vacía y con invitación a entrar.
+  if (!auth.token()) {
+    tabsEl.innerHTML = "";
+    body.innerHTML = `<tr><td colspan="6" class="mono muted" style="text-align:center;padding:36px 20px;">
+      Iniciá sesión para ver las órdenes en las que te inscribiste y el estado de tus subidas.
+      <div style="margin-top:16px;"><button class="btn primary" onclick="scrollToLogin()">Iniciar sesión</button></div></td></tr>`;
+    footEl.innerHTML = "";
+    return;
+  }
 
-  // tabs
+  // Una fila por subida...
+  let uploadRows = [];
+  state.mine.forEach(m => (m.uploads||[]).forEach(u => uploadRows.push({ m, u })));
+  uploadRows.sort((a,b) => (b.u.uploaded_at||0) - (a.u.uploaded_at||0));
+  // ...y las órdenes inscriptas SIN subidas (el bug: antes no se veían).
+  const emptyEnroll = state.mine.filter(m => !(m.uploads && m.uploads.length));
+
+  const counts = { todos: uploadRows.length + emptyEnroll.length, subidos:0, disponibles:0, comercializados:0 };
+  uploadRows.forEach(r => counts[statusCat(r.u)]++);
+
   const tabs = [["todos","Todos"],["subidos","Subidos"],["disponibles","Disponibles"],["comercializados","Comercializados"]];
-  document.getElementById("mis-calls-tabs").innerHTML = tabs.map(([k,label]) =>
+  tabsEl.innerHTML = tabs.map(([k,label]) =>
     `<button class="${state.tab===k?"active":""}" onclick="setTab('${k}')">${label} · ${counts[k]}</button>`).join("");
 
-  const shown = rows.filter(r => state.tab === "todos" || statusCat(r.u) === state.tab);
-  if (!shown.length) {
-    body.innerHTML = `<tr><td colspan="6" class="mono muted" style="text-align:center;padding:28px;">Todavía no subiste sesiones para este filtro.</td></tr>`;
-  } else {
-    body.innerHTML = shown.map(({m,u}) => {
+  const html = [];
+  // En "Todos" van primero las inscripciones sin subidas, para que se vean sí o sí.
+  if (state.tab === "todos") emptyEnroll.forEach(m => html.push(mineRow(m)));
+  uploadRows
+    .filter(r => state.tab === "todos" || statusCat(r.u) === state.tab)
+    .forEach(({m,u}) => {
       const st = uploadStatus(u);
-      const precio = (m.precio_hora_usd) ? fmtUSD(m.precio_hora_usd) : "—";
-      return `<tr>
+      html.push(`<tr>
         <td><div class="game-cell"><div class="mini-cover">${esc(glyph(m.titulo))}</div>
           <div><div class="gname">${esc(m.titulo)}</div><div class="gsub">${esc(m.call_id)} · ${esc(m.tipo||"")}</div></div></div></td>
         <td class="mono muted">${esc(u.juego||"")}</td>
         <td class="mono">${fmtDate(u.uploaded_at)}</td>
         <td class="mono"><strong style="color:var(--ink)">${fmtDur(u.duration_seconds)}</strong></td>
         <td><span class="status ${st.cls}"><span class="pip${st.spin}"></span>${st.txt}</span></td>
-        <td style="text-align:right;" class="amount-cell">${precio}</td>
-      </tr>`;
-    }).join("");
-  }
+        <td style="text-align:right;" class="amount-cell">${m.precio_hora_usd?fmtUSD(m.precio_hora_usd):"—"}</td>
+      </tr>`);
+    });
 
-  // foot: resumen por call
-  document.getElementById("mis-calls-foot").innerHTML = state.mine.length
+  body.innerHTML = html.length ? html.join("")
+    : `<tr><td colspan="6" class="mono muted" style="text-align:center;padding:28px;">No hay subidas para este filtro.</td></tr>`;
+
+  // foot: resumen por orden inscripta
+  footEl.innerHTML = state.mine.length
     ? state.mine.map(m => {
         const subidas = fmtHoras((m.used_seconds||0)/3600);
         const rest = (m.remaining_seconds !== null && m.remaining_seconds !== undefined)
@@ -1928,7 +1965,7 @@ function renderStats() {
   } else { up.textContent = "—"; meta.textContent = "iniciá sesión para ver"; }
 }
 
-function renderAll() { renderStats(); renderCalls(); if (auth.token()) renderMine(); }
+function renderAll() { renderStats(); renderCalls(); renderMine(); }
 
 // ── Inscripción (modal) ─────────────────────────────────────────────────────────
 const enroll = {
