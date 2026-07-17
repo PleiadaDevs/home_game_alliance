@@ -1,0 +1,2019 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<title>Gameplay Alliance — Dashboard · Órdenes abiertas</title>
+<meta name="robots" content="noindex,nofollow">
+<style>
+/* Fuentes self-hosted: reutiliza los mismos woff2 del root del site */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../font-01.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../font-02.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../font-03.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../font-04.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../font-05.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../font-06.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../font-01.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../font-02.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../font-03.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../font-04.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../font-05.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../font-06.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../font-01.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../font-02.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../font-03.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../font-04.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../font-05.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../font-06.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Saira';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../font-25.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Saira';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../font-26.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Saira';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../font-27.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Saira';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../font-25.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Saira';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../font-26.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Saira';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../font-27.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Saira';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../font-25.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Saira';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../font-26.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Saira';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../font-27.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Saira Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../font-10.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Saira Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../font-11.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Saira Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../font-12.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Saira Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../font-13.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Saira Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../font-14.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Saira Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../font-15.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Saira Condensed';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("../font-16.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Saira Condensed';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("../font-17.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Saira Condensed';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("../font-18.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Saira Condensed';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("../font-19.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Saira Condensed';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("../font-20.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Saira Condensed';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("../font-21.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../font-22.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../font-23.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../font-24.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../font-22.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../font-23.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../font-24.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../font-22.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../font-23.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../font-24.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../font-22.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../font-23.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../font-24.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<meta name="viewport" content="width=1280">
+<!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+  ttq.load('D8UROG3C77U550SVN5UG');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
+<style>/* cyrillic-ext */
+
+/* cyrillic */
+
+/* greek */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* cyrillic */
+
+/* greek */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* cyrillic */
+
+/* greek */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+</style>
+<style>
+
+  :root {
+    --bg:           #07060d;
+    --bg-2:         #0c0a18;
+    --panel:        #100c1f;
+    --panel-2:      #15102a;
+    --line:         rgba(139, 92, 246, 0.18);
+    --line-strong:  rgba(139, 92, 246, 0.42);
+    --violet:       #8b5cf6;
+    --violet-2:     #a78bfa;
+    --violet-deep:  #5b21b6;
+    --violet-glow:  rgba(139, 92, 246, 0.55);
+    --ink:          #f5f3ff;
+    --ink-2:        #cfc8e6;
+    --ink-3:        #8a82a8;
+    --ink-4:        #56506e;
+    --ok:           #34d399;
+    --warn:         #fbbf24;
+    --bad:          #fb7185;
+    --display:      "Saira Condensed", "Saira", system-ui, sans-serif;
+    --display-2:    "Saira", system-ui, sans-serif;
+    --ui:           "Space Grotesk", system-ui, sans-serif;
+    --mono:         "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--ui);
+    font-size: 14px;
+    line-height: 1.45;
+    min-width: 1280px;
+    background-image:
+      radial-gradient(1200px 700px at 85% -10%, rgba(139,92,246,0.18), transparent 60%),
+      radial-gradient(900px 600px at -10% 30%, rgba(91,33,182,0.22), transparent 60%),
+      linear-gradient(180deg, #07060d 0%, #06050b 100%);
+    background-attachment: fixed;
+  }
+
+  /* === Background grid + particles =================================== */
+  .bg-grid {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      linear-gradient(rgba(139,92,246,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139,92,246,0.06) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(1200px 800px at 50% 20%, #000 30%, transparent 80%);
+  }
+  .bg-dots {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .5;
+    background-image: radial-gradient(rgba(167,139,250,0.5) 1px, transparent 1.4px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(800px 500px at 80% 10%, #000 0%, transparent 70%);
+  }
+
+  .shell { position: relative; z-index: 1; }
+
+  /* === Top nav ======================================================= */
+  .topbar {
+    display: flex; align-items: center; gap: 32px;
+    padding: 18px 40px; border-bottom: 1px solid var(--line);
+    background: rgba(7, 6, 13, 0.75); backdrop-filter: blur(10px);
+    position: sticky; top: 0; z-index: 50;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand .logo { width: 38px; height: 38px; }
+  .brand .wm { display: flex; flex-direction: column; line-height: 1; }
+  .brand .wm .a { font-family: var(--display); font-weight: 800; letter-spacing: .04em; font-size: 16px; color: var(--ink); }
+  .brand .wm .b { font-family: var(--display); font-weight: 700; letter-spacing: .35em; font-size: 9px; color: var(--violet-2); margin-top: 4px; }
+
+  .nav { display: flex; gap: 4px; margin-left: 24px; }
+  .nav a {
+    font-family: var(--display); font-weight: 700; letter-spacing: .12em; font-size: 12px;
+    color: var(--ink-3); text-decoration: none; padding: 10px 14px; border-radius: 6px;
+    text-transform: uppercase; transition: color .15s, background .15s;
+  }
+  .nav a:hover { color: var(--ink); background: rgba(139,92,246,0.08); }
+  .nav a.active { color: var(--ink); background: rgba(139,92,246,0.14); box-shadow: inset 0 -2px 0 var(--violet); }
+
+  .top-actions { margin-left: auto; display: flex; gap: 14px; align-items: center; }
+  .balance-pill {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 14px; border: 1px solid var(--line-strong);
+    border-radius: 999px; background: rgba(139,92,246,0.08);
+    font-family: var(--mono); font-size: 13px; color: var(--ink);
+  }
+  .balance-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 10px var(--ok); }
+  .icon-btn {
+    width: 38px; height: 38px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--panel);
+    display: grid; place-items: center; color: var(--ink-2); cursor: pointer;
+  }
+  .icon-btn:hover { border-color: var(--line-strong); color: var(--ink); }
+  .avatar {
+    width: 38px; height: 38px; border-radius: 999px;
+    background: linear-gradient(135deg, #7c3aed, #4c1d95);
+    display: grid; place-items: center; color: white; font-family: var(--display);
+    font-weight: 800; font-size: 13px; letter-spacing: .04em;
+    border: 1px solid rgba(255,255,255,0.18);
+  }
+
+  /* === Section primitives =========================================== */
+  .container { padding: 40px 40px 80px; max-width: 1440px; margin: 0 auto; }
+  .section { margin-bottom: 56px; }
+  .section-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 20px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--display); font-weight: 700; letter-spacing: .32em; font-size: 11px;
+    color: var(--violet-2); text-transform: uppercase;
+  }
+  .eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--violet-2); display: inline-block; }
+  .h1 {
+    font-family: var(--display); font-weight: 800; letter-spacing: .01em;
+    font-size: 44px; line-height: 1; margin: 8px 0 0;
+    text-transform: uppercase;
+  }
+  .h1 em { font-style: normal; color: var(--violet-2); }
+  .sub {
+    color: var(--ink-2); margin-top: 10px; font-size: 15px; max-width: 620px;
+  }
+
+  /* === Card / corner cut ============================================ */
+  .card {
+    position: relative; background:
+      linear-gradient(180deg, rgba(139,92,246,0.06), rgba(139,92,246,0) 40%),
+      var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 24px;
+  }
+  .card.glow {
+    box-shadow:
+      0 0 0 1px rgba(139,92,246,0.08),
+      0 30px 80px -30px rgba(139,92,246,0.4),
+      inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+  .corners::before, .corners::after,
+  .corners > .c-tl, .corners > .c-br {
+    content: ""; position: absolute; width: 14px; height: 14px;
+    border-color: var(--violet); border-style: solid; border-width: 0;
+    pointer-events: none;
+  }
+  .corners::before { top: -1px; left: -1px; border-top-width: 1px; border-left-width: 1px; border-top-left-radius: 14px; }
+  .corners::after  { top: -1px; right: -1px; border-top-width: 1px; border-right-width: 1px; border-top-right-radius: 14px; }
+  .corners > .c-bl { content: ""; position: absolute; width: 14px; height: 14px; bottom: -1px; left: -1px; border-color: var(--violet); border-style: solid; border-width: 0; border-bottom-width: 1px; border-left-width: 1px; border-bottom-left-radius: 14px; }
+  .corners > .c-br { bottom: -1px; right: -1px; border-bottom-width: 1px; border-right-width: 1px; border-bottom-right-radius: 14px; }
+
+  /* === Hero stats row =============================================== */
+  .stats-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    margin-bottom: 28px;
+  }
+  .stat {
+    padding: 18px 20px; border: 1px solid var(--line);
+    border-radius: 12px; background: rgba(16,12,31,0.6);
+  }
+  .stat .label { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-3); font-family: var(--display); font-weight: 700; }
+  .stat .value { font-family: var(--display); font-weight: 800; font-size: 32px; line-height: 1; margin-top: 10px; }
+  .stat .meta { color: var(--ink-3); font-size: 12px; margin-top: 8px; font-family: var(--mono); }
+  .stat.accent .value { color: var(--violet-2); }
+
+  /* === Pedido card ================================================== */
+  .pedidos { display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px; align-items: stretch; }
+  .pedidos .col { display: flex; flex-direction: column; gap: 20px; }
+
+  .pedido {
+    position: relative; overflow: hidden;
+  }
+  .pedido .row1 {
+    display: flex; gap: 18px; align-items: center;
+  }
+  .pedido .cover {
+    width: 96px; height: 96px; border-radius: 10px;
+    border: 1px solid var(--line-strong);
+    background: linear-gradient(135deg, var(--panel-2), #1d1338);
+    display: grid; place-items: center; flex: 0 0 96px; overflow: hidden;
+    position: relative;
+  }
+  .pedido .cover::after {
+    content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient( -22deg, rgba(139,92,246,0.05) 0 2px, transparent 2px 8px );
+    mix-blend-mode: screen; pointer-events: none;
+  }
+  .pedido .cover .glyph {
+    font-family: var(--display); font-weight: 900; font-size: 28px; color: var(--violet-2);
+    letter-spacing: .02em; text-align: center; line-height: 1;
+  }
+  .pedido .meta-col { flex: 1; min-width: 0; }
+  .pedido .title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+  .pedido h3 {
+    font-family: var(--display); font-weight: 800; font-size: 22px;
+    margin: 0; letter-spacing: .01em; text-transform: uppercase; line-height: 1.05;
+  }
+  .pedido .platform {
+    font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+    margin-top: 4px; letter-spacing: .04em;
+  }
+  .pedido .reward-now {
+    text-align: right; flex: 0 0 auto; margin-top: 38px;
+    font-family: var(--display); font-weight: 800;
+    color: var(--violet-2); font-size: 22px; line-height: 1;
+  }
+  .pedido .reward-now .unit { font-family: var(--mono); font-size: 11px; color: var(--ink-3); font-weight: 500; display: block; letter-spacing: .12em; text-transform: uppercase; margin-top: 4px; }
+
+  .hours-row {
+    display: flex; align-items: baseline; gap: 10px; margin-top: 14px;
+    font-family: var(--mono); font-size: 12px; color: var(--ink-3);
+  }
+  .hours-row .big {
+    font-family: var(--display); font-weight: 800; color: var(--ink); font-size: 20px;
+  }
+
+  /* Progress bar segmented ----------------------------------------- */
+  .pb-wrap { margin-top: 18px; }
+  .pb-track {
+    position: relative; height: 22px;
+    background: rgba(15, 10, 30, 0.9);
+    border: 1px solid var(--line);
+    border-radius: 6px; padding: 3px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px;
+  }
+  .pb-seg {
+    position: relative; height: 100%; border-radius: 3px;
+    background:
+      repeating-linear-gradient( 45deg, rgba(139,92,246,0.10) 0 4px, rgba(139,92,246,0.02) 4px 8px );
+    overflow: hidden;
+  }
+  .pb-fill {
+    position: absolute; inset: 0; width: 0;
+    background: linear-gradient(90deg, var(--violet-deep), var(--violet) 60%, var(--violet-2));
+    box-shadow: 0 0 14px var(--violet-glow), inset 0 0 8px rgba(255,255,255,0.18);
+    transition: width 1.6s cubic-bezier(.2,.8,.2,1);
+  }
+  .pb-fill.shine::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+    animation: shine 2.4s linear infinite;
+    width: 60%;
+  }
+  @keyframes shine { 0% { transform: translateX(-100%);} 100% { transform: translateX(260%); } }
+
+  .pb-labels {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    margin-top: 10px; gap: 3px; padding: 0 3px;
+  }
+  .pb-label {
+    display: flex; flex-direction: column; gap: 4px; padding-top: 8px;
+    border-top: 1px solid var(--line);
+    position: relative;
+  }
+  .pb-label .tier {
+    font-family: var(--display); font-weight: 800; font-size: 11px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--ink-3);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .pb-label .tier .pct { color: var(--ink-2); font-family: var(--mono); letter-spacing: 0; }
+  .pb-label .payout {
+    font-family: var(--display); font-weight: 800; font-size: 16px; color: var(--ink);
+  }
+  .pb-label .payout small { color: var(--ink-3); font-family: var(--mono); font-weight: 400; font-size: 10px; letter-spacing: .08em; }
+  .pb-label.tier-1 .payout { color: var(--violet-2); }
+  .pb-label.active::before {
+    content: ""; position: absolute; top: -1px; left: 0; right: 0; height: 2px;
+    background: var(--violet); box-shadow: 0 0 10px var(--violet-glow);
+  }
+  .pb-label.active .tier { color: var(--ink); }
+
+  .pedido-foot {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line);
+  }
+  .pedido-foot .deadline { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+  .pedido-foot .deadline strong { color: var(--ink); font-weight: 600; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--display); font-weight: 800; letter-spacing: .14em;
+    text-transform: uppercase; font-size: 12px;
+    padding: 11px 18px; border-radius: 8px;
+    border: 1px solid var(--violet); color: var(--ink); background: transparent;
+    cursor: pointer; transition: background .15s, transform .05s;
+  }
+  .btn:hover { background: rgba(139,92,246,0.14); }
+  .btn:active { transform: translateY(1px); }
+  .btn.primary {
+    background: linear-gradient(180deg, var(--violet), #6d28d9);
+    border-color: transparent; color: white;
+    box-shadow: 0 0 0 1px rgba(139,92,246,0.5), 0 12px 30px -10px var(--violet-glow);
+  }
+  .btn.primary:hover { background: linear-gradient(180deg, #9b6cf8, #7c3aed); }
+  .btn.ghost { border-color: var(--line); color: var(--ink-2); }
+  .btn.ghost:hover { color: var(--ink); border-color: var(--line-strong); }
+
+  /* === Tier banner ================================================== */
+  .tier-banner {
+    position: relative; overflow: hidden;
+    padding: 28px 32px; border-radius: 14px;
+    border: 1px solid var(--line-strong);
+    background:
+      radial-gradient(600px 200px at 0% 50%, rgba(139,92,246,0.25), transparent 60%),
+      linear-gradient(180deg, rgba(91,33,182,0.18), rgba(91,33,182,0.04));
+    display: grid; grid-template-columns: 1.1fr 1.4fr; gap: 32px; align-items: center;
+  }
+  .tier-banner h2 {
+    font-family: var(--display); font-weight: 900; font-size: 32px; line-height: 1;
+    margin: 0; text-transform: uppercase; letter-spacing: .01em;
+  }
+  .tier-banner h2 em { font-style: normal; color: var(--violet-2); }
+  .tier-banner p { color: var(--ink-2); margin: 14px 0 0; max-width: 480px; font-size: 14.5px; }
+
+  .tier-curve { position: relative; height: 150px; }
+  .tier-curve svg { width: 100%; height: 100%; overflow: visible; }
+  .tier-curve .markers { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .tier-curve .markers > div {
+    border-left: 1px dashed rgba(139,92,246,0.25); padding: 8px 10px;
+    font-family: var(--display); font-weight: 700; font-size: 10px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--ink-3); display: flex; flex-direction: column; gap: 4px;
+  }
+  .tier-curve .markers > div:first-child { border-left: 0; }
+  .tier-curve .markers .v { font-family: var(--display); font-weight: 800; font-size: 18px; color: var(--ink); letter-spacing: 0; }
+  .tier-curve .markers .pct { color: var(--violet-2); font-family: var(--mono); font-size: 10px; letter-spacing: .04em; text-transform: none; font-weight: 500; }
+
+  /* === Data Sets table ============================================== */
+  .table-wrap { padding: 0; overflow: hidden; }
+  .table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+  }
+  .table th, .table td {
+    text-align: left; padding: 16px 24px;
+    border-bottom: 1px solid var(--line);
+  }
+  .table th {
+    font-family: var(--display); font-weight: 700; font-size: 11px;
+    letter-spacing: .22em; text-transform: uppercase; color: var(--ink-3);
+    background: rgba(15,10,30,0.6);
+  }
+  .table tbody tr { transition: background .15s; }
+  .table tbody tr:hover { background: rgba(139,92,246,0.05); }
+  .table tbody tr:last-child td { border-bottom: 0; }
+
+  .game-cell { display: flex; align-items: center; gap: 12px; }
+  .game-cell .mini-cover {
+    width: 40px; height: 40px; border-radius: 6px; border: 1px solid var(--line-strong);
+    background: linear-gradient(135deg, var(--panel-2), #1d1338);
+    display: grid; place-items: center; font-family: var(--display); font-weight: 900;
+    font-size: 13px; color: var(--violet-2); letter-spacing: .02em; flex: 0 0 40px;
+  }
+  .game-cell .gname { font-weight: 600; color: var(--ink); }
+  .game-cell .gsub { font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
+
+  .mono { font-family: var(--mono); }
+
+  .status {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--display); font-weight: 700; font-size: 11px;
+    letter-spacing: .18em; text-transform: uppercase;
+    padding: 6px 12px; border-radius: 999px; border: 1px solid currentColor;
+  }
+  .status .pip { width: 6px; height: 6px; border-radius: 50%; background: currentColor; box-shadow: 0 0 8px currentColor; }
+  .status.ok { color: var(--ok); background: rgba(52,211,153,0.08); }
+  .status.warn { color: var(--warn); background: rgba(251,191,36,0.08); }
+  .status.bad { color: var(--bad); background: rgba(251,113,133,0.08); }
+  .status .pip.spin { animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1;} 50% { opacity: .35;} }
+
+  .amount-cell { font-family: var(--display); font-weight: 800; font-size: 17px; }
+  .amount-cell.pending { color: var(--ink-3); }
+  .amount-cell.bad { color: var(--ink-4); text-decoration: line-through; text-decoration-color: rgba(251,113,133,0.6); }
+
+  .table-foot {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 24px; border-top: 1px solid var(--line);
+    color: var(--ink-3); font-family: var(--mono); font-size: 12px;
+  }
+  .filter-tabs { display: flex; gap: 6px; }
+  .filter-tabs button {
+    background: transparent; border: 1px solid var(--line);
+    color: var(--ink-3); font-family: var(--display); font-weight: 700;
+    font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+    padding: 8px 14px; border-radius: 6px; cursor: pointer;
+  }
+  .filter-tabs button.active { color: var(--ink); border-color: var(--violet); background: rgba(139,92,246,0.1); }
+
+  /* === Ganancias ==================================================== */
+  .ganancias-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; }
+  .earnings-hero {
+    padding: 28px 32px; display: flex; flex-direction: column; gap: 18px;
+    overflow: hidden; position: relative;
+  }
+  .earnings-hero .big-amount {
+    font-family: var(--display); font-weight: 900; font-size: 64px; line-height: 1;
+    letter-spacing: -.01em;
+    background: linear-gradient(180deg, #fff, #c4b5fd);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .earnings-hero .sub { color: var(--ink-2); margin-top: -8px; }
+  .ledger {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+  }
+  .ledger > div { padding: 18px 20px; border-right: 1px solid var(--line); }
+  .ledger > div:last-child { border-right: 0; }
+  .ledger .l { font-family: var(--display); font-weight: 700; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); }
+  .ledger .v { font-family: var(--display); font-weight: 800; font-size: 24px; margin-top: 6px; }
+  .ledger .v small { font-family: var(--mono); font-weight: 500; font-size: 11px; color: var(--ink-3); margin-left: 6px; }
+
+  .chart-card { padding: 24px; }
+  .chart-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; }
+  .chart-head .t { font-family: var(--display); font-weight: 700; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-3); }
+  .chart-head .v { font-family: var(--display); font-weight: 800; font-size: 22px; }
+  .chart { display: flex; align-items: flex-end; gap: 6px; height: 130px; }
+  .bar {
+    flex: 1; background: linear-gradient(180deg, var(--violet-2), var(--violet-deep));
+    border-radius: 3px 3px 0 0; position: relative; min-height: 4px;
+    box-shadow: inset 0 -1px 0 rgba(255,255,255,0.2);
+    transition: opacity .15s;
+  }
+  .bar.faded { background: linear-gradient(180deg, #3b2a5e, #1f1638); }
+  .bar:hover { opacity: 1; }
+  .bar .tip {
+    position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%) translateY(-6px);
+    font-family: var(--mono); font-size: 10px; color: var(--ink-2); white-space: nowrap;
+  }
+  .chart-xaxis { display: flex; gap: 6px; margin-top: 8px; }
+  .chart-xaxis span { flex: 1; text-align: center; font-family: var(--mono); font-size: 10px; color: var(--ink-3); }
+
+  .payout-card { padding: 22px 24px; }
+  .payout-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+  .payout-row:last-child { border-bottom: 0; }
+  .payout-row .l { color: var(--ink-2); }
+  .payout-row .v { font-family: var(--mono); color: var(--ink); }
+  .payout-row .v.ok { color: var(--ok); }
+
+  /* === Hero illustration glow ======================================= */
+  .hero-deco {
+    position: absolute; top: 20px; right: 20px; pointer-events: none; opacity: .8;
+  }
+
+  /* === footer note =================================================== */
+  .legal { color: var(--ink-4); font-size: 12px; margin-top: 56px; font-family: var(--mono); }
+  .legal a { color: var(--violet-2); text-decoration: none; }
+
+  /* utility */
+  .row { display: flex; gap: 12px; align-items: center; }
+  .grow { flex: 1; }
+  .muted { color: var(--ink-3); }
+  .tag {
+    display: inline-flex; padding: 4px 8px; border-radius: 4px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+    border: 1px solid var(--line); color: var(--ink-3);
+  }
+  .tag.hot { color: var(--violet-2); border-color: var(--line-strong); background: rgba(139,92,246,0.08); }
+
+  /* === Playground covers (video) ==================================== */
+  .cover video, .cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+  .cover .serial-badge {
+    position: absolute; bottom: 6px; left: 6px; z-index: 3;
+    font-family: var(--mono); font-size: 10px; letter-spacing: .06em; color: var(--ink);
+    background: rgba(7,6,13,0.78); border: 1px solid var(--line-strong);
+    padding: 3px 7px; border-radius: 5px; backdrop-filter: blur(4px);
+  }
+
+  /* === Difficulty + goal chips ====================================== */
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .diff {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--display); font-weight: 800; font-size: 10px;
+    letter-spacing: .16em; text-transform: uppercase;
+    padding: 5px 10px; border-radius: 999px; border: 1px solid currentColor;
+  }
+  .diff .pip { width: 6px; height: 6px; border-radius: 50%; background: currentColor; box-shadow: 0 0 8px currentColor; }
+  .diff.baja { color: var(--ok); background: rgba(52,211,153,0.08); }
+  .diff.media { color: var(--warn); background: rgba(251,191,36,0.08); }
+  .diff.alta { color: var(--bad); background: rgba(251,113,133,0.08); }
+  .goal {
+    display: inline-flex; align-items: center;
+    font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+    padding: 5px 9px; border-radius: 999px; border: 1px solid var(--line);
+    color: var(--ink-2); background: rgba(139,92,246,0.05);
+  }
+
+  /* === Classifier =================================================== */
+  .classifier {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px;
+    margin-bottom: 22px; padding: 16px 20px;
+    border: 1px solid var(--line); border-radius: 12px; background: rgba(16,12,31,0.5);
+  }
+  .classifier .group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .classifier .glabel {
+    font-family: var(--display); font-weight: 700; font-size: 10px;
+    letter-spacing: .22em; text-transform: uppercase; color: var(--ink-4); margin-right: 2px;
+  }
+  .chip-btn {
+    background: transparent; border: 1px solid var(--line); color: var(--ink-3);
+    font-family: var(--display); font-weight: 700; font-size: 11px;
+    letter-spacing: .12em; text-transform: uppercase;
+    padding: 8px 13px; border-radius: 999px; cursor: pointer; transition: color .15s, background .15s, border-color .15s;
+  }
+  .chip-btn:hover { color: var(--ink); border-color: var(--line-strong); }
+  .chip-btn.active { color: var(--ink); border-color: var(--violet); background: rgba(139,92,246,0.14); }
+  .classifier .divider { width: 1px; align-self: stretch; min-height: 24px; background: var(--line); }
+
+  .pg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .pg-card.hidden { display: none; }
+  .pg-empty {
+    grid-column: 1 / -1; display: none; text-align: center; padding: 48px;
+    color: var(--ink-3); font-family: var(--mono); font-size: 13px;
+    border: 1px dashed var(--line-strong); border-radius: 12px;
+  }
+  .pg-empty.show { display: block; }
+
+
+  /* === Login card ==================================================== */
+  .login-grid { display:grid; grid-template-columns: 1.2fr 1fr; gap: 20px; align-items: stretch; }
+  .input {
+    width: 100%; background: rgba(7,6,13,0.8); border: 1px solid var(--line-strong);
+    border-radius: 8px; color: var(--ink); font-family: var(--mono); font-size: 14px;
+    padding: 12px 14px; outline: none;
+  }
+  .input:focus { border-color: var(--violet); }
+  .field-row { display:flex; gap:10px; margin-top: 14px; }
+  .field-row .input { flex: 1; }
+  .form-note { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); margin-top: 10px; }
+  .form-note.ok { color: var(--ok); }
+
+  /* === Coming soon banners =========================================== */
+  .soon-banner {
+    position: relative; overflow: hidden; padding: 32px 36px; border-radius: 14px;
+    border: 1px solid var(--line-strong);
+    background:
+      radial-gradient(600px 220px at 0% 50%, rgba(139,92,246,0.22), transparent 60%),
+      linear-gradient(180deg, rgba(91,33,182,0.16), rgba(91,33,182,0.03));
+    display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px; align-items: center;
+  }
+  .soon-banner h2 { font-family: var(--display); font-weight: 900; font-size: 34px; line-height: 1; margin: 8px 0 0; text-transform: uppercase; }
+  .soon-banner h2 em { font-style: normal; color: var(--violet-2); }
+  .soon-banner p { color: var(--ink-2); margin: 14px 0 0; max-width: 560px; font-size: 14.5px; }
+  .soon-deco { position: relative; height: 150px; }
+
+  /* === Estados de subida (aprobados) ================================= */
+  .status.sold { color: var(--violet-2); background: rgba(139,92,246,0.10); }
+
+  /* === FAQs =========================================================== */
+  .faq-list { display: flex; flex-direction: column; gap: 10px; max-width: 900px; }
+  .faq {
+    border: 1px solid var(--line); border-radius: 12px;
+    background: linear-gradient(180deg, rgba(139,92,246,0.05), rgba(139,92,246,0) 45%), var(--panel);
+    overflow: hidden;
+  }
+  .faq[open] { border-color: var(--line-strong); }
+  .faq summary {
+    list-style: none; cursor: pointer; display: flex; align-items: center; gap: 14px;
+    padding: 18px 22px; font-family: var(--display); font-weight: 700;
+    font-size: 15px; letter-spacing: .04em; text-transform: uppercase; color: var(--ink);
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary .q-num { font-family: var(--mono); font-size: 11px; color: var(--violet-2); flex: 0 0 28px; }
+  .faq summary .caret { margin-left: auto; color: var(--ink-3); transition: transform .2s; }
+  .faq[open] summary .caret { transform: rotate(90deg); color: var(--violet-2); }
+  .faq .a { padding: 0 22px 20px 64px; color: var(--ink-2); font-size: 14px; max-width: 760px; }
+  .faq .a strong { color: var(--violet-2); font-weight: 600; }
+
+  /* === Recorder download card ======================================== */
+  .dl-card { display:flex; flex-direction:column; gap:16px; padding:22px 24px; max-width:380px; }
+  .dl-card .k { font-family:var(--display); font-weight:700; font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--violet-2); }
+  .dl-card .n { font-family:var(--display); font-weight:800; font-size:24px; text-transform:uppercase; line-height:1; margin-top:6px; }
+  .dl-meta { display:flex; flex-wrap:wrap; gap:6px; }
+  .btn-gh { display:flex; align-items:center; gap:14px; padding:14px 18px; border-radius:10px; text-decoration:none; color:#fff; border:1px solid var(--violet); background:linear-gradient(180deg,var(--violet),#6d28d9); box-shadow:0 0 0 1px rgba(139,92,246,0.5), 0 12px 30px -10px var(--violet-glow); transition:background .15s; }
+  .btn-gh:hover { background:linear-gradient(180deg,#9b6cf8,#7c3aed); }
+  .btn-gh .tx { display:flex; flex-direction:column; line-height:1.15; }
+  .btn-gh .s { font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,0.75); }
+  .btn-gh .g { font-family:var(--display); font-weight:800; font-size:18px; letter-spacing:.04em; text-transform:uppercase; }
+  .dl-note { font-family:var(--mono); font-size:11px; color:var(--ink-3); line-height:1.5; }
+
+  /* === GA site header/footer (home) ================================= */
+  .ga-navlinks { display: flex; }
+  .ga-burger { display: none; }
+  @media (max-width: 1060px) {
+    .ga-navlinks { display: none !important; }
+    .ga-burger { display: inline-flex !important; }
+  }
+  .ga-header a { transition: color .15s; }
+  .ga-header nav a:hover, .ga-mobilemenu a:hover { color: var(--ink); }
+  .ga-mobilemenu { display: none; flex-direction: column; padding: 8px 24px 22px; border-top: 1px solid var(--line); background: rgba(7,6,13,0.96); backdrop-filter: blur(18px); }
+  .ga-mobilemenu.open { display: flex; }
+  .ga-footer a { transition: color .15s; }
+  .ga-footer a:hover { color: var(--ink); }
+  .ga-social:hover { background: rgba(139,92,246,0.16) !important; border-color: var(--line-strong) !important; }
+
+</style>
+<style>
+/* --- Cabling: modal de inscripción (el diseño base no lo traía) --- */
+.modal-bg{position:fixed;inset:0;background:rgba(7,6,13,.82);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;z-index:200;padding:20px;}
+.modal-bg.open{display:flex;}
+.modal{max-width:520px;width:100%;padding:28px;max-height:88vh;overflow:auto;box-shadow:0 40px 120px -30px rgba(0,0,0,.7);}
+.modal h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:24px;margin-bottom:14px;}
+.modal .terms{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:16px;font-size:13.5px;line-height:1.65;color:var(--ink-2);margin-bottom:16px;}
+.modal .terms strong{color:var(--ink);}
+.modal .terms a{color:var(--violet-2);}
+.modal-err{color:var(--bad);font-size:13px;min-height:18px;margin-bottom:10px;}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;}
+.btn[disabled]{opacity:.5;cursor:not-allowed;}
+.session-bar{display:flex;align-items:center;gap:10px;justify-content:flex-end;font-family:var(--mono);font-size:12px;color:var(--ink-3);}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="bg-dots"></div>
+
+<div class="shell">
+
+  <!-- ============ HEADER (home site) ============ -->
+  <header class="ga-header" style="position:sticky; left:0; right:0; top:0; z-index:50; background:rgba(7,6,13,0.75); border-bottom:1px solid var(--line); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);">
+    <div style="max-width:1180px; margin:0 auto; padding:14px 24px; display:flex; align-items:center; gap:24px;">
+      <a href="https://gameplayalliance.gg/" target="_top" aria-label="Gameplay Alliance — Inicio" style="display:flex; align-items:center; text-decoration:none; flex:none;">
+        <img src="assets/ga-logo.png" alt="Gameplay Alliance" style="height:32px; width:auto; display:block;">
+      </a>
+      <nav class="ga-navlinks" style="margin-left:18px; align-items:center; gap:20px;">
+        <a href="https://gameplayalliance.gg/#dos-formas" target="_top" style="text-decoration:none; font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); white-space:nowrap;">Programa</a>
+        <a href="https://gameplayalliance.gg/#como-funciona" target="_top" style="text-decoration:none; font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); white-space:nowrap;">Cómo Funciona</a>
+        <a href="https://gameplayalliance.gg/#playgrounds" target="_top" style="text-decoration:none; font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); white-space:nowrap;">Playgrounds</a>
+        <a href="https://catalogo.gameplayalliance.gg/" target="_top" style="text-decoration:none; font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); white-space:nowrap;">Catálogo</a>
+        <a href="https://recorder.gameplayalliance.gg/" target="_top" style="text-decoration:none; font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); white-space:nowrap;">Recorder</a>
+        <a href="https://gameplayalliance.gg/#faq" target="_top" style="text-decoration:none; font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); white-space:nowrap;">FAQ</a>
+        <a href="https://gameplayalliance.gg/dashboard" target="_top" style="text-decoration:none; font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); white-space:nowrap;">Dashboard</a>
+      </nav>
+      <div style="margin-left:auto; display:flex; align-items:center; gap:12px;">
+        <a class="ga-navlinks" href="https://web.miniextensions.com/W32TyrnaWMUHtnazd4oT" target="_blank" rel="noopener" style="align-items:center; gap:8px; padding:11px 20px; border-radius:11px; border:1px solid var(--violet); background:linear-gradient(180deg,var(--violet),#6d28d9); color:#fff; text-decoration:none; font-family:var(--display); font-weight:800; letter-spacing:.06em; text-transform:uppercase; font-size:13px; box-shadow:0 16px 36px -16px var(--violet-glow);">Unite Ahora</a>
+        <button class="ga-burger" onclick="document.getElementById('ga-mm').classList.toggle('open')" aria-label="Abrir menú" style="align-items:center; justify-content:center; width:44px; height:44px; border-radius:10px; background:rgba(139,92,246,0.07); border:1px solid var(--line); color:var(--ink); cursor:pointer;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </div>
+    <div class="ga-mobilemenu" id="ga-mm">
+      <a href="https://gameplayalliance.gg/#dos-formas" target="_top" style="text-decoration:none; padding:13px 0; font-family:var(--display); font-weight:700; font-size:15px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); border-bottom:1px solid var(--line);">Programa</a>
+      <a href="https://gameplayalliance.gg/#como-funciona" target="_top" style="text-decoration:none; padding:13px 0; font-family:var(--display); font-weight:700; font-size:15px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); border-bottom:1px solid var(--line);">Cómo Funciona</a>
+      <a href="https://gameplayalliance.gg/#playgrounds" target="_top" style="text-decoration:none; padding:13px 0; font-family:var(--display); font-weight:700; font-size:15px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); border-bottom:1px solid var(--line);">Playgrounds</a>
+      <a href="https://catalogo.gameplayalliance.gg/" target="_top" style="text-decoration:none; padding:13px 0; font-family:var(--display); font-weight:700; font-size:15px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); border-bottom:1px solid var(--line);">Catálogo</a>
+      <a href="https://recorder.gameplayalliance.gg/" target="_top" style="text-decoration:none; padding:13px 0; font-family:var(--display); font-weight:700; font-size:15px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); border-bottom:1px solid var(--line);">Recorder</a>
+      <a href="https://gameplayalliance.gg/#faq" target="_top" style="text-decoration:none; padding:13px 0; font-family:var(--display); font-weight:700; font-size:15px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); border-bottom:1px solid var(--line);">FAQ</a>
+      <a href="https://gameplayalliance.gg/dashboard" target="_top" style="text-decoration:none; padding:13px 0; font-family:var(--display); font-weight:700; font-size:15px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); border-bottom:1px solid var(--line);">Dashboard</a>
+      <a href="https://web.miniextensions.com/W32TyrnaWMUHtnazd4oT" target="_blank" rel="noopener" style="margin-top:16px; text-align:center; text-decoration:none; padding:14px 0; font-family:var(--display); font-weight:800; font-size:16px; letter-spacing:.06em; text-transform:uppercase; color:#fff; background:linear-gradient(180deg,var(--violet),#6d28d9); border-radius:12px; box-shadow:0 16px 36px -16px var(--violet-glow);">Unite Ahora</a>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ============ HERO + STATS ============ -->
+    <section class="section">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 28px; gap: 40px;">
+        <div>
+          <div class="eyebrow">Gameplay Alliance</div>
+          <h1 class="h1">ÓRDENES <em>ABIERTAS</em>.</h1>
+          <p class="sub">Las órdenes abiertas son pedidos de contenido para la comunidad Gameplay Alliance. Inscribite en una orden que esté activa, grabá cualquiera de los juegos que entran en el pedido con el <strong style="color:var(--violet-2)">Pleiada Recorder</strong> y subí tus sesiones. Solo el contenido de juegos elegibles, y de las órdenes en las que te inscribiste, son los que van a poder subirse a través del Recorder.</p>
+          <p class="sub" style="margin-top:8px;color:var(--ink-3);">¿Todavía no sos parte? <a href="https://gameplayalliance.gg/join" style="color:var(--violet-2);text-decoration:none;font-weight:600;">Registrate gratis ya!</a></p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:18px; align-items:flex-end; flex:0 0 auto;">
+          <div class="card corners glow dl-card">
+            <div class="c-bl"></div><div class="c-br"></div>
+            <div>
+              <div class="k">Última versión</div>
+              <div class="n">Pleiada Recorder</div>
+            </div>
+            <div class="dl-meta">
+              <span class="tag hot">Windows 10 / 11</span>
+              <span class="tag hot">Gratuito</span>
+              <span class="tag hot">Open source</span>
+            </div>
+            <a class="btn-gh" href="https://github.com/PleiadaAI/pleiada-recorder/releases" target="_blank" rel="noopener">
+              <svg width="26" height="26" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+              <span class="tx"><span class="s">Descargá la última versión en</span><span class="g">GitHub</span></span>
+            </a>
+            <div class="dl-note">Descargá la última versión desde GitHub y ejecutá el instalador. Al finalizar se abre el asistente de configuración.</div>
+          </div>
+          <div class="row" style="gap: 10px;">
+            <a class="btn primary" href="https://web.miniextensions.com/W32TyrnaWMUHtnazd4oT" target="_blank" rel="noopener" style="text-decoration:none;">Registrate gratis <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"></path></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat">
+          <div class="label">Órdenes activas</div>
+          <div class="value" id="stat-calls">—</div>
+          <div class="meta" id="stat-calls-meta">Marketplace abierto</div>
+        </div>
+        <div class="stat">
+          <div class="label">Horas pedidas</div>
+          <div class="value" id="stat-hours">—</div>
+          <div class="meta">entre todas las órdenes</div>
+        </div>
+        <div class="stat accent">
+          <div class="label">Tus horas subidas</div>
+          <div class="value" id="stat-uploaded">—</div>
+          <div class="meta" id="stat-uploaded-meta">iniciá sesión para ver</div>
+        </div>
+        
+      </div>
+
+      <!-- ============ LOGIN ============ -->
+      <div class="login-grid">
+        <div class="card corners glow" id="auth-card">
+          <div class="c-bl"></div><div class="c-br"></div>
+          <div id="auth-form">
+            <div class="eyebrow">Acceso</div>
+            <h2 style="font-family:var(--display);font-weight:800;font-size:26px;text-transform:uppercase;margin:8px 0 0;">INICIAR <em style="font-style:normal;color:var(--violet-2);">SESIÓN</em></h2>
+            <p class="sub" style="font-size:14px;">Ingresá el email con el que te registraste en el programa. Te mandaremos un código de acceso.</p>
+            <div class="field-row">
+              <input class="input" type="email" id="in-email" placeholder="tu@email.com" autocomplete="email" onkeydown="if(event.key==='Enter')auth.requestOtp()">
+              <button class="btn primary" id="btn-send" onclick="auth.requestOtp()">Enviar código</button>
+            </div>
+            <div class="form-note ok" id="note-sent" style="display:none;">Código enviado. Revisá tu correo (y carpeta de Spam por las dudas).</div>
+            <div class="field-row" id="code-row" style="display:none;">
+              <input class="input" type="text" id="in-code" inputmode="numeric" maxlength="6" placeholder="Código de 6 dígitos" style="text-align:center;letter-spacing:.3em;" autocomplete="one-time-code" onkeydown="if(event.key==='Enter')auth.verifyOtp()">
+              <button class="btn" id="btn-verify" onclick="auth.verifyOtp()">Ingresar</button>
+            </div>
+            <div class="form-note" id="note-hint" style="display:none;"></div>
+            <div class="form-note" id="note-err" style="color:var(--bad);display:none;"></div>
+          </div>
+          <div id="auth-logged" style="display:none;">
+            <div class="eyebrow">Acceso</div>
+            <h2 style="font-family:var(--display);font-weight:800;font-size:26px;text-transform:uppercase;margin:8px 0 0;">SESIÓN <em style="font-style:normal;color:var(--violet-2);">INICIADA</em></h2>
+            <p class="sub" style="font-size:14px;">Ingresaste como <strong id="logged-email" style="color:var(--ink);"></strong>. Ya podés inscribirte en las órdenes abiertas y seguir tus subidas en <em style="font-style:normal;color:var(--violet-2);">Mis Órdenes</em>.</p>
+            <div class="field-row"><button class="btn ghost" onclick="auth.logout()">Cerrar sesión</button></div>
+          </div>
+        </div>
+        <div class="card corners" style="display:flex;flex-direction:column;justify-content:flex-start;">
+          <div class="c-bl"></div><div class="c-br"></div>
+          <div class="eyebrow">Cómo funciona</div>
+          <div style="display:flex;flex-direction:column;gap:14px;margin-top:14px;">
+            <div class="row" style="gap:14px;align-items:flex-start;"><span class="tag hot" style="flex:0 0 auto;">01</span><span style="color:var(--ink-2);font-size:13.5px;">Inscribite en una orden abierta desde este dashboard.</span></div>
+            <div class="row" style="gap:14px;align-items:flex-start;"><span class="tag hot" style="flex:0 0 auto;">02</span><span style="color:var(--ink-2);font-size:13.5px;">Grabá con el Pleiada Recorder cualquiera de los juegos elegibles de la orden.</span></div>
+            <div class="row" style="gap:14px;align-items:flex-start;"><span class="tag hot" style="flex:0 0 auto;">03</span><span style="color:var(--ink-2);font-size:13.5px;">Subí tus sesiones desde el Recorder y seguí acá su estado y tus horas.</span></div>
+          </div>
+          <div style="margin-top:20px;padding-top:18px;border-top:1px solid var(--line);">
+            <div style="display:flex;align-items:center;gap:8px;font-family:var(--display);font-weight:800;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--violet-2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;"><path d="M12 17v5M9 10.8V5a3 3 0 0 1 6 0v5.8l2.6 2.6a1 1 0 0 1-.7 1.6H7.1a1 1 0 0 1-.7-1.6L9 10.8z"></path></svg>
+              Antes de tu primera sesión real
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;margin-top:14px;">
+              <div class="row" style="gap:12px;align-items:flex-start;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--violet-2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;margin-top:2px;"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"></path></svg>
+                <span style="color:var(--ink-2);font-size:13px;">Es tu responsabilidad <strong style="color:var(--ink);">no compartir información privada o que te identifique</strong>. Si eso ocurre, el dataset generado va a ser descartado. Tu <strong style="color:var(--ink);">gamertag o nombre de usuario dentro del juego no cuenta</strong> como información que te identifique — podés dejarlo visible tranquilo.</span>
+              </div>
+              <div class="row" style="gap:12px;align-items:flex-start;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--violet-2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;margin-top:2px;"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3.5 2"></path></svg>
+                <span style="color:var(--ink-2);font-size:13px;">Buscamos <strong style="color:var(--ink);">gameplay continuo</strong>, con la menor cantidad de cutscenes posibles.</span>
+              </div>
+              <div class="row" style="gap:12px;align-items:flex-start;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--violet-2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;margin-top:2px;"><path d="M11 5L6 9H2v6h4l5 4V5zM15.5 8.5a5 5 0 0 1 0 7"></path></svg>
+                <span style="color:var(--ink-2);font-size:13px;">El audio debe incluir <strong style="color:var(--ink);">la música y los FX del juego, pero sin voces humanas</strong> — ni la tuya ni la de otros jugadores.</span>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div></section>
+
+    <!-- ============ 01 · MARKETPLACE ============ -->
+    <section class="section" id="marketplace">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Sección 01 · Contenido de juegos</div>
+          <h1 class="h1" style="font-size:36px;">MARKET<em>PLACE</em>.</h1>
+          <p class="sub">Abrimos órdenes para que subas tu contenido de gameplay grabado con el Pleiada Recorder. Nosotros le buscamos un comprador entre las empresas de IA. <strong style="color:var(--violet-2)">Recordá que si bien estamos siempre a la búsqueda de nuevas oportunidades comerciales, la venta de tu contenido no está garantizada</strong>: cobrás cuando tu contenido se comercializa, al precio informado en la orden.</p>
+        </div>
+        <a href="https://catalogo.gameplayalliance.gg" target="_blank" style="font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--violet-2);text-decoration:none;">Catálogo de juegos →</a>
+      </div>
+
+      <div class="pg-grid" id="calls-grid">
+
+        <!-- Contenido dinámico (list_calls). Los siguientes son placeholders
+             de diseño: el script los reemplaza al cargar. -->
+        <!-- Orden por categorías, precio publicado, NO inscripto -->
+        <article class="card corners pedido glow" style="grid-column:1 / -1;">
+          <div class="c-bl"></div><div class="c-br"></div>
+          <span class="tag hot" style="position:absolute; top:18px; right:20px;">Nuevo</span>
+          <div class="row1">
+            <div class="cover" style="width:140px;height:140px;flex-basis:140px;border-radius:12px;">
+              <span class="glyph">SP</span>
+              <span class="serial-badge">GA-2026-001</span>
+            </div>
+            <div class="meta-col">
+              <div class="title-row">
+                <div>
+                  <h3>Shooters PvP</h3>
+                  <div class="platform">Orden GA-2026-001 · Marketplace · PC · teclado y mouse</div>
+                  <div class="chips">
+                    <span class="goal">Categoría: Shooter</span>
+                    <span class="goal">Categoría: Battle Royale</span>
+                    <span class="diff media"><span class="pip"></span>Máx. 10 h por usuario</span>
+                  </div>
+                </div>
+                <div class="reward-now">
+                  US$ 4,50 / h
+                  <span class="unit">si se comercializa</span>
+                </div>
+              </div>
+              <div class="hours-row">
+                <span class="big">48,5</span>
+                <span>de</span>
+                <span class="big" style="color:var(--ink-3)">200</span>
+                <span>horas pedidas</span>
+                <span style="margin-left:auto" class="muted">· 24% completado</span>
+              </div>
+              <div class="pb-wrap">
+                <div class="pb-track" aria-label="Progreso de la orden">
+                  <div class="pb-seg"><div class="pb-fill shine" data-fill="97"></div></div>
+                  <div class="pb-seg"><div class="pb-fill" data-fill="0"></div></div>
+                  <div class="pb-seg"><div class="pb-fill" data-fill="0"></div></div>
+                  <div class="pb-seg"><div class="pb-fill" data-fill="0"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pedido-foot">
+            <div class="deadline">Chequeá qué juegos entran en el <a href="https://catalogo.gameplayalliance.gg" target="_blank" style="color:var(--violet-2);text-decoration:none;"><strong>catálogo</strong></a> filtrando por categoría.</div>
+            <div class="row" style="gap:10px;">
+              <button class="btn ghost">Iniciá sesión para inscribirte</button>
+              <button class="btn primary">Inscribirme</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Orden por juegos específicos, sin precio publicado, YA inscripto -->
+        <article class="card corners pedido" style="grid-column:1 / -1;">
+          <div class="c-bl"></div><div class="c-br"></div>
+          <span class="status ok" style="position:absolute; top:18px; right:20px;"><span class="pip"></span>Inscripto</span>
+          <div class="row1">
+            <div class="cover" style="width:140px;height:140px;flex-basis:140px;border-radius:12px;">
+              <span class="glyph">RPG</span>
+              <span class="serial-badge">GA-2026-003</span>
+            </div>
+            <div class="meta-col">
+              <div class="title-row">
+                <div>
+                  <h3>RPG de mundo abierto</h3>
+                  <div class="platform">Orden GA-2026-003 · Marketplace · PC · teclado y mouse</div>
+                  <div class="chips">
+                    <span class="goal">Juego: Elden Ring</span>
+                    <span class="goal">Juego: Baldur's Gate 3</span>
+                    <span class="goal">Juego: The Witcher 3</span>
+                  </div>
+                </div>
+                <div class="reward-now" style="color:var(--ink-3);font-size:16px;">
+                  Precio a confirmar
+                  <span class="unit">al comercializarse</span>
+                </div>
+              </div>
+              <div class="hours-row">
+                <span class="big">390</span>
+                <span>de</span>
+                <span class="big" style="color:var(--ink-3)">500</span>
+                <span>horas pedidas</span>
+                <span style="margin-left:auto" class="muted">· 78% completado</span>
+              </div>
+              <div class="pb-wrap">
+                <div class="pb-track" aria-label="Progreso de la orden">
+                  <div class="pb-seg"><div class="pb-fill" data-fill="100"></div></div>
+                  <div class="pb-seg"><div class="pb-fill" data-fill="100"></div></div>
+                  <div class="pb-seg"><div class="pb-fill" data-fill="100"></div></div>
+                  <div class="pb-seg"><div class="pb-fill shine" data-fill="12"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pedido-foot">
+            <div class="deadline"><strong style="color:var(--ok);font-weight:700;">✓ Inscripto</strong> — <strong>Grabá con el Pleiada Recorder y subí tus sesiones.</strong></div>
+            <div class="row" style="gap:10px;">
+              <button class="btn ghost">Abrir Recorder</button>
+            </div>
+          </div>
+        </article>
+
+        <div class="pg-empty show" style="grid-column:1 / -1;">No hay órdenes activas en este momento. Apenas se abra una, te avisaremos por mail y por las redes sociales.</div>
+      </div>
+    </section>
+
+    <!-- ============ 02 · PLAYGROUNDS ============ -->
+    <section class="section" id="playgrounds">
+      <div class="soon-banner">
+        <div>
+          <div class="eyebrow">Sección 02 · Pago por resolución</div>
+          <h2>PLAY<em>GROUNDS</em>.</h2>
+          <p>Cada tanto abrimos órdenes para jugar <strong style="color:var(--violet-2)">Playgrounds diseñados por nosotros</strong>: entornos 3D con físicas reales, pensados para entrenar IA. Se paga por cada resolución completada y grabada con el Recorder.</p>
+          <div class="chips" style="margin-top:16px;">
+            <span class="tag hot">Disponible próximamente</span>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; align-items:center;">
+          <div style="position:relative; aspect-ratio:16/9; overflow:hidden; border-radius:12px; border:1px solid var(--line-strong); background:#07060d; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
+            <video src="assets/playground-01.webm" autoplay="" loop="" muted="" playsinline="" preload="metadata" style="position:static; width:100%; height:100%; object-fit:cover; display:block;"></video>
+            <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(7,6,13,0) 55%, rgba(16,12,31,0.55) 100%); pointer-events:none;"></div>
+          </div>
+          <div style="position:relative; aspect-ratio:16/9; overflow:hidden; border-radius:12px; border:1px solid var(--line-strong); background:#07060d; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
+            <video src="assets/playground-02.webm" autoplay="" loop="" muted="" playsinline="" preload="metadata" style="position:static; width:100%; height:100%; object-fit:cover; display:block;"></video>
+            <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(7,6,13,0) 55%, rgba(16,12,31,0.55) 100%); pointer-events:none;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 03 · MINDSETS ============ -->
+    <section class="section" id="mindsets">
+      <div class="soon-banner">
+        <div>
+          <div class="eyebrow">Sección 03 · Pago por resolución</div>
+          <h2>MIND<em>SETS</em>.</h2>
+          <p><strong style="color:var(--violet-2)">Experiencias de conversación con AI.</strong> Se comercializan de la misma manera que los Playgrounds: abrimos órdenes cada tanto y se paga por resolución completada.</p>
+          <div class="chips" style="margin-top:16px;">
+            <span class="tag hot">Beta</span>
+            <span class="tag hot">Disponible próximamente</span>
+          </div>
+        </div>
+        <div style="position:relative; aspect-ratio:16/9; overflow:hidden; border-radius:12px; border:1px solid var(--line-strong); background:#07060d; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
+          <video src="assets/mindsets.webm" poster="assets/mindsets-poster.jpg" autoplay="" loop="" muted="" playsinline="" preload="metadata" style="position:static; width:100%; height:100%; object-fit:cover; display:block;"></video>
+          <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(7,6,13,0) 55%, rgba(16,12,31,0.55) 100%); pointer-events:none;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MIS CALLS ============ -->
+    <section class="section" id="mis-calls-section" style="display:none;">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Historial</div>
+          <h1 class="h1" style="font-size:32px;">MIS <em>ÓRDENES</em>.</h1>
+          <p class="sub">Tus inscripciones, las sesiones que subiste para cada orden y su estado.</p>
+        </div>
+        <div class="filter-tabs" id="mis-calls-tabs"></div>
+      </div>
+
+      <div class="card corners table-wrap">
+        <div class="c-bl"></div><div class="c-br"></div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="width:30%;">Orden</th>
+              <th>Juego</th>
+              <th>Enviado</th>
+              <th>Duración</th>
+              <th>Estado</th>
+              <th style="text-align:right;">Pago por hora</th>
+            </tr>
+          </thead>
+          <tbody id="mis-calls-body">
+            <tr>
+              <td>
+                <div class="game-cell">
+                  <div class="mini-cover">SP</div>
+                  <div>
+                    <div class="gname">Shooters PvP</div>
+                    <div class="gsub">GA-2026-001 · Marketplace</div>
+                  </div>
+                </div>
+              </td>
+              <td class="mono muted">DOOM Eternal</td>
+              <td class="mono">14 Jul 2026</td>
+              <td class="mono"><strong style="color:var(--ink)">58 min</strong></td>
+              <td><span class="status warn"><span class="pip spin"></span>Subido</span></td>
+              <td style="text-align:right;" class="amount-cell">US$ 4,50</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="game-cell">
+                  <div class="mini-cover">SP</div>
+                  <div>
+                    <div class="gname">Shooters PvP</div>
+                    <div class="gsub">GA-2026-001 · Marketplace</div>
+                  </div>
+                </div>
+              </td>
+              <td class="mono muted">Apex Legends</td>
+              <td class="mono">12 Jul 2026</td>
+              <td class="mono"><strong style="color:var(--ink)">1 h 42 min</strong></td>
+              <td><span class="status ok"><span class="pip"></span>Disponible p/ Comercializar</span></td>
+              <td style="text-align:right;" class="amount-cell">US$ 4,50</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="game-cell">
+                  <div class="mini-cover" style="color:#a78bfa;">RPG</div>
+                  <div>
+                    <div class="gname">RPG de mundo abierto</div>
+                    <div class="gsub">GA-2026-003 · Marketplace</div>
+                  </div>
+                </div>
+              </td>
+              <td class="mono muted">Elden Ring</td>
+              <td class="mono">09 Jul 2026</td>
+              <td class="mono"><strong style="color:var(--ink)">2 h 05 min</strong></td>
+              <td><span class="status sold"><span class="pip"></span>Comercializado</span></td>
+              <td style="text-align:right;" class="amount-cell">US$ 5,00</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="game-cell">
+                  <div class="mini-cover" style="color:#a78bfa;">RPG</div>
+                  <div>
+                    <div class="gname">RPG de mundo abierto</div>
+                    <div class="gsub">GA-2026-003 · Marketplace</div>
+                  </div>
+                </div>
+              </td>
+              <td class="mono muted">Baldur's Gate 3</td>
+              <td class="mono">05 Jul 2026</td>
+              <td class="mono"><strong style="color:var(--ink)">1 h 18 min</strong></td>
+              <td><span class="status ok"><span class="pip"></span>Disponible p/ Comercializar</span></td>
+              <td style="text-align:right;" class="amount-cell">US$ 5,00</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="table-foot">
+          <div id="mis-calls-foot"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQS ============ -->
+    <section class="section" id="faqs">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Preguntas frecuentes</div>
+          <h1 class="h1" style="font-size:32px;">FAQ<em>S</em>.</h1>
+          <p class="sub">Todo lo que necesitás saber antes de inscribirte en una orden abierta.</p>
+        </div>
+      </div>
+
+      <div class="faq-list">
+        <details class="faq" open="">
+          <summary><span class="q-num">01</span>¿Qué es una orden abierta?<span class="caret">›</span></summary>
+          <div class="a">Una orden abierta es un pedido de contenido que abrimos a la comunidad de Gameplay Alliance: especifica qué juegos o categorías buscamos, cuántas horas necesitamos y, si corresponde, el pago por hora. Te inscribís, grabás con el Pleiada Recorder y subís tus sesiones desde la misma app.</div>
+        </details>
+        <details class="faq">
+          <summary><span class="q-num">02</span>¿Quién puede participar?<span class="caret">›</span></summary>
+          <div class="a">Cualquier persona registrada en el programa con su email confirmado. Si todavía no sos parte, registrate gratis en gameplayalliance.gg/join — el registro te habilita a iniciar sesión en este dashboard y en el Recorder.</div>
+        </details>
+        <details class="faq">
+          <summary><span class="q-num">03</span>¿Cuál es la diferencia entre Marketplace, Playgrounds y Mindsets?<span class="caret">›</span></summary>
+          <div class="a"><strong>Marketplace:</strong> subís gameplay de juegos comerciales grabado con el Recorder; nosotros le buscamos comprador entre empresas de IA. La venta no está garantizada: cobrás si tu contenido se comercializa. <strong>Playgrounds:</strong> cada tanto abrimos órdenes para jugar playgrounds diseñados por nosotros, y se paga por resolución completada (disponible próximamente). <strong>Mindsets:</strong> experiencias de conversación con AI, se comercializan igual que los Playgrounds; está en Beta (disponible próximamente).</div>
+        </details>
+        <details class="faq">
+          <summary><span class="q-num">04</span>¿Cómo sé qué juegos puedo grabar para una orden?<span class="caret">›</span></summary>
+          <div class="a">Cada orden indica los juegos puntuales que acepta, o las categorías aceptadas. Si es por categoría, podés filtrar el catálogo por esa categoría para ver todos los juegos que entran. El Recorder también te muestra, antes de subir, en qué orden entra tu grabación.</div>
+        </details>
+        <details class="faq">
+          <summary><span class="q-num">05</span>¿Cómo se cuentan las horas que subo?<span class="caret">›</span></summary>
+          <div class="a">Por la duración de cada sesión grabada y subida. Las horas se computan al confirmarse cada subida, y las ves en "Mis Órdenes" junto con tu cupo restante si la orden tiene máximo por usuario.</div>
+        </details>
+        <details class="faq">
+          <summary><span class="q-num">06</span>¿Cuándo y cuánto cobro?<span class="caret">›</span></summary>
+          <div class="a">Depende del tipo de orden. En Marketplace, cobrás cuando tu contenido se comercializa, al precio por hora informado en la orden al momento de tu inscripción (la venta no está garantizada). En Playgrounds y Mindsets, el pago es por resolución completada y aprobada. Los montos siempre están visibles antes de inscribirte, si la orden los publica.</div>
+        </details>
+        <details class="faq">
+          <summary><span class="q-num">07</span>¿Qué significan los estados de mis subidas?<span class="caret">›</span></summary>
+          <div class="a"><strong>Subido:</strong> tu sesión llegó correctamente y quedó registrada. <strong>Disponible para Comercializar:</strong> pasó los controles y está en el pool que ofrecemos a compradores. <strong>Comercializado:</strong> se vendió — se libera tu pago según los términos de la orden. Un contenido comercializado puede seguir disponible para nuevas ventas.</div>
+        </details>
+        <details class="faq">
+          <summary><span class="q-num">08</span>¿Puedo subir contenido sin estar inscripto en una orden?<span class="caret">›</span></summary>
+          <div class="a">No. Las subidas solo se habilitan para juegos elegibles de una orden en la que estés inscripto. Si tu juego no entra en ninguna de tus órdenes, el Recorder te lo indica antes de subir.</div>
+        </details>
+        <details class="faq">
+          <summary><span class="q-num">09</span>¿Qué pasa si la orden se completa mientras estoy grabando?<span class="caret">›</span></summary>
+          <div class="a">Al llegar al 100% de las horas pedidas se cierran las inscripciones y las grabaciones nuevas, pero las sesiones que empezaste a grabar antes del cierre podés subirlas igual (la orden admite un margen para no dejarte afuera con la sesión empezada).</div>
+        </details>
+        <details class="faq">
+          <summary><span class="q-num">10</span>¿Qué necesito para grabar y qué pasa con mis datos?<span class="caret">›</span></summary>
+          <div class="a">Necesitás una PC con Windows, teclado y mouse, y el Pleiada Recorder instalado. La app verifica automáticamente que la grabación esté sincronizada antes de dejarte subir. Tu contenido se almacena de forma segura y tu identidad se protege: los datasets se publican bajo un identificador anónimo, nunca con tu email ni tus datos personales.</div>
+        </details>
+      </div>
+
+      <div class="legal">
+        Gameplay Alliance · un programa de Pleiada · <a href="https://gameplayalliance.gg/terminos-condiciones">Términos y Condiciones</a> · <a href="#">Política de privacidad</a> · <a href="#">Soporte</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ MODAL DE INSCRIPCIÓN ============ -->
+  <div class="modal-bg" id="modal-bg">
+    <div class="modal card corners">
+      <div class="c-bl"></div><div class="c-br"></div>
+      <h3>Confirmar inscripción</h3>
+      <div class="terms" id="modal-terms"></div>
+      <div class="modal-err" id="modal-err"></div>
+      <div class="modal-actions">
+        <button class="btn ghost" onclick="enroll.close()">Cancelar</button>
+        <button class="btn primary" id="btn-confirm-enroll" onclick="enroll.confirm()">Inscribirme</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ FOOTER (home site) ============ -->
+  <footer class="ga-footer" style="position:relative; background:rgba(7,6,13,0.55); border-top:1px solid var(--line);">
+    <div style="max-width:1180px; margin:0 auto; padding:64px 24px 40px; display:flex; flex-direction:column; align-items:center; gap:44px;">
+      <div style="display:flex; flex-direction:column; align-items:center;">
+        <img src="assets/ga-logo.png" alt="Gameplay Alliance" style="width:min(300px,72vw); height:auto; display:block;">
+      </div>
+      <div style="display:flex; gap:56px; flex-wrap:wrap; justify-content:center;">
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <span style="font-family:var(--display); font-size:11px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-4);">Programa</span>
+          <a href="https://gameplayalliance.gg/#como-funciona" target="_top" style="text-decoration:none; font-size:14px; color:var(--ink-3);">Cómo funciona</a>
+          <a href="https://gameplayalliance.gg/#playgrounds" target="_top" style="text-decoration:none; font-size:14px; color:var(--ink-3);">Playgrounds</a>
+          <a href="https://web.miniextensions.com/W32TyrnaWMUHtnazd4oT" target="_blank" rel="noopener" style="text-decoration:none; font-size:14px; color:var(--ink-3);">Registrate</a>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <span style="font-family:var(--display); font-size:11px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-4);">Legal</span>
+          <a href="https://gameplayalliance.gg/terminos-condiciones" target="_top" rel="noopener" style="text-decoration:none; font-size:14px; color:var(--ink-3);">Términos y condiciones</a>
+          <a href="mailto:hello@pleiada.ai" style="text-decoration:none; font-size:14px; color:var(--ink-3);">Contacto</a>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <span style="font-family:var(--display); font-size:11px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-4);">Redes</span>
+          <div style="display:flex; gap:12px;">
+            <a class="ga-social" href="https://www.instagram.com/gameplay.alliance/" target="_blank" rel="noopener" aria-label="Instagram" style="width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(139,92,246,0.06);border:1px solid var(--line);"><svg viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;display:block;"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.4" cy="6.6" r="1.15" fill="#a78bfa" stroke="none"></circle></svg></a>
+            <a class="ga-social" href="https://www.tiktok.com/@gameplay.alliance" target="_blank" rel="noopener" aria-label="TikTok" style="width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(139,92,246,0.06);border:1px solid var(--line);"><svg viewBox="0 0 24 24" fill="#a78bfa" style="width:20px;height:20px;display:block;"><path d="M16.6 3h-2.5v13.1c0 1.4-.8 2.3-2 2.4-1.2.1-2.1-.6-2.2-1.8-.1-1.2.7-2 1.9-2.1.4 0 .9 0 1.3.1v-2.7c-3.2-.3-5.6 1.8-5.6 4.8 0 2.9 2.3 5 5.2 5 3.1 0 5.6-2.2 5.6-5.6V9c1.3.7 2.5 1 3.8.9V7.4c-2.2-.2-3.5-1.7-3.8-3.9-.1-.2-.1-.3-.1-.5z"></path></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--line);">
+      <div style="max-width:1180px; margin:0 auto; padding:22px 24px; display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center;">
+        <span style="font-family:var(--mono); font-size:12px; color:var(--ink-4);">© Pleiada Labs · Gameplay Alliance</span>
+        <img src="assets/pleiada-logo.png" alt="Pleiada" style="height:20px; width:auto; display:block; opacity:0.85;">
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+"use strict";
+// ════════════════════════════════════════════════════════════════════════════
+//  Dashboard de Órdenes abiertas — lógica funcional (habla con la Lambda pleiada-api).
+//  El gate real vive en el backend; acá solo mostramos y facilitamos.
+//  ?mock=1 en la URL usa datos de ejemplo (para QA sin backend deployado).
+// ════════════════════════════════════════════════════════════════════════════
+const API = "https://hdk2i43wuiw3272mtnjgwwsaby0bkood.lambda-url.sa-east-1.on.aws/";
+const LS_TOKEN = "ga_session_token", LS_EMAIL = "ga_session_email";
+const RECORDER_URL = "https://recorder.gameplayalliance.gg/";
+const SIGNUP_URL = "https://web.miniextensions.com/W32TyrnaWMUHtnazd4oT";
+const MOCK = new URLSearchParams(location.search).has("mock");
+
+const state = { calls: [], mine: [], enrolledIds: new Set(), pending: null, tab: "todos", _email: "" };
+
+const MESES = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const nf = n => { const x = Number(n)||0; return (x % 1 === 0 ? x.toFixed(0) : x.toFixed(1)).replace(".", ","); };
+const fmtHoras = h => nf(h) + " h";
+const fmtDur = sec => { sec = Number(sec)||0; const m = Math.round(sec/60); if (m < 60) return m + " min"; return Math.floor(m/60) + " h " + String(m%60).padStart(2,"0") + " min"; };
+const fmtDate = ts => { const d = new Date((Number(ts)||0)*1000); return d.getDate() + " " + MESES[d.getMonth()] + " " + d.getFullYear(); };
+const fmtUSD = n => "US$ " + (Number(n)||0).toFixed(2).replace(".", ",");
+const glyph = t => (String(t||"").trim().split(/\s+/).map(w => w[0]).join("").toUpperCase().replace(/[^A-Z0-9]/g,"") || "GA").slice(0,3);
+
+// ── API ──────────────────────────────────────────────────────────────────────
+async function api(action, payload) {
+  if (MOCK) return mockApi(action, payload);
+  let res;
+  try {
+    res = await fetch(API, { method:"POST", headers:{"Content-Type":"application/json"},
+                             body: JSON.stringify(Object.assign({action}, payload||{})) });
+  } catch (e) {
+    return { ok:false, status:0, data:{ error:"No pudimos conectar con el servidor. Revisá tu conexión y probá de nuevo." } };
+  }
+  let data = {}; try { data = await res.json(); } catch (e) {}
+  if (res.status === 401 && action !== "verify_otp") auth.logout(false);
+  return { ok: res.ok, status: res.status, data };
+}
+
+// ── Auth ─────────────────────────────────────────────────────────────────────
+const auth = {
+  token: () => localStorage.getItem(LS_TOKEN),
+  email: () => localStorage.getItem(LS_EMAIL),
+  _busy(btn, on, label) { const b = document.getElementById(btn); b.disabled = on; if (label) b.textContent = label; },
+  _err(msg) { const e = document.getElementById("note-err"); e.style.display = msg ? "" : "none"; e.textContent = msg || ""; },
+
+  async requestOtp() {
+    const email = (document.getElementById("in-email").value || "").trim().toLowerCase();
+    this._err("");
+    if (!email.includes("@") || !email.includes(".")) { this._err("Ingresá un email válido."); return; }
+    this._busy("btn-send", true, "Enviando…");
+    const r = await api("request_otp", { email });
+    this._busy("btn-send", false, "Enviar código");
+    if (r.ok) {
+      state._email = email;
+      document.getElementById("note-sent").style.display = "";
+      document.getElementById("code-row").style.display = "";
+      const hint = document.getElementById("note-hint");
+      hint.style.display = ""; hint.textContent = "Te enviamos un código a " + email + ". Vence en 10 minutos.";
+      document.getElementById("in-code").focus();
+    } else {
+      this._err(r.data.message || r.data.error || "No pudimos enviar el código. Probá de nuevo.");
+    }
+  },
+
+  async verifyOtp() {
+    const code = (document.getElementById("in-code").value || "").trim();
+    this._err("");
+    if (code.length < 6) { this._err("El código tiene 6 dígitos."); return; }
+    this._busy("btn-verify", true, "Verificando…");
+    const r = await api("verify_otp", { email: state._email, code });
+    this._busy("btn-verify", false, "Ingresar");
+    if (r.ok && r.data.token) {
+      localStorage.setItem(LS_TOKEN, r.data.token);
+      localStorage.setItem(LS_EMAIL, r.data.email);
+      applySession();
+      await loadMine();
+      renderAll();
+    } else {
+      this._err(r.data.message || r.data.error || "Código incorrecto.");
+    }
+  },
+
+  logout(reload = true) {
+    localStorage.removeItem(LS_TOKEN); localStorage.removeItem(LS_EMAIL);
+    state.mine = []; state.enrolledIds = new Set();
+    if (reload) { applySession(); renderAll(); }
+  },
+};
+
+function applySession() {
+  const logged = !!auth.token();
+  document.getElementById("auth-form").style.display = logged ? "none" : "";
+  document.getElementById("auth-logged").style.display = logged ? "" : "none";
+  document.getElementById("mis-calls-section").style.display = logged ? "" : "none";
+  if (logged) document.getElementById("logged-email").textContent = auth.email() || "";
+}
+
+// ── Render: cards de calls ─────────────────────────────────────────────────────
+function segsHtml(pct) {
+  let out = "";
+  for (let i = 0; i < 4; i++) {
+    const f = Math.max(0, Math.min(100, (pct - i*25) / 25 * 100));
+    const shine = (f > 0 && f < 100) ? " shine" : "";
+    out += `<div class="pb-seg"><div class="pb-fill${shine}" data-fill="${f.toFixed(0)}"></div></div>`;
+  }
+  return out;
+}
+
+function callCard(c) {
+  const enrolled = state.enrolledIds.has(c.call_id);
+  // Progreso real contra lo pedido. Si la orden está completa, la barra va llena
+  // y NO se muestra porcentaje: el objetivo original ya no aplica (se cerró con
+  // lo que entró) y un "25%" al lado del badge "Completo" se contradice.
+  // Las horas mostradas son siempre las reales — con esas se paga.
+  const pct = (!c.sin_limite && c.horas_totales > 0) ? Math.min(100, Math.round(100 * c.horas_subidas / c.horas_totales)) : null;
+  const pctBar = c.completo ? 100 : pct;
+  const chips = (c.targeting_mode === "juegos_especificos")
+    ? (c.juegos||[]).map(j => `<span class="goal">Juego: ${esc(j)}</span>`).join("")
+    : (c.categorias||[]).map(x => `<span class="goal">Categoría: ${esc(x)}</span>`).join("");
+  const maxChip = c.max_horas_por_usuario > 0
+    ? `<span class="diff media"><span class="pip"></span>Máx. ${nf(c.max_horas_por_usuario)} h por usuario</span>` : "";
+  const reward = (c.precio_hora_usd)
+    ? `<div class="reward-now">${fmtUSD(c.precio_hora_usd)} / h<span class="unit">si se comercializa</span></div>`
+    : `<div class="reward-now" style="color:var(--ink-3);font-size:16px;">Precio a confirmar<span class="unit">al comercializarse</span></div>`;
+  const hoursRow = c.completo
+    ? `<span class="big">${nf(c.horas_subidas)}</span><span>horas recibidas</span><span style="margin-left:auto" class="muted">· Completada</span>`
+    : c.sin_limite
+      ? `<span class="big">${nf(c.horas_subidas)}</span><span>horas subidas</span><span style="margin-left:auto" class="muted">· sin límite</span>`
+      : `<span class="big">${nf(c.horas_subidas)}</span><span>de</span><span class="big" style="color:var(--ink-3)">${nf(c.horas_totales)}</span><span>horas pedidas</span>${pct!==null?`<span style="margin-left:auto" class="muted">· ${pct}% completado</span>`:""}`;
+  // Al 100% el call cierra inscripciones. Los ya inscriptos lo siguen viendo normal
+  // (pueden subir lo que estaban grabando: el backend acepta hasta el margen).
+  const badge = enrolled
+    ? `<span class="status ok" style="position:absolute; top:18px; right:20px;"><span class="pip"></span>Inscripto</span>`
+    : c.completo
+      ? `<span class="status warn" style="position:absolute; top:18px; right:20px;"><span class="pip"></span>Completo</span>`
+      : `<span class="tag hot" style="position:absolute; top:18px; right:20px;">Abierto</span>`;
+  const foot = enrolled
+    ? `<div class="deadline"><strong style="color:var(--ok);font-weight:700;">✓ Inscripto</strong> — <strong>Grabá con el Pleiada Recorder y subí tus sesiones.</strong></div>
+       <div class="row" style="gap:10px;"><a class="btn ghost" href="${RECORDER_URL}" target="_blank" rel="noopener" style="text-decoration:none;">Abrir Recorder</a></div>`
+    : c.completo
+      ? `<div class="deadline">Esta orden ya completó las horas pedidas.</div>`
+      : `<div class="deadline">Chequeá qué juegos entran en el <a href="https://catalogo.gameplayalliance.gg" target="_blank" style="color:var(--violet-2);text-decoration:none;"><strong>catálogo</strong></a> filtrando por categoría.</div>
+       <div class="row" style="gap:10px;">${auth.token()
+          ? `<button class="btn primary" onclick="enroll.open('${esc(c.call_id)}')">Inscribirme</button>`
+          : `<button class="btn ghost" onclick="scrollToLogin()">Iniciá sesión para inscribirte</button>`}</div>`;
+  const pbar = (pctBar !== null)
+    ? `<div class="pb-wrap"><div class="pb-track" aria-label="Progreso de la orden">${segsHtml(pctBar)}</div></div>` : "";
+  return `<article class="card corners pedido${enrolled?"":" glow"}" style="grid-column:1 / -1;">
+    <div class="c-bl"></div><div class="c-br"></div>${badge}
+    <div class="row1">
+      <div class="cover" style="width:140px;height:140px;flex-basis:140px;border-radius:12px;">
+        <span class="glyph">${esc(glyph(c.titulo))}</span>
+        <span class="serial-badge">${esc(c.call_id)}</span>
+      </div>
+      <div class="meta-col">
+        <div class="title-row">
+          <div>
+            <h3>${esc(c.titulo)}</h3>
+            <div class="platform">Orden ${esc(c.call_id)} · ${esc(c.tipo)} · PC · teclado y mouse</div>
+            <div class="chips">${chips}${maxChip}</div>
+          </div>
+          ${reward}
+        </div>
+        <div class="hours-row">${hoursRow}</div>
+        ${pbar}
+      </div>
+    </div>
+    <div class="pedido-foot">${foot}</div>
+  </article>`;
+}
+
+function renderCalls() {
+  const grid = document.getElementById("calls-grid");
+  if (!state.calls.length) {
+    grid.innerHTML = `<div class="pg-empty show" style="grid-column:1 / -1;">No hay órdenes activas en este momento. Apenas se abra una, te avisaremos por mail y por las redes sociales.</div>`;
+  } else {
+    grid.innerHTML = state.calls.map(callCard).join("");
+  }
+  animateBars();
+}
+
+// ── Render: estado de subida ───────────────────────────────────────────────────
+function uploadStatus(u) {
+  const s = u.sale_status;
+  if (s === "VENDIDO" || s === "VENDIDO_EXCLUSIVO") return { cls:"sold", spin:"", txt:"Comercializado" };
+  if (s === "DISPONIBLE") return { cls:"ok", spin:"", txt:"Disponible p/ Comercializar" };
+  return { cls:"warn", spin:" spin", txt:"Subido" };
+}
+function statusCat(u) {
+  const s = u.sale_status;
+  if (s === "VENDIDO" || s === "VENDIDO_EXCLUSIVO") return "comercializados";
+  if (s === "DISPONIBLE") return "disponibles";
+  return "subidos";
+}
+
+function renderMine() {
+  const body = document.getElementById("mis-calls-body");
+  const byCall = {}; state.mine.forEach(m => byCall[m.call_id] = m);
+  let rows = [];
+  state.mine.forEach(m => (m.uploads||[]).forEach(u => rows.push({ m, u })));
+  rows.sort((a,b) => (b.u.uploaded_at||0) - (a.u.uploaded_at||0));
+
+  const counts = { todos: rows.length, subidos:0, disponibles:0, comercializados:0 };
+  rows.forEach(r => counts[statusCat(r.u)]++);
+
+  // tabs
+  const tabs = [["todos","Todos"],["subidos","Subidos"],["disponibles","Disponibles"],["comercializados","Comercializados"]];
+  document.getElementById("mis-calls-tabs").innerHTML = tabs.map(([k,label]) =>
+    `<button class="${state.tab===k?"active":""}" onclick="setTab('${k}')">${label} · ${counts[k]}</button>`).join("");
+
+  const shown = rows.filter(r => state.tab === "todos" || statusCat(r.u) === state.tab);
+  if (!shown.length) {
+    body.innerHTML = `<tr><td colspan="6" class="mono muted" style="text-align:center;padding:28px;">Todavía no subiste sesiones para este filtro.</td></tr>`;
+  } else {
+    body.innerHTML = shown.map(({m,u}) => {
+      const st = uploadStatus(u);
+      const precio = (m.precio_hora_usd) ? fmtUSD(m.precio_hora_usd) : "—";
+      return `<tr>
+        <td><div class="game-cell"><div class="mini-cover">${esc(glyph(m.titulo))}</div>
+          <div><div class="gname">${esc(m.titulo)}</div><div class="gsub">${esc(m.call_id)} · ${esc(m.tipo||"")}</div></div></div></td>
+        <td class="mono muted">${esc(u.juego||"")}</td>
+        <td class="mono">${fmtDate(u.uploaded_at)}</td>
+        <td class="mono"><strong style="color:var(--ink)">${fmtDur(u.duration_seconds)}</strong></td>
+        <td><span class="status ${st.cls}"><span class="pip${st.spin}"></span>${st.txt}</span></td>
+        <td style="text-align:right;" class="amount-cell">${precio}</td>
+      </tr>`;
+    }).join("");
+  }
+
+  // foot: resumen por call
+  document.getElementById("mis-calls-foot").innerHTML = state.mine.length
+    ? state.mine.map(m => {
+        const subidas = fmtHoras((m.used_seconds||0)/3600);
+        const rest = (m.remaining_seconds !== null && m.remaining_seconds !== undefined)
+          ? "restante: " + fmtHoras(m.remaining_seconds/3600) : "sin tope";
+        const cerrado = m.call_activo ? "" : ` · <span style="color:var(--warn)">orden cerrada</span>`;
+        return `${esc(m.titulo)}: <strong style="color:var(--ink)">${subidas} subidas · ${rest}</strong>${cerrado}`;
+      }).join(" &nbsp;·&nbsp; ")
+    : `<span class="muted">Todavía no estás inscripto en ninguna orden. Inscribite en una de arriba para empezar.</span>`;
+}
+window.setTab = k => { state.tab = k; renderMine(); };
+
+// ── Render: stats ──────────────────────────────────────────────────────────────
+function renderStats() {
+  document.getElementById("stat-calls").textContent = state.calls.length || "0";
+  const finite = state.calls.filter(c => !c.sin_limite);
+  const totalH = finite.reduce((s,c) => s + (c.horas_totales||0), 0);
+  const hasInf = state.calls.some(c => c.sin_limite);
+  document.getElementById("stat-hours").innerHTML = (totalH ? nf(totalH) : "0") +
+    `<small style="font-family:var(--mono);font-weight:500;font-size:13px;color:var(--ink-3);margin-left:6px">hs${hasInf ? "+" : ""}</small>`;
+  const up = document.getElementById("stat-uploaded"), meta = document.getElementById("stat-uploaded-meta");
+  if (auth.token()) {
+    const sec = state.mine.reduce((s,m) => s + (m.used_seconds||0), 0);
+    up.innerHTML = nf(sec/3600) + `<small style="font-family:var(--mono);font-weight:500;font-size:13px;color:var(--ink-3);margin-left:6px">hs</small>`;
+    meta.textContent = state.mine.length + (state.mine.length === 1 ? " orden activa" : " órdenes activas");
+  } else { up.textContent = "—"; meta.textContent = "iniciá sesión para ver"; }
+}
+
+function renderAll() { renderStats(); renderCalls(); if (auth.token()) renderMine(); }
+
+// ── Inscripción (modal) ─────────────────────────────────────────────────────────
+const enroll = {
+  open(callId) {
+    const c = state.calls.find(x => x.call_id === callId); if (!c) return;
+    state.pending = c;
+    const pedido = c.sin_limite ? "sin límite de horas" : fmtHoras(c.horas_totales) + " totales";
+    document.getElementById("modal-terms").innerHTML =
+      `<strong>${esc(c.call_id)} — ${esc(c.titulo)}</strong><br><br>
+       · Tipo: <strong>${esc(c.tipo)}</strong><br>
+       · Contenido pedido: ${pedido}${c.max_horas_por_usuario>0?` (máx. ${fmtHoras(c.max_horas_por_usuario)} por usuario)`:""}<br>
+       ${c.precio_hora_usd?`· Pago por hora de contenido: <strong>${fmtUSD(c.precio_hora_usd)}</strong> (si se comercializa)<br>`:""}
+       · Solo se aceptan sesiones de juegos elegibles para esta orden, grabadas con el Pleiada Recorder.<br>
+       · Las horas se computan al confirmarse cada subida.<br><br>
+       Al inscribirte aceptás estas condiciones bajo los <a href="https://gameplayalliance.gg/terminos-condiciones" target="_blank">Términos y Condiciones</a> del programa.`;
+    document.getElementById("modal-err").textContent = "";
+    document.getElementById("modal-bg").classList.add("open");
+  },
+  close() { document.getElementById("modal-bg").classList.remove("open"); state.pending = null; },
+  async confirm() {
+    const c = state.pending; if (!c) return;
+    const btn = document.getElementById("btn-confirm-enroll"); btn.disabled = true;
+    const r = await api("enroll_call", { token: auth.token(), call_id: c.call_id });
+    btn.disabled = false;
+    if (r.ok || r.status === 409) { this.close(); await loadMine(); renderAll(); }
+    else document.getElementById("modal-err").textContent = r.data.message || r.data.error || "No pudimos inscribirte. Probá de nuevo.";
+  },
+};
+window.enroll = enroll;
+window.scrollToLogin = () => { document.getElementById("auth-card").scrollIntoView({behavior:"smooth", block:"center"}); document.getElementById("in-email").focus(); };
+
+// ── Animación de barras ────────────────────────────────────────────────────────
+function animateBars() {
+  requestAnimationFrame(() => document.querySelectorAll('#calls-grid .pb-fill').forEach(el => {
+    const v = parseFloat(el.getAttribute('data-fill')) || 0;
+    el.style.width = "0%";
+    setTimeout(() => { el.style.width = v + '%'; }, 200 + Math.random()*300);
+  }));
+}
+
+// ── Carga de datos ─────────────────────────────────────────────────────────────
+async function loadCalls() {
+  const r = await api("list_calls", {});
+  state.calls = (r.ok && r.data.calls) ? r.data.calls : [];
+}
+async function loadMine() {
+  if (!auth.token()) { state.mine = []; state.enrolledIds = new Set(); return; }
+  const r = await api("my_calls", { token: auth.token() });
+  if (r.ok) { state.mine = r.data.enrollments || []; state.enrolledIds = new Set(state.mine.map(m => m.call_id)); }
+}
+
+(async function init() {
+  applySession();
+  await Promise.all([loadCalls(), loadMine()]);
+  renderAll();
+})();
+
+// ── Datos mock (solo con ?mock=1, para QA sin backend) ──────────────────────────
+function mockApi(action, p) {
+  const calls = [
+    { call_id:"GA-2026-001", titulo:"Shooters PvP", tipo:"Marketplace", targeting_mode:"categorias",
+      categorias:["Shooter","Battle Royale"], juegos:[], horas_totales:200, sin_limite:false,
+      max_horas_por_usuario:10, horas_subidas:48.5, precio_hora_usd:4.5 },
+    { call_id:"GA-2026-003", titulo:"RPG de mundo abierto", tipo:"Marketplace", targeting_mode:"juegos_especificos",
+      categorias:[], juegos:["Elden Ring","Baldur's Gate 3","The Witcher 3"], horas_totales:500, sin_limite:false,
+      max_horas_por_usuario:0, horas_subidas:390, precio_hora_usd:0 },
+  ];
+  const enrollments = [
+    { call_id:"GA-2026-003", titulo:"RPG de mundo abierto", tipo:"Marketplace", status:"activa", call_activo:true,
+      used_seconds:12240, remaining_seconds:null, precio_hora_usd:0, targeting_mode:"juegos_especificos",
+      categorias:[], juegos:["Elden Ring","Baldur's Gate 3","The Witcher 3"],
+      uploads:[
+        { juego:"Elden Ring", duration_seconds:7500, uploaded_at:1752600000, qa_status:"SUBIDO", sale_status:"VENDIDO" },
+        { juego:"Baldur's Gate 3", duration_seconds:4680, uploaded_at:1752200000, qa_status:"SUBIDO", sale_status:"DISPONIBLE" },
+      ] },
+  ];
+  const D = { request_otp:{ok:true}, verify_otp:{token:"MOCK",email:p&&p.email||"qa@test.com"},
+              list_calls:{calls}, my_calls:{enrollments}, enroll_call:{ok:true} };
+  return Promise.resolve({ ok:true, status:200, data: D[action] || {} });
+}
+</script>
+
+
+
+
+<div style="position:fixed;bottom:14px;left:14px;z-index:9999;background:#5b21b6;color:#fff;font:600 12px 'JetBrains Mono',monospace;padding:8px 13px;border-radius:9px;box-shadow:0 8px 24px -8px rgba(0,0,0,.6);border:1px solid #8b5cf6;">BETA · entorno de QA · datos de prueba</div>
+</body></html>
