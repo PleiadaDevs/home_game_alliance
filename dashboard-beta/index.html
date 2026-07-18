@@ -1149,6 +1149,15 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 .cover .cat-ico{width:88px;height:88px;color:var(--violet-2);position:relative;z-index:2;filter:drop-shadow(0 4px 14px rgba(139,92,246,.45));}
 /* Orden completada: la palabra bien grande, senal a la comunidad */
 .reward-now.completed-badge{color:var(--violet-2);font-family:var(--display);font-weight:900;font-size:30px;line-height:.95;text-transform:uppercase;letter-spacing:.01em;}
+/* Control de sesion en el header (Acceder / usuario + luz verde + salir) */
+.ga-acceder{font-family:var(--display);font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:13px;padding:11px 20px;border-radius:11px;border:1px solid var(--line-strong);background:rgba(139,92,246,0.08);color:var(--ink);cursor:pointer;transition:border-color .15s,background .15s;}
+.ga-acceder:hover{border-color:var(--violet);background:rgba(139,92,246,0.16);}
+.ga-userchip{display:inline-flex;align-items:center;gap:9px;padding:7px 8px 7px 13px;border:1px solid var(--line-strong);border-radius:11px;background:rgba(16,12,31,0.65);font-family:var(--mono);font-size:13px;color:var(--ink);}
+.ga-dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 9px var(--ok);flex:0 0 auto;animation:gaPulse 2.4s ease-in-out infinite;}
+@keyframes gaPulse{0%,100%{opacity:1}50%{opacity:.45}}
+.ga-uname{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ga-logout{width:26px;height:26px;border-radius:7px;border:1px solid var(--line);background:transparent;color:var(--ink-3);cursor:pointer;font-size:12px;line-height:1;display:grid;place-items:center;transition:color .15s,border-color .15s;}
+.ga-logout:hover{color:var(--bad);border-color:var(--bad);}
 </style>
 </head>
 <body>
@@ -1173,6 +1182,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         <a href="https://gameplayalliance.gg/dashboard" target="_top" style="text-decoration:none; font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); white-space:nowrap;">Dashboard</a>
       </nav>
       <div style="margin-left:auto; display:flex; align-items:center; gap:12px;">
+        <span id="ga-auth" style="display:flex; align-items:center;"></span>
         <a class="ga-navlinks" href="https://web.miniextensions.com/W32TyrnaWMUHtnazd4oT" target="_blank" rel="noopener" style="align-items:center; gap:8px; padding:11px 20px; border-radius:11px; border:1px solid var(--violet); background:linear-gradient(180deg,var(--violet),#6d28d9); color:#fff; text-decoration:none; font-family:var(--display); font-weight:800; letter-spacing:.06em; text-transform:uppercase; font-size:13px; box-shadow:0 16px 36px -16px var(--violet-glow);">Unite Ahora</a>
         <button class="ga-burger" onclick="document.getElementById('ga-mm').classList.toggle('open')" aria-label="Abrir menú" style="align-items:center; justify-content:center; width:44px; height:44px; border-radius:10px; background:rgba(139,92,246,0.07); border:1px solid var(--line); color:var(--ink); cursor:pointer;">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -1676,7 +1686,13 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 //  ?mock=1 en la URL usa datos de ejemplo (para QA sin backend deployado).
 // ════════════════════════════════════════════════════════════════════════════
 const API = "https://hdk2i43wuiw3272mtnjgwwsaby0bkood.lambda-url.sa-east-1.on.aws/";
-const LS_TOKEN = "ga_session_token", LS_EMAIL = "ga_session_email";
+// Sesión en COOKIE de dominio (.gameplayalliance.gg) para compartirla entre el
+// dashboard y el catálogo (subdominios distintos: localStorage no alcanza).
+const CK_TOKEN = "ga_session", CK_EMAIL = "ga_email", CK_NAME = "ga_name";
+function ckDomain(){ return location.hostname.endsWith("gameplayalliance.gg") ? "; domain=.gameplayalliance.gg" : ""; }
+function ckSet(n,v,days){ const e=new Date(Date.now()+days*864e5).toUTCString(); document.cookie=`${n}=${encodeURIComponent(v)}; expires=${e}; path=/${ckDomain()}; SameSite=Lax${location.protocol==="https:"?"; Secure":""}`; }
+function ckGet(n){ return document.cookie.split("; ").reduce((a,c)=>{const i=c.indexOf("="); return c.slice(0,i)===n?decodeURIComponent(c.slice(i+1)):a;},""); }
+function ckDel(n){ document.cookie=`${n}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${ckDomain()}`; }
 const RECORDER_URL = "https://recorder.gameplayalliance.gg/";
 const SIGNUP_URL = "https://web.miniextensions.com/W32TyrnaWMUHtnazd4oT";
 const MOCK = new URLSearchParams(location.search).has("mock");
@@ -1709,8 +1725,8 @@ async function api(action, payload) {
 
 // ── Auth ─────────────────────────────────────────────────────────────────────
 const auth = {
-  token: () => localStorage.getItem(LS_TOKEN),
-  email: () => localStorage.getItem(LS_EMAIL),
+  token: () => ckGet(CK_TOKEN),
+  email: () => ckGet(CK_EMAIL),
   _busy(btn, on, label) { const b = document.getElementById(btn); b.disabled = on; if (label) b.textContent = label; },
   _err(msg) { const e = document.getElementById("note-err"); e.style.display = msg ? "" : "none"; e.textContent = msg || ""; },
 
@@ -1741,8 +1757,9 @@ const auth = {
     const r = await api("verify_otp", { email: state._email, code });
     this._busy("btn-verify", false, "Ingresar");
     if (r.ok && r.data.token) {
-      localStorage.setItem(LS_TOKEN, r.data.token);
-      localStorage.setItem(LS_EMAIL, r.data.email);
+      ckSet(CK_TOKEN, r.data.token, 30);
+      ckSet(CK_EMAIL, r.data.email, 30);
+      ckSet(CK_NAME, r.data.nombre || "", 30);
       applySession();
       await loadMine();
       renderAll();
@@ -1752,13 +1769,30 @@ const auth = {
   },
 
   logout(reload = true) {
-    localStorage.removeItem(LS_TOKEN); localStorage.removeItem(LS_EMAIL);
+    ckDel(CK_TOKEN); ckDel(CK_EMAIL); ckDel(CK_NAME);
     state.mine = []; state.enrolledIds = new Set();
     if (reload) { applySession(); renderAll(); }
   },
 };
 
+// Control de sesión en el header: Acceder / usuario + luz verde + salir.
+function renderHeaderAuth() {
+  const el = document.getElementById("ga-auth"); if (!el) return;
+  const email = auth.email() || "";
+  if (auth.token() && email) {
+    const uname = (ckGet(CK_NAME) || "").trim() || email.split("@")[0];
+    const short = uname.length > 16 ? uname.slice(0, 15) + "…" : uname;
+    el.innerHTML = `<span class="ga-userchip" title="${esc(email)}">
+        <span class="ga-dot"></span><span class="ga-uname">${esc(short)}</span>
+        <button class="ga-logout" onclick="auth.logout()" aria-label="Cerrar sesión" title="Cerrar sesión">✕</button>
+      </span>`;
+  } else {
+    el.innerHTML = `<button class="ga-acceder" onclick="scrollToLogin()">Acceder</button>`;
+  }
+}
+
 function applySession() {
+  renderHeaderAuth();
   const logged = !!auth.token();
   document.getElementById("auth-form").style.display = logged ? "none" : "";
   document.getElementById("auth-logged").style.display = logged ? "" : "none";
@@ -1778,13 +1812,19 @@ function segsHtml(pct) {
 }
 
 const GENRE_ICONS={"Action Adventure":`<circle cx="12" cy="12" r="9"/><path d="M14.8 9.2l-2 4.6-4.6 2 2-4.6 4.6-2z"/>`,"Action RPG":`<path d="M14.5 4.5l5 5-8.5 8.5-2.5.5.5-2.5L14.5 4.5z"/><path d="M5 19l2.5-2.5M4 14l1.5 1.5M9 5l1.5 1.5"/>`,"FPS":`<circle cx="12" cy="12" r="7.5"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="1.6"/>`,"Survival":`<path d="M12 3l8 16H4l8-16z"/><path d="M12 9v10"/><path d="M12 12l3.5-2M12 14.5l-3.5-2"/>`,"Survival Horror":`<path d="M12 2.5c-4.4 0-7.5 3.2-7.5 7.3 0 2.6 1.3 4 2.5 5v3.4h10v-3.4c1.2-1 2.5-2.4 2.5-5C19.5 5.7 16.4 2.5 12 2.5z"/><circle cx="9" cy="10.5" r="1.4"/><circle cx="15" cy="10.5" r="1.4"/><path d="M10 21v-2M12 21v-2.5M14 21v-2"/>`,"Narrative Adventure":`<path d="M12 6c-1.8-1.4-4-1.8-6.5-1.5v12C8 16.2 10.2 16.6 12 18c1.8-1.4 4-1.8 6.5-1.5v-12C16 4.2 13.8 4.6 12 6z"/><path d="M12 6v12"/>`,"Souls-like":`<path d="M12 2v9"/><path d="M9 4l3-2 3 2"/><path d="M5 20c0-3 3-4 7-4s7 1 7 4"/><path d="M8.5 13.5l-1 2M15.5 13.5l1 2M12 12.5v3.5"/>`,"City Builder":`<path d="M3 21h18"/><path d="M5 21V9l5-3v15M14 21V11l5 3v7"/><path d="M7.5 12v0M7.5 15v0M16.5 17v0"/>`,"JRPG":`<path d="M12 2.5l2.3 5 5.2.5-4 3.4 1.3 5.1L12 19l-4.8 2.5 1.3-5.1-4-3.4 5.2-.5L12 2.5z"/>`,"MMORPG":`<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 6 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-6-3.8-9S9.5 5.5 12 3z"/>`,"Racing":`<path d="M5 4v17"/><path d="M5 5c3-1.5 5 1.5 8 0s4-1.5 6 0v8c-2 1.5-3 0-6 0s-5 1.5-8 0V5z"/><path d="M9 5.5v3.5M13 6.5v3.5M5 9h4M9 9h4M13 9.5h6"/>`,"Metroidvania":`<rect x="3" y="4" width="7" height="6" rx="1"/><rect x="14" y="4" width="7" height="6" rx="1"/><rect x="8.5" y="14" width="7" height="6" rx="1"/><path d="M10 7h4M6.5 10v4l5.5 0M17.5 10v4l-5.5 0"/>`,"Puzzle":`<path d="M9 4h6v3a2 2 0 1 1 4 0v3h-3a2 2 0 1 0 0 4h3v3H9v-3a2 2 0 1 1-4 0V8h4V4z"/>`,"Shooter":`<path d="M3 9h12l1.5 4H5z"/><path d="M15 9V7h4l2 2v2M9 13v3M7 16h4"/>`,"Adventure":`<path d="M9 3l6 2 6-2v15l-6 2-6-2-6 2V5l6-2z"/><path d="M9 3v15M15 5v15"/>`,"Horror":`<path d="M5 11a7 7 0 0 1 14 0v9l-2.3-1.5L14.4 20 12 18.5 9.6 20 7.3 18.5 5 20z"/><circle cx="9.5" cy="11" r="1.3"/><circle cx="14.5" cy="11" r="1.3"/>`,"Tactical Shooter":`<path d="M12 3v3.5M12 17.5V21M3 12h3.5M17.5 12H21"/><path d="M6 4h-2v2M20 4h-2v2M6 20h-2v-2M20 20h-2v-2"/><circle cx="12" cy="12" r="3"/>`,"Action":`<path d="M13 2L4 13h6l-1 9 9-12h-6l1-8z"/>`,"Exploration":`<circle cx="11" cy="11" r="7"/><path d="M11 7l2 4-2 4-2-4 2-4z"/><path d="M16.5 16.5L21 21"/>`,"Fighting":`<path d="M7 11V7.5a1.5 1.5 0 0 1 3 0V10M10 10V6.5a1.5 1.5 0 0 1 3 0V10M13 10V7.5a1.5 1.5 0 0 1 3 0V12c0 4-2.5 7-6 7s-6-2.5-6-6v-2a1.5 1.5 0 0 1 3 0v1"/>`,"Sandbox":`<path d="M12 3l8 4v10l-8 4-8-4V7l8-4z"/><path d="M12 3v18M4 7l8 4 8-4M8 5l8 4"/>`,"Sports":`<circle cx="12" cy="12" r="9"/><path d="M12 6l3 2.2-1.1 3.5h-3.8L9 8.2 12 6z"/><path d="M12 6V3M14.8 11.7l3 1M9.2 11.7l-3 1M13.6 15.5l1.5 2.7M10.4 15.5l-1.5 2.7"/>`,"Driving Sim":`<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/><path d="M12 9.5V4M9.8 13.5l-4.6 3M14.2 13.5l4.6 3"/>`,"Immersive Sim":`<path d="M2 12l10-6 10 6-10 6-10-6z"/><path d="M2 12l10 6 10-6M6 14v3M18 14v3"/><circle cx="12" cy="12" r="1.5"/>`,"4X Strategy":`<path d="M5 8l3.5 2L5 12M5 8v8l3.5 2M5 16l3.5-2M8.5 6l3.5 2 3.5-2M8.5 6v8l3.5 2 3.5-2V6M15.5 8L19 6v8l-3.5 2"/>`,"Roguelike":`<rect x="4" y="4" width="16" height="16" rx="2.5"/><circle cx="8.5" cy="8.5" r="1.2"/><circle cx="15.5" cy="8.5" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="8.5" cy="15.5" r="1.2"/><circle cx="15.5" cy="15.5" r="1.2"/>`,"Platformer":`<path d="M3 20h5v-4h5v-4h5V8"/><path d="M16 5l2 3 2-3"/><circle cx="5.5" cy="13" r="1.5"/>`,"Racing Sim":`<path d="M4 18a8 8 0 1 1 16 0"/><path d="M12 18l4-5"/><circle cx="12" cy="18" r="1.4"/><path d="M5 18h.5M19 18h-.5M7 11l.4.4M17 11l-.4.4M12 9v.5"/>`,"Simulation":`<path d="M5 7h14M5 12h14M5 17h14"/><circle cx="9" cy="7" r="1.8"/><circle cx="15" cy="12" r="1.8"/><circle cx="8" cy="17" r="1.8"/>`,"RPG":`<path d="M12 2l9 5v10l-9 5-9-5V7l9-5z"/><path d="M12 2v20M3 7l9 5 9-5M12 12l-4.5 2.5M12 12l4.5 2.5"/>`,"Roguelike Shooter":`<circle cx="12" cy="12" r="7.5"/><path d="M12 4.5v3M12 16.5v3M4.5 12h3M16.5 12h3"/><circle cx="10" cy="10" r="1"/><circle cx="14" cy="14" r="1"/><circle cx="14" cy="10" r="1"/>`,"Stealth":`<path d="M4 7c2-2 5-3 8-3s6 1 8 3c-1.5 1-3 1.5-3 1.5"/><path d="M3 12c2.5 3 6 4.5 9 4.5s6.5-1.5 9-4.5c-2.5-3-6-4.5-9-4.5S5.5 9 3 12z"/><circle cx="12" cy="12" r="2"/>`,"Grand Strategy":`<path d="M4 8l3 3 5-5 5 5 3-3v9H4V8z"/><path d="M4 20h16"/><circle cx="4" cy="7" r="1"/><circle cx="20" cy="7" r="1"/><circle cx="12" cy="4.5" r="1"/>`,"Strategy":`<path d="M9 21h6M12 21v-4"/><path d="M9 17h6l1-3H8l1 3z"/><path d="M10 14V7.5a2 2 0 1 1 4 0V14"/><circle cx="12" cy="5" r="2"/>`,"RTS":`<circle cx="12" cy="12" r="8.5"/><path d="M12 12V4.5M12 12l6 4"/><circle cx="12" cy="12" r="1.5"/><path d="M12 12l-5 3"/>`,"Extraction Shooter":`<rect x="5" y="10" width="14" height="9" rx="1.5"/><path d="M5 13h14"/><path d="M12 8V2.5M9 5l3-2.5L15 5"/>`,"Vehicle Combat":`<rect x="3" y="12" width="14" height="6" rx="1.5"/><circle cx="7" cy="19" r="1.5"/><circle cx="13" cy="19" r="1.5"/><path d="M6 12V9h6v3M12 10h9M19 10v-2"/>`,"Survival Action":`<path d="M14 3l3 3-7 7-1.5 4.5L5 21l3.5-3.5L13 16l-3-3-7-7"/><path d="M16 6l3-3"/><path d="M9 9l-4 1 1 4"/>`,"Flight Sim":`<path d="M12 2l1.5 8L21 14v2l-7.5-2.5L13 19l2.5 1.5V22L12 21l-3.5 1.5V20.5L11 19l-.5-5.5L3 16v-2l7.5-4L12 2z"/>`,"Management Sim":`<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 3v-.5a3 3 0 0 1 6 0V3"/><path d="M8 14v3M12 11v6M16 13v4"/>`,"Farming Sim":`<path d="M12 21v-7"/><path d="M12 14c0-3-2-5-5-5 0 3 2 5 5 5z"/><path d="M12 12c0-3 2-5 5-5 0 3-2 5-5 5z"/><path d="M7 21h10"/>`,"Hero Shooter":`<path d="M12 2.5l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L4.2 8.2l5.4-.8L12 2.5z"/><circle cx="12" cy="11" r="2"/>`,"Colony Sim":`<path d="M3 20h18"/><path d="M5 20l3-7 3 7M13 20l3-6 3 6"/><path d="M8 13v-2M16 14v-2"/>`,"Life Sim":`<path d="M4 11l8-6 8 6v9H4v-9z"/><path d="M12 20v-5h0"/><path d="M12 12.5c-.8-1.2-2.6-1-2.6.4 0 1 1.2 1.8 2.6 2.8 1.4-1 2.6-1.8 2.6-2.8 0-1.4-1.8-1.6-2.6-.4z"/>`,"Driving Survival":`<path d="M3 16h2m14 0h2M5 16v-3l2-4h8l2 4v3"/><circle cx="8" cy="16" r="1.5"/><circle cx="15" cy="16" r="1.5"/><path d="M12 3l-1.5 3h3L12 9"/>`,"Battle Royale":`<path d="M5 4l4 5M19 4l-4 5"/><path d="M5 4h4M19 4h-4"/><path d="M7 9c0 3 2.2 4.5 5 4.5S17 12 17 9"/><path d="M12 13.5V21M9.5 21h5"/>`,"Hunting Sim":`<path d="M12 21a4 4 0 0 0 4-4c0-2-1-3-1-5"/><path d="M12 21a4 4 0 0 1-4-4c0-2 1-3 1-5"/><path d="M9 12c-1-1-1.5-2.5-1.5-4M9 12c-1.5 0-3-.5-4-1.5M15 12c1-1 1.5-2.5 1.5-4M15 12c1.5 0 3-.5 4-1.5"/>`,"Tactics":`<rect x="4" y="4" width="16" height="16" rx="1.5"/><path d="M4 9h16M4 14h16M9 4v16M14 4v16"/><circle cx="6.5" cy="6.5" r="1.2"/><circle cx="16.5" cy="16.5" r="1.2"/>`,"Simulator":`<path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/><path d="M12 2v3M12 19v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>`};
-// Icono de la primera categoria (mismo set que el catalogo). Si es orden por
-// juegos o la categoria no tiene icono, cae a las 2-3 letras del titulo.
+// Ícono genérico (gamepad) para órdenes por juego/s específico/s — no tienen
+// categoría, así que no hay ícono de género que mostrar.
+const GENERIC_GAME_ICON = `<line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><rect x="2" y="6" width="20" height="12" rx="2.5"/>`;
+
+// Recuadro de la orden: ícono de la 1ra categoría (mismo set que el catálogo)
+// si es por categorías; gamepad genérico si es por juego/s específico/s.
 function catCover(c) {
   const cat = (c.targeting_mode !== "juegos_especificos" && (c.categorias||[])[0]) || "";
-  const paths = GENRE_ICONS[cat];
-  if (paths) return `<svg class="cat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-label="${esc(cat)}">${paths}</svg>`;
-  return `<span class="glyph">${esc(glyph(c.titulo))}</span>`;
+  const paths = (c.targeting_mode === "juegos_especificos")
+    ? GENERIC_GAME_ICON
+    : (GENRE_ICONS[cat] || GENERIC_GAME_ICON);
+  const label = (c.targeting_mode === "juegos_especificos") ? "Juego específico" : cat;
+  return `<svg class="cat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-label="${esc(label)}">${paths}</svg>`;
 }
 
 function callCard(c) {
