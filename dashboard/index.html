@@ -1687,7 +1687,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 const API = "https://hdk2i43wuiw3272mtnjgwwsaby0bkood.lambda-url.sa-east-1.on.aws/";
 // Sesión en COOKIE de dominio (.gameplayalliance.gg) para compartirla entre el
 // dashboard y el catálogo (subdominios distintos: localStorage no alcanza).
-const CK_TOKEN = "ga_session", CK_EMAIL = "ga_email";
+const CK_TOKEN = "ga_session", CK_EMAIL = "ga_email", CK_NAME = "ga_name";
 function ckDomain(){ return location.hostname.endsWith("gameplayalliance.gg") ? "; domain=.gameplayalliance.gg" : ""; }
 function ckSet(n,v,days){ const e=new Date(Date.now()+days*864e5).toUTCString(); document.cookie=`${n}=${encodeURIComponent(v)}; expires=${e}; path=/${ckDomain()}; SameSite=Lax${location.protocol==="https:"?"; Secure":""}`; }
 function ckGet(n){ return document.cookie.split("; ").reduce((a,c)=>{const i=c.indexOf("="); return c.slice(0,i)===n?decodeURIComponent(c.slice(i+1)):a;},""); }
@@ -1758,6 +1758,7 @@ const auth = {
     if (r.ok && r.data.token) {
       ckSet(CK_TOKEN, r.data.token, 30);
       ckSet(CK_EMAIL, r.data.email, 30);
+      ckSet(CK_NAME, r.data.nombre || "", 30);
       applySession();
       await loadMine();
       renderAll();
@@ -1767,7 +1768,7 @@ const auth = {
   },
 
   logout(reload = true) {
-    ckDel(CK_TOKEN); ckDel(CK_EMAIL);
+    ckDel(CK_TOKEN); ckDel(CK_EMAIL); ckDel(CK_NAME);
     state.mine = []; state.enrolledIds = new Set();
     if (reload) { applySession(); renderAll(); }
   },
@@ -1778,7 +1779,7 @@ function renderHeaderAuth() {
   const el = document.getElementById("ga-auth"); if (!el) return;
   const email = auth.email() || "";
   if (auth.token() && email) {
-    const uname = email.split("@")[0];
+    const uname = (ckGet(CK_NAME) || "").trim() || email.split("@")[0];
     const short = uname.length > 16 ? uname.slice(0, 15) + "…" : uname;
     el.innerHTML = `<span class="ga-userchip" title="${esc(email)}">
         <span class="ga-dot"></span><span class="ga-uname">${esc(short)}</span>
