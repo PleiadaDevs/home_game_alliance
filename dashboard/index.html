@@ -1148,6 +1148,15 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 .cover .cat-ico{width:88px;height:88px;color:var(--violet-2);position:relative;z-index:2;filter:drop-shadow(0 4px 14px rgba(139,92,246,.45));}
 /* Orden completada: la palabra bien grande, senal a la comunidad */
 .reward-now.completed-badge{color:var(--violet-2);font-family:var(--display);font-weight:900;font-size:30px;line-height:.95;text-transform:uppercase;letter-spacing:.01em;}
+/* Control de sesion en el header (Acceder / usuario + luz verde + salir) */
+.ga-acceder{font-family:var(--display);font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:13px;padding:11px 20px;border-radius:11px;border:1px solid var(--line-strong);background:rgba(139,92,246,0.08);color:var(--ink);cursor:pointer;transition:border-color .15s,background .15s;}
+.ga-acceder:hover{border-color:var(--violet);background:rgba(139,92,246,0.16);}
+.ga-userchip{display:inline-flex;align-items:center;gap:9px;padding:7px 8px 7px 13px;border:1px solid var(--line-strong);border-radius:11px;background:rgba(16,12,31,0.65);font-family:var(--mono);font-size:13px;color:var(--ink);}
+.ga-dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 9px var(--ok);flex:0 0 auto;animation:gaPulse 2.4s ease-in-out infinite;}
+@keyframes gaPulse{0%,100%{opacity:1}50%{opacity:.45}}
+.ga-uname{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ga-logout{width:26px;height:26px;border-radius:7px;border:1px solid var(--line);background:transparent;color:var(--ink-3);cursor:pointer;font-size:12px;line-height:1;display:grid;place-items:center;transition:color .15s,border-color .15s;}
+.ga-logout:hover{color:var(--bad);border-color:var(--bad);}
 </style>
 </head>
 <body>
@@ -1172,6 +1181,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         <a href="https://gameplayalliance.gg/dashboard" target="_top" style="text-decoration:none; font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); white-space:nowrap;">Dashboard</a>
       </nav>
       <div style="margin-left:auto; display:flex; align-items:center; gap:12px;">
+        <span id="ga-auth" style="display:flex; align-items:center;"></span>
         <a class="ga-navlinks" href="https://web.miniextensions.com/W32TyrnaWMUHtnazd4oT" target="_blank" rel="noopener" style="align-items:center; gap:8px; padding:11px 20px; border-radius:11px; border:1px solid var(--violet); background:linear-gradient(180deg,var(--violet),#6d28d9); color:#fff; text-decoration:none; font-family:var(--display); font-weight:800; letter-spacing:.06em; text-transform:uppercase; font-size:13px; box-shadow:0 16px 36px -16px var(--violet-glow);">Unite Ahora</a>
         <button class="ga-burger" onclick="document.getElementById('ga-mm').classList.toggle('open')" aria-label="Abrir menú" style="align-items:center; justify-content:center; width:44px; height:44px; border-radius:10px; background:rgba(139,92,246,0.07); border:1px solid var(--line); color:var(--ink); cursor:pointer;">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -1675,7 +1685,13 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 //  ?mock=1 en la URL usa datos de ejemplo (para QA sin backend deployado).
 // ════════════════════════════════════════════════════════════════════════════
 const API = "https://hdk2i43wuiw3272mtnjgwwsaby0bkood.lambda-url.sa-east-1.on.aws/";
-const LS_TOKEN = "ga_session_token", LS_EMAIL = "ga_session_email";
+// Sesión en COOKIE de dominio (.gameplayalliance.gg) para compartirla entre el
+// dashboard y el catálogo (subdominios distintos: localStorage no alcanza).
+const CK_TOKEN = "ga_session", CK_EMAIL = "ga_email";
+function ckDomain(){ return location.hostname.endsWith("gameplayalliance.gg") ? "; domain=.gameplayalliance.gg" : ""; }
+function ckSet(n,v,days){ const e=new Date(Date.now()+days*864e5).toUTCString(); document.cookie=`${n}=${encodeURIComponent(v)}; expires=${e}; path=/${ckDomain()}; SameSite=Lax${location.protocol==="https:"?"; Secure":""}`; }
+function ckGet(n){ return document.cookie.split("; ").reduce((a,c)=>{const i=c.indexOf("="); return c.slice(0,i)===n?decodeURIComponent(c.slice(i+1)):a;},""); }
+function ckDel(n){ document.cookie=`${n}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${ckDomain()}`; }
 const RECORDER_URL = "https://recorder.gameplayalliance.gg/";
 const SIGNUP_URL = "https://web.miniextensions.com/W32TyrnaWMUHtnazd4oT";
 const MOCK = new URLSearchParams(location.search).has("mock");
@@ -1708,8 +1724,8 @@ async function api(action, payload) {
 
 // ── Auth ─────────────────────────────────────────────────────────────────────
 const auth = {
-  token: () => localStorage.getItem(LS_TOKEN),
-  email: () => localStorage.getItem(LS_EMAIL),
+  token: () => ckGet(CK_TOKEN),
+  email: () => ckGet(CK_EMAIL),
   _busy(btn, on, label) { const b = document.getElementById(btn); b.disabled = on; if (label) b.textContent = label; },
   _err(msg) { const e = document.getElementById("note-err"); e.style.display = msg ? "" : "none"; e.textContent = msg || ""; },
 
@@ -1740,8 +1756,8 @@ const auth = {
     const r = await api("verify_otp", { email: state._email, code });
     this._busy("btn-verify", false, "Ingresar");
     if (r.ok && r.data.token) {
-      localStorage.setItem(LS_TOKEN, r.data.token);
-      localStorage.setItem(LS_EMAIL, r.data.email);
+      ckSet(CK_TOKEN, r.data.token, 30);
+      ckSet(CK_EMAIL, r.data.email, 30);
       applySession();
       await loadMine();
       renderAll();
@@ -1751,13 +1767,30 @@ const auth = {
   },
 
   logout(reload = true) {
-    localStorage.removeItem(LS_TOKEN); localStorage.removeItem(LS_EMAIL);
+    ckDel(CK_TOKEN); ckDel(CK_EMAIL);
     state.mine = []; state.enrolledIds = new Set();
     if (reload) { applySession(); renderAll(); }
   },
 };
 
+// Control de sesión en el header: Acceder / usuario + luz verde + salir.
+function renderHeaderAuth() {
+  const el = document.getElementById("ga-auth"); if (!el) return;
+  const email = auth.email() || "";
+  if (auth.token() && email) {
+    const uname = email.split("@")[0];
+    const short = uname.length > 16 ? uname.slice(0, 15) + "…" : uname;
+    el.innerHTML = `<span class="ga-userchip" title="${esc(email)}">
+        <span class="ga-dot"></span><span class="ga-uname">${esc(short)}</span>
+        <button class="ga-logout" onclick="auth.logout()" aria-label="Cerrar sesión" title="Cerrar sesión">✕</button>
+      </span>`;
+  } else {
+    el.innerHTML = `<button class="ga-acceder" onclick="scrollToLogin()">Acceder</button>`;
+  }
+}
+
 function applySession() {
+  renderHeaderAuth();
   const logged = !!auth.token();
   document.getElementById("auth-form").style.display = logged ? "none" : "";
   document.getElementById("auth-logged").style.display = logged ? "" : "none";
