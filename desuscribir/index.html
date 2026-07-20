@@ -91,20 +91,32 @@
       cargando:
         '<p class="label">Un momento</p>' +
         '<h1 class="titulo">Procesando<br>tu baja<span class="ac">.</span></h1>',
+      cargando_alta:
+        '<p class="label">Un momento</p>' +
+        '<h1 class="titulo">Procesando<br>tu suscripción<span class="ac">.</span></h1>',
       baja_ok:
         '<p class="label">Listo</p>' +
         '<h1 class="titulo">Baja<br><span class="ac">confirmada.</span></h1>' +
         '<hr class="divider">' +
-        '<p class="texto">No vas a recibir más newsletters de <strong>Gameplay Alliance</strong>.<br>' +
-        'Seguís siendo parte del programa y podés seguir usando tu cuenta normalmente.<br>' +
-        'Si te arrepentís, escribinos y te volvemos a sumar.</p>' +
-        '<a href="mailto:gg_support@pleiada.ai" class="boton">Contactar soporte</a>',
+        '<p class="texto">No vas a recibir más newsletters de <strong>Gameplay Alliance</strong>. ' +
+        'Seguís siendo parte del programa y tu cuenta sigue activa.<br>' +
+        'Eso sí: el newsletter es la forma más rápida y segura de enterarte de los pedidos ' +
+        'abiertos que se van generando en el programa. Si cambiás de idea, volvé a sumarte con un click.</p>' +
+        '<a href="#" onclick="resuscribir();return false;" class="boton">Volver a suscribirme</a>',
       ya_baja:
         '<p class="label">Sin novedades</p>' +
         '<h1 class="titulo">Ya estabas<br><span class="ac">dado de baja.</span></h1>' +
         '<hr class="divider">' +
         '<p class="texto">Tu casilla ya no recibía el newsletter de <strong>Gameplay Alliance</strong>.<br>' +
-        'No hace falta que hagas nada más.</p>' +
+        'Recordá que el newsletter es la forma más rápida y segura de enterarte de los pedidos ' +
+        'abiertos que se van generando en el programa. ¿Querés volver?</p>' +
+        '<a href="#" onclick="resuscribir();return false;" class="boton">Volver a suscribirme</a>',
+      alta_ok:
+        '<p class="label">¡De vuelta!</p>' +
+        '<h1 class="titulo">Suscripción<br><span class="ac">reactivada.</span></h1>' +
+        '<hr class="divider">' +
+        '<p class="texto">Ya estás suscripto de nuevo: las novedades y los pedidos abiertos ' +
+        'del programa te van a llegar directo a tu casilla.</p>' +
         '<a href="https://gameplayalliance.gg" class="boton">Ir al sitio</a>',
       error:
         '<p class="label">Algo salió mal</p>' +
@@ -116,6 +128,23 @@
     };
 
     function setEstado(e){ render(VIEWS[e] || VIEWS.error); }
+
+    function resuscribir(){
+      setEstado("cargando_alta");
+      fetch(WEBHOOK, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: token, accion: "alta" })
+      })
+        .then(function(res){
+          return res.json().catch(function(){ return null; });
+        })
+        .then(function(data){
+          if (data && data.previo === "alta") setEstado("alta_ok");
+          else setEstado("error");
+        })
+        .catch(function(){ setEstado("error"); });
+    }
 
     setEstado("cargando");
 
