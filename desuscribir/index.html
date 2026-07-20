@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Baja del newsletter · Gameplay Alliance</title>
+<meta name="robots" content="noindex">
+
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#030306; --accent:#C28AFF; --white:#FFFFFF;
+    --text:#F2EFFA; --muted:#6B5F82; --divider:#3D2A5B;
+    --card-bg:#08080D; --card-border:#241B37;
+    --font:"Inter", Arial, Helvetica, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  .page{
+    position:fixed; inset:0; width:100%; height:100vh;
+    background:var(--bg);
+    background-image:
+      radial-gradient(circle at 50% 0%, rgba(178,113,255,0.18) 0%, rgba(3,3,6,0) 40%),
+      radial-gradient(circle at 0% 40%, rgba(126,83,255,0.13) 0%, rgba(3,3,6,0) 35%),
+      radial-gradient(circle at 100% 55%, rgba(181,97,255,0.12) 0%, rgba(3,3,6,0) 35%);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    font-family:var(--font); padding:20px; gap:32px;
+  }
+  .logo-above{ display:block; width:260px; height:auto; }
+  .logo-inside{ display:none; width:180px; height:auto; margin-bottom:40px; }
+  .card{
+    background:var(--card-bg); border:1px solid var(--card-border);
+    border-radius:22px; padding:52px 48px; text-align:center;
+    max-width:520px; width:100%;
+  }
+  .label{
+    margin:0 0 12px 0; font-size:11px; font-weight:900; color:var(--accent);
+    letter-spacing:2.4px; text-transform:uppercase;
+  }
+  .titulo{
+    margin:0 0 20px 0; font-size:38px; font-weight:900; color:var(--white);
+    letter-spacing:-1px; line-height:1.05;
+  }
+  .ac{ color:var(--accent); }
+  .divider{
+    height:1px; background:var(--divider); margin:0 0 28px 0; border:none; width:100%;
+  }
+  .texto{
+    margin:0 0 32px 0; font-size:16px; color:var(--text); line-height:1.68; font-weight:400;
+  }
+  .texto strong{ color:var(--white); }
+  .boton{
+    display:block; background:linear-gradient(135deg, #9B5EFF 0%, #7B35E8 100%);
+    color:var(--white); padding:16px 40px; border-radius:10px; text-decoration:none;
+    font-weight:800; font-size:14px; letter-spacing:1.5px; text-transform:uppercase; width:100%;
+  }
+  @media (max-width:479px){
+    .page{ padding:0; gap:0; }
+    .logo-above{ display:none; }
+    .logo-inside{ display:block; }
+    .card{
+      border:none; border-radius:0; width:100%; height:100%; flex:1;
+      padding:56px 28px 48px; display:flex; flex-direction:column;
+      justify-content:center; align-items:center; text-align:center;
+    }
+    .titulo{ font-size:32px; }
+  }
+</style>
+</head>
+<body>
+  <div class="page" id="page"></div>
+
+  <script>
+    var WEBHOOK = "https://hook.us2.make.com/2y0e55lwsdg39uxoevq3as81f9ar5wm8";
+    var LOGO = "https://bucket.mailersendapp.com/351ndgwzmqgzqx8k/nrw7gym856kg2k8e/images/a1de05db-3de6-4fd4-84f6-542a48bc8aa0.jpeg";
+
+    function render(html){
+      document.getElementById("page").innerHTML =
+        '<img class="logo-above" src="' + LOGO + '" alt="Gameplay Alliance">' +
+        '<div class="card">' +
+          '<img class="logo-inside" src="' + LOGO + '" alt="Gameplay Alliance">' +
+          html +
+        '</div>';
+    }
+
+    var VIEWS = {
+      cargando:
+        '<p class="label">Un momento</p>' +
+        '<h1 class="titulo">Procesando<br>tu baja<span class="ac">.</span></h1>',
+      baja_ok:
+        '<p class="label">Listo</p>' +
+        '<h1 class="titulo">Baja<br><span class="ac">confirmada.</span></h1>' +
+        '<hr class="divider">' +
+        '<p class="texto">No vas a recibir más newsletters de <strong>Gameplay Alliance</strong>.<br>' +
+        'Seguís siendo parte del programa y podés seguir usando tu cuenta normalmente.<br>' +
+        'Si te arrepentís, escribinos y te volvemos a sumar.</p>' +
+        '<a href="mailto:gg_support@pleiada.ai" class="boton">Contactar soporte</a>',
+      ya_baja:
+        '<p class="label">Sin novedades</p>' +
+        '<h1 class="titulo">Ya estabas<br><span class="ac">dado de baja.</span></h1>' +
+        '<hr class="divider">' +
+        '<p class="texto">Tu casilla ya no recibía el newsletter de <strong>Gameplay Alliance</strong>.<br>' +
+        'No hace falta que hagas nada más.</p>' +
+        '<a href="https://gameplayalliance.gg" class="boton">Ir al sitio</a>',
+      error:
+        '<p class="label">Algo salió mal</p>' +
+        '<h1 class="titulo">Link<br><span class="ac">inválido.</span></h1>' +
+        '<hr class="divider">' +
+        '<p class="texto">Este link no es válido.<br>' +
+        'Si querés dejar de recibir el newsletter, escribinos y lo resolvemos al toque.</p>' +
+        '<a href="mailto:gg_support@pleiada.ai" class="boton">Contactar soporte</a>'
+    };
+
+    function setEstado(e){ render(VIEWS[e] || VIEWS.error); }
+
+    setEstado("cargando");
+
+    var params = new URLSearchParams(window.location.search);
+    var token = params.get("t") || params.get("token");
+
+    if (!token || WEBHOOK.indexOf("http") !== 0) {
+      setEstado("error");
+    } else {
+      fetch(WEBHOOK, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: token })
+      })
+        .then(function(res){
+          return res.json().catch(function(){ return null; });
+        })
+        .then(function(data){
+          var previo = data && data.previo;
+          if (previo === "suscripto") setEstado("baja_ok");
+          else if (previo === "baja") setEstado("ya_baja");
+          else setEstado("error");
+        })
+        .catch(function(){ setEstado("error"); });
+    }
+  </script>
+</body>
+</html>
