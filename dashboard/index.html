@@ -1113,6 +1113,15 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   .btn-gh .tx { display:flex; flex-direction:column; line-height:1.15; }
   .btn-gh .s { font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,0.75); }
   .btn-gh .g { font-family:var(--display); font-weight:800; font-size:18px; letter-spacing:.04em; text-transform:uppercase; }
+  /* — Perfil / wallet de pagos — */
+  .net-chip { flex:1; display:flex; flex-direction:column; gap:4px; padding:14px 16px; border-radius:12px; border:1px solid var(--line); background:rgba(139,92,246,0.05); cursor:pointer; text-align:left; transition:border-color .15s, background .15s; }
+  .net-chip:hover { border-color:var(--violet); }
+  .net-chip.sel { border-color:var(--violet); background:rgba(139,92,246,0.14); box-shadow:0 0 0 1px var(--violet); }
+  .net-chip .nn { font-family:var(--display); font-weight:800; font-size:16px; letter-spacing:.05em; text-transform:uppercase; color:var(--ink); }
+  .net-chip .nd { font-family:var(--mono); font-size:11px; color:var(--ink-3); }
+  .wal-addr { font-family:var(--mono); font-size:13px; color:var(--ink); word-break:break-all; background:rgba(139,92,246,0.07); border:1px solid var(--line); border-radius:10px; padding:12px 14px; }
+  .wal-hl { color:var(--violet-2); font-weight:700; }
+  .wal-big { font-family:var(--mono); font-size:15px; word-break:break-all; line-height:1.6; background:rgba(139,92,246,0.08); border:1px solid var(--violet); border-radius:12px; padding:16px; margin:12px 0; color:var(--ink); }
   .dl-note { font-family:var(--mono); font-size:11px; color:var(--ink-3); line-height:1.5; }
 
   /* === GA site header/footer (home) ================================= */
@@ -1223,11 +1232,11 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
               <span class="tag hot">Gratuito</span>
               <span class="tag hot">Open source</span>
             </div>
-            <a class="btn-gh" href="https://github.com/PleiadaAI/pleiada-recorder/releases" target="_blank" rel="noopener">
-              <svg width="26" height="26" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
-              <span class="tx"><span class="s">Descargá la última versión en</span><span class="g">GitHub</span></span>
+            <a class="btn-gh" href="https://github.com/PleiadaAI/pleiada-recorder/releases/latest/download/PleiadaRecorder_Setup.exe" rel="noopener">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"></path></svg>
+              <span class="tx"><span class="s">Descarga directa para Windows</span><span class="g">Descargar</span></span>
             </a>
-            <div class="dl-note">Descargá la última versión desde GitHub y ejecutá el instalador. Al finalizar se abre el asistente de configuración.</div>
+            <div class="dl-note">Descargá la última versión y ejecutá el instalador. Al finalizar se abre el asistente de configuración.</div>
           </div>
           <div class="row" style="gap: 10px;">
             <a class="btn primary" href="https://web.miniextensions.com/W32TyrnaWMUHtnazd4oT" target="_blank" rel="noopener" style="text-decoration:none;">Registrate gratis <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"></path></svg></a>
@@ -1566,6 +1575,60 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       </div>
     </section>
 
+    <!-- ============ PERFIL (datos de pago) ============ -->
+    <section class="section" id="perfil-section" style="display:none;">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Perfil</div>
+          <h1 class="h1" style="font-size:32px;">DATOS DE <em>PAGO</em>.</h1>
+          <p class="sub">Los pagos se hacen en <strong style="color:var(--violet-2)">USDT</strong> por <strong style="color:var(--ink)">TRON (TRC20)</strong> o <strong style="color:var(--ink)">BNB Chain (BEP20)</strong> — elegís una sola red. Informanos acá la wallet donde querés recibir tus pagos.</p>
+        </div>
+      </div>
+
+      <div class="login-grid">
+        <div class="card corners glow">
+          <div class="c-bl"></div><div class="c-br"></div>
+
+          <div id="wallet-form">
+            <div class="eyebrow">Tu wallet de pagos</div>
+            <p class="sub" style="font-size:14px;">Todavía no cargaste tu wallet. Elegí la red y pegá la dirección <strong style="color:var(--ink)">directo desde tu billetera</strong>.</p>
+            <div class="row" style="gap:12px; margin:14px 0;">
+              <button type="button" class="net-chip" id="chip-trc20" onclick="perfil.pick('TRC20')"><span class="nn">TRON</span><span class="nd">USDT · red TRC20</span></button>
+              <button type="button" class="net-chip" id="chip-bep20" onclick="perfil.pick('BEP20')"><span class="nn">BNB Chain</span><span class="nd">USDT · red BEP20</span></button>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <input class="input" type="text" id="wal-addr1" placeholder="Dirección de tu wallet" autocomplete="off" spellcheck="false">
+              <input class="input" type="text" id="wal-addr2" placeholder="Repetí la dirección (pegala de nuevo)" autocomplete="off" spellcheck="false">
+            </div>
+            <div class="form-note" id="wal-err" style="color:var(--bad); display:none;"></div>
+            <div class="field-row" style="margin-top:12px;">
+              <button class="btn primary" id="btn-wallet" onclick="perfil.review()">Guardar wallet</button>
+            </div>
+          </div>
+
+          <div id="wallet-set" style="display:none;">
+            <div class="eyebrow">Tu wallet de pagos</div>
+            <div style="display:flex; align-items:center; gap:10px; margin:12px 0 10px;">
+              <span class="tag hot" id="wal-net-tag"></span>
+              <span style="font-family:var(--mono); font-size:12px; color:var(--ink-3);" id="wal-updated"></span>
+            </div>
+            <div class="wal-addr" id="wal-current"></div>
+            <p class="sub" style="font-size:13px; margin-top:14px;">Una vez informada tu wallet, para cambiarla escribinos a <a href="mailto:gg_support@pleiada.ai" style="color:var(--violet-2); text-decoration:none; font-weight:600;">gg_support@pleiada.ai</a> con al menos <strong style="color:var(--ink)">una semana de anticipación</strong> al próximo pago.</p>
+          </div>
+        </div>
+
+        <div class="card corners" style="display:flex; flex-direction:column; justify-content:flex-start;">
+          <div class="c-bl"></div><div class="c-br"></div>
+          <div class="eyebrow">Sobre las wallets</div>
+          <div style="display:flex; flex-direction:column; gap:12px; margin-top:14px;">
+            <span style="color:var(--ink-2); font-size:13.5px;">Podés usar billeteras como <strong style="color:var(--ink)">MetaMask, Trust Wallet, Lemon, Belo, Bitso o Binance</strong>, entre otras — no recomendamos ninguna en particular. Asegurate de que tu billetera soporte <strong style="color:var(--ink)">USDT en la red que elijas</strong> (TRON/TRC20 o BNB Chain/BEP20).</span>
+            <span style="color:var(--ink-2); font-size:13.5px;">Verificá la dirección antes de guardar: <strong style="color:var(--ink)">una dirección equivocada significa perder el pago</strong> — las transferencias en blockchain no se pueden revertir.</span>
+            <span style="color:var(--ink-2); font-size:13.5px;">Los pagos se procesan según los términos de cada orden, dentro de los <strong style="color:var(--ink)">45 días</strong> desde la aprobación de tus datasets.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ FAQS ============ -->
     <section class="section" id="faqs">
       <div class="section-head">
@@ -1644,6 +1707,24 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     </div>
   </div>
 
+  <!-- ============ MODAL CONFIRMAR WALLET ============ -->
+  <div class="modal-bg" id="wal-modal-bg">
+    <div class="modal card corners">
+      <div class="c-bl"></div><div class="c-br"></div>
+      <h3>Confirmá tu wallet</h3>
+      <p class="sub" style="font-size:13.5px;">Red <strong style="color:var(--violet-2)" id="wal-m-net"></strong>. Revisá la dirección completa — especialmente los <strong style="color:var(--ink)">primeros y últimos caracteres</strong>:</p>
+      <div class="wal-big" id="wal-m-addr"></div>
+      <label style="display:flex; gap:10px; align-items:flex-start; font-size:13px; color:var(--ink-2); cursor:pointer;">
+        <input type="checkbox" id="wal-m-check" style="margin-top:2px;"> Verifiqué que la dirección es mía, es de la red elegida y soporta USDT.
+      </label>
+      <div class="modal-err" id="wal-m-err"></div>
+      <div class="modal-actions">
+        <button class="btn ghost" onclick="perfil.closeModal()">Cancelar</button>
+        <button class="btn primary" id="btn-wal-confirm" onclick="perfil.confirm()">Confirmar y guardar</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ============ FOOTER (home site) ============ -->
   <footer class="ga-footer" style="position:relative; background:rgba(7,6,13,0.55); border-top:1px solid var(--line);">
     <div style="max-width:1180px; margin:0 auto; padding:64px 24px 40px; display:flex; flex-direction:column; align-items:center; gap:44px;">
@@ -1700,7 +1781,7 @@ const RECORDER_URL = "https://recorder.gameplayalliance.gg/";
 const SIGNUP_URL = "https://web.miniextensions.com/W32TyrnaWMUHtnazd4oT";
 const MOCK = new URLSearchParams(location.search).has("mock");
 
-const state = { calls: [], mine: [], enrolledIds: new Set(), pending: null, tab: "todos", _email: "" };
+const state = { calls: [], mine: [], enrolledIds: new Set(), pending: null, tab: "todos", _email: "", profile: null };
 
 const MESES = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -1764,8 +1845,8 @@ const auth = {
       ckSet(CK_EMAIL, r.data.email, 30);
       ckSet(CK_NAME, r.data.nombre || "", 30);
       applySession();
-      await loadMine();
-      renderAll();
+      await Promise.all([loadMine(), loadProfile()]);
+      renderAll(); renderPerfil();
     } else {
       this._err(r.data.message || r.data.error || "Código incorrecto.");
     }
@@ -1773,10 +1854,86 @@ const auth = {
 
   logout(reload = true) {
     ckDel(CK_TOKEN); ckDel(CK_EMAIL); ckDel(CK_NAME);
-    state.mine = []; state.enrolledIds = new Set();
+    state.mine = []; state.enrolledIds = new Set(); state.profile = null;
     if (reload) { applySession(); renderAll(); }
   },
 };
+
+// ── Perfil: wallet de pagos (una sola; el cambio posterior es vía soporte) ────
+const RE_TRC20 = /^T[1-9A-HJ-NP-Za-km-z]{33}$/;
+const RE_BEP20 = /^0x[0-9a-fA-F]{40}$/;
+const perfil = {
+  net: "", addr: "",
+  _err(msg) { const e = document.getElementById("wal-err"); e.style.display = msg ? "" : "none"; e.textContent = msg || ""; },
+  _merr(msg) { const e = document.getElementById("wal-m-err"); e.textContent = msg || ""; },
+  pick(n) {
+    this.net = n;
+    document.getElementById("chip-trc20").classList.toggle("sel", n === "TRC20");
+    document.getElementById("chip-bep20").classList.toggle("sel", n === "BEP20");
+    this._err("");
+  },
+  review() {
+    this._err("");
+    const a1 = (document.getElementById("wal-addr1").value || "").trim();
+    const a2 = (document.getElementById("wal-addr2").value || "").trim();
+    if (!this.net) { this._err("Elegí la red: TRON (TRC20) o BNB Chain (BEP20)."); return; }
+    const re = this.net === "TRC20" ? RE_TRC20 : RE_BEP20;
+    if (!re.test(a1)) {
+      this._err(this.net === "TRC20"
+        ? "La dirección no parece de TRON: son 34 caracteres y empieza con T. Copiala directo desde tu billetera."
+        : "La dirección no parece de BNB Chain: empieza con 0x y sigue con 40 caracteres. Copiala directo desde tu billetera.");
+      return;
+    }
+    if (a1 !== a2) { this._err("Las dos direcciones no coinciden. Pegá la misma dirección en los dos campos."); return; }
+    this.addr = a1;
+    document.getElementById("wal-m-net").textContent = this.net === "TRC20" ? "TRON (TRC20)" : "BNB Chain (BEP20)";
+    document.getElementById("wal-m-addr").innerHTML =
+      `<span class="wal-hl">${esc(a1.slice(0, 6))}</span>${esc(a1.slice(6, -6))}<span class="wal-hl">${esc(a1.slice(-6))}</span>`;
+    document.getElementById("wal-m-check").checked = false;
+    this._merr("");
+    document.getElementById("wal-modal-bg").classList.add("open");
+  },
+  closeModal() { document.getElementById("wal-modal-bg").classList.remove("open"); },
+  async confirm() {
+    if (!document.getElementById("wal-m-check").checked) { this._merr("Marcá la casilla de verificación para continuar."); return; }
+    const b = document.getElementById("btn-wal-confirm"); b.disabled = true; b.textContent = "Guardando…";
+    const r = await api("set_wallet", { token: auth.token(), network: this.net, address: this.addr });
+    b.disabled = false; b.textContent = "Confirmar y guardar";
+    if (r.ok && r.data.wallet) {
+      state.profile = r.data.wallet;
+      this.closeModal();
+      renderPerfil();
+    } else {
+      this._merr(r.data.message || r.data.error || "No pudimos guardar la wallet. Probá de nuevo en un momento.");
+    }
+  },
+};
+
+async function loadProfile() {
+  if (!auth.token()) { state.profile = null; return; }
+  const r = await api("get_profile", { token: auth.token() });
+  if (r.ok) state.profile = r.data.wallet || null;
+}
+
+function walletHtml(addr) {
+  const a = String(addr || "");
+  return `<span class="wal-hl">${esc(a.slice(0, 6))}</span>${esc(a.slice(6, -6))}<span class="wal-hl">${esc(a.slice(-6))}</span>`;
+}
+
+function renderPerfil() {
+  const sec = document.getElementById("perfil-section"); if (!sec) return;
+  const logged = !!auth.token();
+  sec.style.display = logged ? "" : "none";
+  if (!logged) return;
+  const w = state.profile;
+  document.getElementById("wallet-form").style.display = w ? "none" : "";
+  document.getElementById("wallet-set").style.display = w ? "" : "none";
+  if (w) {
+    document.getElementById("wal-net-tag").textContent = w.network === "TRC20" ? "TRON · TRC20" : "BNB CHAIN · BEP20";
+    document.getElementById("wal-current").innerHTML = walletHtml(w.address);
+    document.getElementById("wal-updated").textContent = w.updated_at ? "informada el " + fmtDate(w.updated_at) : "";
+  }
+}
 
 // Control de sesión en el header: Acceder / usuario + luz verde + salir.
 function renderHeaderAuth() {
@@ -1801,6 +1958,7 @@ function applySession() {
   document.getElementById("auth-logged").style.display = logged ? "" : "none";
   document.getElementById("mis-calls-section").style.display = "";  // siempre visible; vacía si no hay sesión
   if (logged) document.getElementById("logged-email").textContent = auth.email() || "";
+  renderPerfil();  // la sección Perfil solo se ve con sesión iniciada
 }
 
 // ── Render: cards de calls ─────────────────────────────────────────────────────
@@ -2063,8 +2221,8 @@ async function loadMine() {
 
 (async function init() {
   applySession();
-  await Promise.all([loadCalls(), loadMine()]);
-  renderAll();
+  await Promise.all([loadCalls(), loadMine(), loadProfile()]);
+  renderAll(); renderPerfil();
 })();
 
 // ── Datos mock (solo con ?mock=1, para QA sin backend) ──────────────────────────
@@ -2086,6 +2244,11 @@ function mockApi(action, p) {
         { juego:"Baldur's Gate 3", duration_seconds:4680, uploaded_at:1752200000, qa_status:"SUBIDO", sale_status:"DISPONIBLE" },
       ] },
   ];
+  if (action === "get_profile") return Promise.resolve({ ok:true, status:200, data:{ wallet: mockApi._w || null } });
+  if (action === "set_wallet") {
+    mockApi._w = { network: p.network, address: p.address, updated_at: Math.floor(Date.now()/1000) };
+    return Promise.resolve({ ok:true, status:200, data:{ ok:true, wallet: mockApi._w } });
+  }
   const D = { request_otp:{ok:true}, verify_otp:{token:"MOCK",email:p&&p.email||"qa@test.com"},
               list_calls:{calls}, my_calls:{enrollments}, enroll_call:{ok:true} };
   return Promise.resolve({ ok:true, status:200, data: D[action] || {} });
