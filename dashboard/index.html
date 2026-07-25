@@ -1082,6 +1082,15 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
   /* === Estados de subida (aprobados) ================================= */
   .status.sold { color: var(--violet-2); background: rgba(139,92,246,0.10); }
+  /* Subida incompleta: falla de infraestructura nuestra, no del uploader.
+     Va en cian y no en rojo justamente para no leerse como un rechazo. */
+  .status.info { color: #38bdf8; background: rgba(56,189,248,0.09); }
+  /* Pago efectuado: verde mas saturado que "disponible", es el estado final. */
+  .status.paid { color: #22c55e; background: rgba(34,197,94,0.12); }
+  .motivo-qa {
+    display: block; margin-top: 6px; max-width: 380px;
+    font-size: 12px; line-height: 1.45; color: var(--ink-3);
+  }
 
   /* === FAQs =========================================================== */
   .faq-list { display: flex; flex-direction: column; gap: 10px; max-width: 900px; }
@@ -1494,8 +1503,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         <table class="table">
           <thead>
             <tr>
-              <th style="width:30%;">Orden</th>
-              <th>Juego</th>
+              <th style="width:34%;">Orden</th>
               <th>Enviado</th>
               <th>Duración</th>
               <th>Estado</th>
@@ -1513,7 +1521,6 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                   </div>
                 </div>
               </td>
-              <td class="mono muted">DOOM Eternal</td>
               <td class="mono">14 Jul 2026</td>
               <td class="mono"><strong style="color:var(--ink)">58 min</strong></td>
               <td><span class="status warn"><span class="pip spin"></span>Subido</span></td>
@@ -2062,16 +2069,26 @@ function renderCalls() {
 }
 
 // ── Render: estado de subida ───────────────────────────────────────────────────
+// El estado que ve el uploader sale de DOS campos: qa_status (control de
+// calidad) y sale_status (comercial). El QA manda: un dataset rechazado no
+// puede mostrarse como disponible aunque sale_status haya quedado viejo.
 function uploadStatus(u) {
-  const s = u.sale_status;
-  if (s === "VENDIDO" || s === "VENDIDO_EXCLUSIVO") return { cls:"sold", spin:"", txt:"Comercializado" };
-  if (s === "DISPONIBLE") return { cls:"ok", spin:"", txt:"Disponible p/ Comercializar" };
-  return { cls:"warn", spin:" spin", txt:"Subido" };
+  const qa = u.qa_status, s = u.sale_status;
+  if (u.pago_estado === "ENVIADO")             return { cls:"paid", spin:"", txt:"Pago efectuado" };
+  if (s === "VENDIDO" || s === "VENDIDO_EXCLUSIVO")
+                                               return { cls:"sold", spin:"", txt:"Comercializado" };
+  if (qa === "RECHAZADO")                      return { cls:"bad",  spin:"", txt:"Rechazado por QA" };
+  if (qa === "RECUPERABLE")                    return { cls:"info", spin:"", txt:"Subida incompleta" };
+  if (qa === "PENDIENTE")                      return { cls:"warn", spin:" spin", txt:"En revisión" };
+  if (qa === "APROBADO" && s === "DISPONIBLE") return { cls:"ok",   spin:"", txt:"Disponible" };
+  return { cls:"warn", spin:" spin", txt:"Subido, esperando QA" };
 }
 function statusCat(u) {
-  const s = u.sale_status;
+  const qa = u.qa_status, s = u.sale_status;
+  if (u.pago_estado === "ENVIADO")   return "pagados";
   if (s === "VENDIDO" || s === "VENDIDO_EXCLUSIVO") return "comercializados";
-  if (s === "DISPONIBLE") return "disponibles";
+  if (qa === "RECHAZADO" || qa === "RECUPERABLE")   return "no_aprobados";
+  if (qa === "APROBADO" && s === "DISPONIBLE")      return "disponibles";
   return "subidos";
 }
 
@@ -2081,7 +2098,7 @@ function mineRow(m) {
   return `<tr>
     <td><div class="game-cell"><div class="mini-cover">${esc(glyph(m.titulo))}</div>
       <div><div class="gname">${esc(m.titulo)}</div><div class="gsub">${esc(m.call_id)} · ${esc(m.tipo||"")}</div></div></div></td>
-    <td class="mono muted" colspan="3">Inscripto — todavía no subiste sesiones para esta orden.</td>
+    <td class="mono muted" colspan="2">Inscripto — todavía no subiste sesiones para esta orden.</td>
     <td><span class="status warn"><span class="pip"></span>${est}</span></td>
     <td style="text-align:right;" class="amount-cell">${m.precio_hora_usd?fmtUSD(m.precio_hora_usd):"—"}</td>
   </tr>`;
@@ -2095,7 +2112,7 @@ function renderMine() {
   // Deslogueado: la sección se ve igual, pero vacía y con invitación a entrar.
   if (!auth.token()) {
     tabsEl.innerHTML = "";
-    body.innerHTML = `<tr><td colspan="6" class="mono muted" style="text-align:center;padding:36px 20px;">
+    body.innerHTML = `<tr><td colspan="5" class="mono muted" style="text-align:center;padding:36px 20px;">
       Iniciá sesión para ver las órdenes en las que te inscribiste y el estado de tus subidas.
       <div style="margin-top:16px;"><button class="btn primary" onclick="scrollToLogin()">Iniciar sesión</button></div></td></tr>`;
     footEl.innerHTML = "";
@@ -2109,10 +2126,16 @@ function renderMine() {
   // ...y las órdenes inscriptas SIN subidas (el bug: antes no se veían).
   const emptyEnroll = state.mine.filter(m => !(m.uploads && m.uploads.length));
 
-  const counts = { todos: uploadRows.length + emptyEnroll.length, subidos:0, disponibles:0, comercializados:0 };
+  // Las claves tienen que cubrir TODO lo que devuelve statusCat: si falta una,
+  // counts[cat]++ da NaN y la pestaña muestra "undefined".
+  const counts = { todos: uploadRows.length + emptyEnroll.length,
+                   subidos:0, disponibles:0, comercializados:0,
+                   pagados:0, no_aprobados:0 };
   uploadRows.forEach(r => counts[statusCat(r.u)]++);
 
-  const tabs = [["todos","Todos"],["subidos","Subidos"],["disponibles","Disponibles"],["comercializados","Comercializados"]];
+  const tabs = [["todos","Todos"],["subidos","Subidos"],["disponibles","Disponibles"],
+                ["comercializados","Comercializados"],["pagados","Pagados"],
+                ["no_aprobados","No aprobados"]];
   tabsEl.innerHTML = tabs.map(([k,label]) =>
     `<button class="${state.tab===k?"active":""}" onclick="setTab('${k}')">${label} · ${counts[k]}</button>`).join("");
 
@@ -2126,26 +2149,22 @@ function renderMine() {
       html.push(`<tr>
         <td><div class="game-cell"><div class="mini-cover">${esc(glyph(m.titulo))}</div>
           <div><div class="gname">${esc(m.titulo)}</div><div class="gsub">${esc(m.call_id)} · ${esc(m.tipo||"")}</div></div></div></td>
-        <td class="mono muted">${esc(u.juego||"")}</td>
         <td class="mono">${fmtDate(u.uploaded_at)}</td>
         <td class="mono"><strong style="color:var(--ink)">${fmtDur(u.duration_seconds)}</strong></td>
-        <td><span class="status ${st.cls}"><span class="pip${st.spin}"></span>${st.txt}</span></td>
+        <td><span class="status ${st.cls}"><span class="pip${st.spin}"></span>${st.txt}</span>
+          ${u.qa_reason_text ? `<span class="motivo-qa">${esc(u.qa_reason_text)}</span>` : ""}</td>
         <td style="text-align:right;" class="amount-cell">${m.precio_hora_usd?fmtUSD(m.precio_hora_usd):"—"}</td>
       </tr>`);
     });
 
   body.innerHTML = html.length ? html.join("")
-    : `<tr><td colspan="6" class="mono muted" style="text-align:center;padding:28px;">No hay subidas para este filtro.</td></tr>`;
+    : `<tr><td colspan="5" class="mono muted" style="text-align:center;padding:28px;">No hay subidas para este filtro.</td></tr>`;
 
-  // foot: resumen por orden inscripta
-  footEl.innerHTML = state.mine.length
-    ? state.mine.map(m => {
-        const subidas = fmtHoras((m.used_seconds||0)/3600);
-        const rest = (m.remaining_seconds !== null && m.remaining_seconds !== undefined)
-          ? "restante: " + fmtHoras(m.remaining_seconds/3600) : "sin tope";
-        const cerrado = m.call_activo ? "" : ` · <span style="color:var(--warn)">orden cerrada</span>`;
-        return `${esc(m.titulo)}: <strong style="color:var(--ink)">${subidas} subidas · ${rest}</strong>${cerrado}`;
-      }).join(" &nbsp;·&nbsp; ")
+  // foot: solo la invitacion cuando no hay inscripciones. El resumen por orden
+  // ("X h subidas · sin tope") se saco: mezclaba ordenes y generos distintos en
+  // una linea suelta bajo la tabla y no habia forma de saber a que correspondia
+  // cada numero.
+  footEl.innerHTML = state.mine.length ? ""
     : `<span class="muted">Todavía no estás inscripto en ninguna orden. Inscribite en una de arriba para empezar.</span>`;
 }
 window.setTab = k => { state.tab = k; renderMine(); };
@@ -2239,8 +2258,16 @@ function mockApi(action, p) {
       used_seconds:12240, remaining_seconds:null, precio_hora_usd:0, targeting_mode:"juegos_especificos",
       categorias:[], juegos:["Elden Ring","Baldur's Gate 3","The Witcher 3"],
       uploads:[
-        { juego:"Elden Ring", duration_seconds:7500, uploaded_at:1752600000, qa_status:"SUBIDO", sale_status:"VENDIDO" },
-        { juego:"Baldur's Gate 3", duration_seconds:4680, uploaded_at:1752200000, qa_status:"SUBIDO", sale_status:"DISPONIBLE" },
+        { juego:"Elden Ring", duration_seconds:7500, uploaded_at:1752600000, qa_status:"APROBADO", sale_status:"VENDIDO" },
+        { juego:"Baldur's Gate 3", duration_seconds:4680, uploaded_at:1752200000, qa_status:"APROBADO", sale_status:"DISPONIBLE" },
+        // Uno por estado, para poder revisar los 6 chips con ?mock=1 sin backend.
+        { juego:"The Witcher 3", duration_seconds:3600, uploaded_at:1752500000, qa_status:"SUBIDO", sale_status:"DISPONIBLE" },
+        { juego:"The Witcher 3", duration_seconds:3200, uploaded_at:1752400000, qa_status:"RECHAZADO", sale_status:"NO_DISPONIBLE",
+          qa_reason_text:"La sesión tiene un tramo largo seguido sin actividad de teclado ni mouse." },
+        { juego:"Elden Ring", duration_seconds:2900, uploaded_at:1752300000, qa_status:"RECUPERABLE", sale_status:"NO_DISPONIBLE",
+          qa_reason_text:"La subida no se completó: llegaron los datos de input pero el video no. Si todavía tenés la carpeta de la sesión en tu PC y la orden continúa abierta, volvé a subirla desde el Recorder y se acredita." },
+        { juego:"Baldur's Gate 3", duration_seconds:3900, uploaded_at:1752100000, qa_status:"APROBADO", sale_status:"VENDIDO",
+          pago_estado:"ENVIADO", pago_monto_usd:5.42, pago_fecha:"2026-07-25" },
       ] },
   ];
   if (action === "get_profile") return Promise.resolve({ ok:true, status:200, data:{ wallet: mockApi._w || null } });
