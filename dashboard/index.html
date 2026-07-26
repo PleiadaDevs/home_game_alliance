@@ -1111,6 +1111,29 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   .faq[open] summary .caret { transform: rotate(90deg); color: var(--violet-2); }
   .faq .a { padding: 0 22px 20px 64px; color: var(--ink-2); font-size: 14px; max-width: 760px; }
   .faq .a strong { color: var(--violet-2); font-weight: 600; }
+  .faq .a p { margin: 0 0 10px; line-height: 1.65; }
+  .faq .a p:last-child { margin-bottom: 0; }
+  /* nivel 1: tema. La cuenta de preguntas ayuda a decidir si vale abrirlo. */
+  .faq-tema summary .t-count {
+    margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--ink-4);
+  }
+  .faq-tema summary .t-count + .caret { margin-left: 12px; }
+  .faq-tema > .t-body { padding: 0 14px 12px 14px; }
+  /* nivel 2: pregunta */
+  .faq-q { border-top: 1px solid var(--line); }
+  .faq-q summary {
+    list-style: none; cursor: pointer; display: flex; align-items: flex-start; gap: 12px;
+    padding: 13px 8px 13px 50px; font-family: var(--ui); font-weight: 600;
+    font-size: 14px; letter-spacing: 0; text-transform: none; color: var(--ink-2);
+    line-height: 1.45;
+  }
+  .faq-q summary::-webkit-details-marker { display: none; }
+  .faq-q summary:hover { color: var(--ink); }
+  .faq-q summary .caret { margin-left: auto; color: var(--ink-4); transition: transform .2s; flex: none; }
+  .faq-q[open] summary { color: var(--ink); }
+  .faq-q[open] summary .caret { transform: rotate(90deg); color: var(--violet-2); }
+  .faq-lk { color: var(--violet-2); text-decoration: none; font-weight: 600; word-break: break-word; }
+  .faq-lk:hover { text-decoration: underline; }
 
   /* === Recorder download card ======================================== */
   .dl-card { display:flex; flex-direction:column; gap:16px; padding:22px 24px; max-width:380px; }
@@ -1658,49 +1681,441 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       </div>
 
       <div class="faq-list">
-        <details class="faq" open="">
-          <summary><span class="q-num">01</span>¿Qué es una orden abierta?<span class="caret">›</span></summary>
-          <div class="a">Una orden abierta es un pedido de contenido que abrimos a la comunidad de Gameplay Alliance: especifica qué juegos o categorías buscamos, cuántas horas necesitamos y, si corresponde, el pago por hora. Te inscribís, grabás con el Gameplay Recorder y subís tus sesiones desde la misma app.</div>
+        <details class="faq faq-tema">
+          <summary><span class="q-num">01</span>El programa<span class="t-count">8</span><span class="caret">›</span></summary>
+          <div class="t-body">
+            <details class="faq-q">
+              <summary>¿Qué es Gameplay Alliance?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Es un programa de comunidad para generar ingresos con tus habilidades gamer. Hay dos formas de participar: el Marketplace, donde grabás tu sesión con el Gameplay Recorder y la enviás; y los Gameplay Labs (Playgrounds), con desafíos (single o multiplayer) que se abren por tiempo limitado y se pagan de forma fija por completarlos. Podés elegir una modalidad o las dos.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Cómo puedo participar?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>En las dos modalidades el flujo es el mismo: elegís un desafío, lo jugás, enviás tu sesión y, si pasa la revisión de calidad, generás ingresos. En el Marketplace participás con el contenido que ya jugás (dentro de las categorías de cada orden); en los Gameplay Labs jugás Playgrounds propios.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Necesito ser pro?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>No. Lo que importa es completar la misión del desafío bajo los requisitos pedidos, no tu ranking ni tu nivel.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Qué necesito para empezar?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Una PC con Windows y ganas de jugar. Con eso te registrás, descargás el Gameplay Recorder y te inscribís en una orden activa.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Es gratis sumarse?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Sí. El registro es gratis y el Gameplay Recorder también.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Qué edad hay que tener?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Tenés que ser mayor de 18 años. Al aceptar los Términos y Condiciones declarás que cumplís ese requisito.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Desde qué países puedo participar?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>El programa de pagos está disponible para residentes de: Argentina, Bolivia, Chile, Colombia, Costa Rica, Ecuador, El Salvador, Guatemala, Honduras, México, Nicaragua, Panamá, Paraguay, Perú, Puerto Rico, República Dominicana, Uruguay y Venezuela. Esta lista puede ampliarse o restringirse avisando con 15 días de anticipación. Los usuarios ya registrados de estos países no serán dado de baja salvo que exista alguna restricción legal ajena a nuestro alcance.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Puedo tener más de una cuenta?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Corresponde una sola cuenta por persona: el registro se asocia a tu documento de identidad (DNI) y la cuenta no se puede transferir a otra persona.</p>
+              </div>
+            </details>
+          </div>
         </details>
-        <details class="faq">
-          <summary><span class="q-num">02</span>¿Quién puede participar?<span class="caret">›</span></summary>
-          <div class="a">Cualquier persona registrada en el programa con su email confirmado. Si todavía no sos parte, registrate gratis en gameplayalliance.gg/join — el registro te habilita a iniciar sesión en este dashboard y en el Recorder.</div>
+        <details class="faq faq-tema">
+          <summary><span class="q-num">02</span>Requisitos técnicos y equipo<span class="t-count">6</span><span class="caret">›</span></summary>
+          <div class="t-body">
+            <details class="faq-q">
+              <summary>¿En qué sistema operativo funciona el Gameplay Recorder?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Por ahora, solo en PC con Windows 10 (64 bits) o superior —el mismo piso que Steam requiere hoy para su cliente—. No hay versión para Mac ni Linux.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Necesito una PC potente? ¿Hay requisitos mínimos?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>No hay requisitos mínimos aunque el Gameplay Recorder captura video de pantalla mediante OBS junto con tus entradas de teclado y mouse, así que conviene que tu equipo corra con fluidez el contenido que vas a grabar. Tené también algo de espacio libre en disco: la sesión se graba en tu equipo antes de enviarse.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Puedo jugar con mando, joystick o control?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>No. Solo se juega con mouse y teclado. El uso de joystick/mando invalida la sesión, aunque el Gameplay Recorder te haya dejado grabar.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Puedo usar mods, cheats, trainers, macros o automatizaciones?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>No. Al enviar una sesión declarás que no usaste mods, cheats, trainers ni automatizaciones que alteren el comportamiento del contenido o de la captura, y que no usás bots ni scripts. Una sesión así no es válida y su subida puede provocar baneo permanente de la cuenta.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Puedo grabar desde una consola o con una capturadora de material de otra persona?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>No. La sesión tiene que ser jugada y capturada por vos, en tiempo real y en tu propia PC con Windows. No vale material derivado de grabaciones, transmisiones o capturas de terceros.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿El Gameplay Recorder afecta el rendimiento (FPS) de mi PC?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Como toda grabación por OBS, usa algo de recursos mientras corre. En equipos que cumplen los requisitos el impacto suele ser bajo.</p>
+              </div>
+            </details>
+          </div>
         </details>
-        <details class="faq">
-          <summary><span class="q-num">03</span>¿Cuál es la diferencia entre Marketplace, Playgrounds y Mindsets?<span class="caret">›</span></summary>
-          <div class="a"><strong>Marketplace:</strong> subís gameplay de juegos comerciales grabado con el Recorder; nosotros le buscamos comprador entre empresas de IA. La venta no está garantizada: cobrás si tu contenido se comercializa. <strong>Playgrounds:</strong> cada tanto abrimos órdenes para jugar playgrounds diseñados por nosotros, y se paga por resolución completada (disponible próximamente). <strong>Mindsets:</strong> experiencias de conversación con AI, se comercializan igual que los Playgrounds; está en Beta (disponible próximamente).</div>
+        <details class="faq faq-tema">
+          <summary><span class="q-num">03</span>Registro, cuenta y verificación<span class="t-count">3</span><span class="caret">›</span></summary>
+          <div class="t-body">
+            <details class="faq-q">
+              <summary>¿Cómo me registro?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>El registro es gratis y priorizamos por orden de entrada. Te registrás desde el botón “Unite / Registrate” del sitio; después descargás el Gameplay Recorder y te inscribís en las Órdenes Abiertas desde el Dashboard.</p>
+                <p><a href="https://gameplayalliance.gg/dashboard" target="_blank" rel="noopener" class="faq-lk">https://gameplayalliance.gg/dashboard</a></p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Qué datos me piden para poder cobrar?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Para participar del programa de pagos tenés que dar, de forma completa y veraz: nombre completo, un email válido, tu documento de identidad (DNI) válido y vigente, la dirección de tu wallet para cobrar en USDT (red BNB Chain) y tu país de residencia. La Empresa puede verificar esos datos y rechazar o suspender el acceso si hay información falsa o inconsistente.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>Al registrarme ingresé un email incorrecto y no me deja registrarme de nuevo con mi DNI. ¿Cómo lo corrijo?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Escribí a <a href="mailto:gg_support@gameplayalliance.gg" class="faq-lk">gg_support@gameplayalliance.gg</a> y solicitá el blanqueo de usuario. Esto podrá excepcionalmente por única vez.</p>
+              </div>
+            </details>
+          </div>
         </details>
-        <details class="faq">
-          <summary><span class="q-num">04</span>¿Cómo sé qué juegos puedo grabar para una orden?<span class="caret">›</span></summary>
-          <div class="a">Cada orden indica los juegos puntuales que acepta, o las categorías aceptadas. Si es por categoría, podés filtrar el catálogo por esa categoría para ver todos los juegos que entran. El Recorder también te muestra, antes de subir, en qué orden entra tu grabación.</div>
+        <details class="faq faq-tema">
+          <summary><span class="q-num">04</span>Órdenes Abiertas y contenido elegible<span class="t-count">6</span><span class="caret">›</span></summary>
+          <div class="t-body">
+            <details class="faq-q">
+              <summary>¿Cómo sé qué contenido puedo grabar?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Cada Orden Abierta indica qué categorías/géneros acepta. Como referencia usamos el catálogo de Steam. Entrá al catálogo de géneros aceptados y revisá la ficha de cada categoría:</p>
+                <p><a href="https://catalogo.gameplayalliance.gg/" target="_blank" rel="noopener" class="faq-lk">https://catalogo.gameplayalliance.gg/</a></p>
+                <p>¿No estás seguro de si un contenido califica? Verificá en su página de Steam que figure dentro de esa categoría/género: si figura, entra.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Por qué en el Catálogo solo veo categorías y no un listado de contenidos?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Porque el sistema funciona por categorías de contenido, no por listados cerrados. Sos libre de aportar contenido dentro de las categorías que habilita cada Orden Abierta. Abrí la categoría correspondiente en el Catálogo y, para confirmar un caso puntual, usá la ficha de Steam como referencia.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>Veo contenido en el catálogo que no está en la orden activa. ¿Puedo subirlo igual?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>No. Solo se puede subir contenido cuando hay una Orden Abierta activa que acepte esa categoría. Subir contenido fuera de las categorías/géneros aceptados se considera una falta grave.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Puedo grabar antes y subir después, cuando se activen las órdenes?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Si. La subida se habilita solo cuando hay una orden activa que acepte ese contenido.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Por cuánto tiempo está activa una Orden Abierta?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>No está limitada por una fecha fija: la orden se cierra cuando se alcanza la totalidad de horas solicitadas.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Se puede participar con contenido multijugador?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Sí. Hay desafíos de equipo, y suelen estar entre los que más valen. Revisá los requisitos de cada orden para ver si admite modalidad multiplayer.</p>
+              </div>
+            </details>
+          </div>
         </details>
-        <details class="faq">
-          <summary><span class="q-num">05</span>¿Cómo se cuentan las horas que subo?<span class="caret">›</span></summary>
-          <div class="a">Por la duración de cada sesión grabada y subida. Las horas se computan al confirmarse cada subida, y las ves en "Mis Órdenes" junto con tu cupo restante si la orden tiene máximo por usuario.</div>
+        <details class="faq faq-tema">
+          <summary><span class="q-num">05</span>Gameplay Recorder (instalación, seguridad y errores)<span class="t-count">8</span><span class="caret">›</span></summary>
+          <div class="t-body">
+            <details class="faq-q">
+              <summary>¿Dónde descargo el Gameplay Recorder o cómo lo reinstalo?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Desde la página oficial del Gameplay Recorder, donde también está la guía de instalación. Es la única fuente oficial:</p>
+                <p><a href="https://recorder.gameplayalliance.gg/" target="_blank" rel="noopener" class="faq-lk">https://recorder.gameplayalliance.gg/</a></p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Tengo que actualizar el Gameplay Recorder cada vez que me inscribo en una orden nueva?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>No siempre. La actualización es obligatoria cuando te la comunicamos (así pasó, por ejemplo, al abrir las primeras órdenes). Fuera de esos casos, igual recomendamos usar siempre la última versión disponible para evitar problemas de compatibilidad al grabar y subir.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>Mi antivirus detecta un troyano ¿Es verdad?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>No. Si tu antivirus detecta un troyano, es un falso positivo. Las herramientas que graban pantalla y registran teclado/mouse suelen disparar alertas de este tipo. Gameplay Recorder es de código abierto y auditable: podés revisar exactamente qué hace, línea por línea en GitHub. Para tu seguridad, descargálo solo desde la página oficial y, si querés, agregá una excepción en tu antivirus.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿El Gameplay Recorder hace data mining o extrae mis datos personales?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>No. Sólo genera dos cosas: un registro de video de la pantalla de tu partida (sin voces humanas ni audio externo) y datos de tu actividad (teclas, mouse, tiempos y trayectorias). No captura datos biométricos ni información que te identifique dentro del contenido. Además es de código abierto, así que podés auditar qué hace.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>Me aparece “Juego no detectado” aunque tengo el contenido abierto. ¿Qué puede ser?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Suele deberse a alguna de estas causas: (1) Permisos: el Gameplay Recorder no tiene los permisos necesarios para detectar la ventana del contenido. (2) Modo de pantalla: si estás en pantalla completa exclusiva, probá pasar a modo ventana o ventana sin bordes. (3) Permisos de administrador: cerrá el Gameplay Recorder y volvé a abrirlo como administrador. Para ver qué pasó, andá a Documentos → Pleiada Recordings: hay una carpeta por cada grabación (con fecha y hora en el nombre) y adentro están los logs con el detalle de qué se intentó y qué falló; si no existe esa carpeta, no se ejecutó ninguna grabación.</p>
+                <p>Si probaste todo y sigue igual, escribínos a <a href="mailto:gg_support@gameplayalliance.gg" class="faq-lk">gg_support@gameplayalliance.gg</a>.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Tengo que archivar las sesiones en mi PC? ¿Puedo borrarlas?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>No necesitás archivarlas: la sesión se graba en tu equipo (en Documentos → Pleiada Recordings, en una carpeta por grabación), se envía con el Gameplay Recorder y después podés borrar esa carpeta local. Tené en cuenta que, una vez enviada a la plataforma, el envío es irrevocable y no se puede retirar ni borrar del lado de la Empresa.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>La velocidad de subida (MB/s) que muestra el Gameplay Recorder es más baja que la de mi internet. ¿Está limitada?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>La velocidad puede verse afectada por el tamaño del archivo, la red y el servidor de subida. No hay un límite intencional de subida en la app.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>Tengo contenido grabado con una versión anterior del Gameplay Recorder. ¿Lo puedo enviar o tengo que grabarlo de nuevo?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Si la grabación cumple con los requisitos y corresponde a un contenido aceptado en una Orden Abierta, puedes enviarlo por medio de la nueva versión del Gameplay Recorder.</p>
+              </div>
+            </details>
+          </div>
         </details>
-        <details class="faq">
-          <summary><span class="q-num">06</span>¿Cuándo y cuánto cobro?<span class="caret">›</span></summary>
-          <div class="a">Depende del tipo de orden. En Marketplace, cobrás cuando tu contenido se comercializa, al precio por hora informado en la orden al momento de tu inscripción (la venta no está garantizada). En Playgrounds y Mindsets, el pago es por resolución completada y aprobada. Los montos siempre están visibles antes de inscribirte, si la orden los publica.</div>
+        <details class="faq faq-tema">
+          <summary><span class="q-num">06</span>Reglas de la sesión de gameplay<span class="t-count">6</span><span class="caret">›</span></summary>
+          <div class="t-body">
+            <details class="faq-q">
+              <summary>¿Cuál es la duración mínima y máxima de una sesión?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>El mínimo para monetizar es una hora: menos de una hora se considera insuficiente y no paga. Por seguridad, para garantizar la hora completa, el Gameplay Recorder te permite grabar apenas unos minutos más de una hora y, pasado ese excedente, corta la grabación automáticamente.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>Si me paso de una hora, ¿cuánto se paga?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Se paga una hora por sesión, independientemente de los minutos adicionales.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Da lo mismo si gano o pierdo dentro de la sesión?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Lo que se evalúa es que la sesión cumpla los requisitos de la orden y pase el control de calidad, no si ganás o perdés en la partida.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Qué pasa con el contenido que tiene mucha cinemática o momentos sin jugar?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Lo que aporta valor es el gameplay activo: tu interacción con teclado y mouse. Grabar sesiones con largos períodos en los que no estás interactuando (AFK) puede hacer que la sesión subida sea rechazada.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿La sesión puede tener mi voz, mi cámara, overlays o el chat en pantalla?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>No. La sesión no puede contener voces humanas, rostros o imágenes de personas, datos personales, ni contenido superpuesto como marcas de agua, overlays, chats o comentarios. Debe ser solo el desarrollo de tu partida. Subir contenido que te haga identificable (por ejemplo, tu voz) es una falta grave.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Qué pasa si se corta internet o se cierra la app durante la grabación?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>La grabación se hace en tu equipo; la subida es un paso posterior.</p>
+              </div>
+            </details>
+          </div>
         </details>
-        <details class="faq">
-          <summary><span class="q-num">07</span>¿Cómo me pagan y qué necesito para cobrar?<span class="caret">›</span></summary>
-          <div class="a">Los pagos se hacen en <strong>USDT</strong> (stablecoin atada al dólar) a la wallet que registres, dentro de los <strong>45 días</strong> de aprobado el trabajo, por la red <strong>BNB Chain (BEP20)</strong>. El pago se libera a partir de <strong>US$ 5 acumulados</strong>; si tu saldo es menor, se suma al siguiente pago. Solo necesitás una wallet gratuita compatible con USDT en esa red: una opción es <a href="https://metamask.io/" target="_blank" rel="noopener" style="color:var(--violet-2); font-weight:600; text-decoration:underline;">MetaMask</a> (la más descentralizada), y también hay wallets de uso masivo en Latam como <a href="https://trustwallet.com/" target="_blank" rel="noopener" style="color:var(--violet-2); font-weight:600; text-decoration:underline;">Trust Wallet</a>, <a href="https://lemon.me/" target="_blank" rel="noopener" style="color:var(--violet-2); font-weight:600; text-decoration:underline;">Lemon</a>, <a href="https://belo.app/" target="_blank" rel="noopener" style="color:var(--violet-2); font-weight:600; text-decoration:underline;">Belo</a>, <a href="https://bitso.com/" target="_blank" rel="noopener" style="color:var(--violet-2); font-weight:600; text-decoration:underline;">Bitso</a> o <a href="https://www.binance.com/" target="_blank" rel="noopener" style="color:var(--violet-2); font-weight:600; text-decoration:underline;">Binance</a>. Todas son opciones válidas — la decisión es tuya: elegí la que más te convenga o la que ya uses; lo único imprescindible es que soporte USDT en BNB Chain (BEP20).</div>
+        <details class="faq faq-tema">
+          <summary><span class="q-num">07</span>Marketplace, Playgrounds y Gameplay Labs<span class="t-count">4</span><span class="caret">›</span></summary>
+          <div class="t-body">
+            <details class="faq-q">
+              <summary>¿Qué diferencia hay entre el Marketplace y los Gameplay Labs?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>El Marketplace trabaja sobre gameplay del contenido que ya tenés: subís tu sesión y, si se aprueba, generás ingresos. Los Gameplay Labs usan nuestros propios Playgrounds (de descarga gratuita) y se pagan de forma fija por completarlos.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Qué son los Playgrounds? ¿Se pagan igual que una sesión del Marketplace?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Los Playgrounds son desafíos propios de los Gameplay Labs (reacción, navegación, estrategia y equipo). En ambos casos se paga por el monto publicado al aceptar la orden; la diferencia es el tipo de contenido: propio en los Labs, tuyo en el Marketplace.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Los Playgrounds se juegan online o hay que descargarlos?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Los Playgrounds son de descarga gratuita y se capturan con el mismo Gameplay Recorder y el mismo procedimiento que en el Marketplace.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Ya puedo empezar a jugar y generar ingresos?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Sí. El registro está abierto y las primeras Órdenes Abiertas del Marketplace ya se publican en el Dashboard. Los Playgrounds llegan próximamente; cuando se abran, te avisamos al email que registraste y por nuestras redes.</p>
+              </div>
+            </details>
+          </div>
         </details>
-        <details class="faq">
-          <summary><span class="q-num">08</span>¿Qué significan los estados de mis subidas?<span class="caret">›</span></summary>
-          <div class="a"><strong>Subido:</strong> tu sesión llegó correctamente y quedó registrada. <strong>Disponible para Comercializar:</strong> pasó los controles y está en el pool que ofrecemos a compradores. <strong>Comercializado:</strong> se vendió — se libera tu pago según los términos de la orden. Un contenido comercializado puede seguir disponible para nuevas ventas.</div>
+        <details class="faq faq-tema">
+          <summary><span class="q-num">08</span>Tu contenido una vez enviado<span class="t-count">3</span><span class="caret">›</span></summary>
+          <div class="t-body">
+            <details class="faq-q">
+              <summary>¿Puedo retirar o borrar una sesión después de subirla?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>No. Una vez que enviás la sesión a la plataforma, el envío es irrevocable: no se puede solicitar el retiro, la supresión ni la devolución del material desde los servidores de la Empresa. Por eso el momento en el que vos decidís qué compartir es antes de subir: revisá y verificá la sesión antes de enviarla.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Qué pasa con las sesiones que no se aprueban?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Las sesiones que no se aprueban se eliminan de los servidores de la Empresa (las rechazadas, dentro de los 30 días) y no se usan, licencian ni se incorporan al entrenamiento de sistemas de inteligencia artificial. Se te notificará en la Dashboard el estado (de aceptación o rechazo) del contenido.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Puedo transmitir en vivo o subir a YouTube/Twitch la misma sesión que envié?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>No mientras esa sesión esté en proceso en la plataforma o su licencia siga vigente: durante ese tiempo no podés publicar, transmitir en vivo ni poner a disposición del público ese mismo registro, salvo autorización previa y por escrito de la Empresa. Esto aplica a la sesión que enviás, no a tu actividad de streaming en general.</p>
+              </div>
+            </details>
+          </div>
         </details>
-        <details class="faq">
-          <summary><span class="q-num">09</span>¿Puedo subir contenido sin estar inscripto en una orden?<span class="caret">›</span></summary>
-          <div class="a">No. Las subidas solo se habilitan para juegos elegibles de una orden en la que estés inscripto. Si tu juego no entra en ninguna de tus órdenes, el Recorder te lo indica antes de subir.</div>
+        <details class="faq faq-tema">
+          <summary><span class="q-num">09</span>Pagos y cobros<span class="t-count">8</span><span class="caret">›</span></summary>
+          <div class="t-body">
+            <details class="faq-q">
+              <summary>¿Cuánto puedo generar?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>El monto está preestablecido y es visible en la orden antes de que te suscribas, así que siempre sabés cuánto se paga antes de jugar. En las órdenes abiertas estándar ese valor es un piso: el pago arranca desde el monto publicado y puede subir según la demanda.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Por qué exactamente me pagan?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Se paga por tu aporte —tu ejecución, tu tiempo y la generación de los datos de tu sesión—, no por el contenido de terceros que aparezca en pantalla.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Cuándo se genera el derecho al pago?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Cada sesión pasa por un control de calidad. Solo las sesiones aprobadas generan derecho a pago; las que no se aprueban se eliminan y no se pagan.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Cómo y cuándo cobro?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Cobrás en USDT (una stablecoin atada al dólar) directo a tu wallet, dentro de los 45 días desde que la Empresa aprueba los importes. El pago se hace exclusivamente por la red BNB Chain (BEP20), a la wallet que hayas registrado en el programa.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Hay un monto mínimo para cobrar?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Sí. Si lo acumulado en el período es inferior a USD 5, se retiene hasta superar ese mínimo.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Quién paga las comisiones de red (gas)?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Las comisiones de red de la transferencia las asume la Empresa y no se descuentan de tu pago. Quedan a tu cargo las comisiones que te cobre tu propio exchange o wallet por recibir, custodiar o retirar, y cualquier costo por convertir a otra moneda.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Qué wallet necesito?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Una wallet BNB Chain (BEP20). Algunas opciones: MetaMask (la más descentralizada) y wallets de uso masivo en Latam como Trust Wallet, Lemon, Belo, Bitso o Binance. Lo único imprescindible es que soporte USDT en la red BNB Chain (BEP20).</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>Cometí un error en la dirección de mi wallet. ¿Cómo lo corrijo?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Escribí a <a href="mailto:gg_support@gameplayalliance.gg" class="faq-lk">gg_support@gameplayalliance.gg</a> para revisar tu caso. Considera que deberás ofrecer el consentimiento firmado del cambio solicitado.</p>
+              </div>
+            </details>
+          </div>
         </details>
-        <details class="faq">
-          <summary><span class="q-num">10</span>¿Qué pasa si la orden se completa mientras estoy grabando?<span class="caret">›</span></summary>
-          <div class="a">Al llegar al 100% de las horas pedidas se cierran las inscripciones y las grabaciones nuevas, pero las sesiones que empezaste a grabar antes del cierre podés subirlas igual (la orden admite un margen para no dejarte afuera con la sesión empezada).</div>
+        <details class="faq faq-tema">
+          <summary><span class="q-num">10</span>Revisión, calidad y estados<span class="t-count">3</span><span class="caret">›</span></summary>
+          <div class="t-body">
+            <details class="faq-q">
+              <summary>¿Qué pasa con mi sesión una vez enviada?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Se somete a un control de calidad, tanto humano como automatizado, que verifica los requisitos técnicos y de contenido. Si se aprueba, el pago se procesa según la sección de pagos.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿En cuánto tiempo sé si mi contenido es aceptado o rechazado?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Si una sesión se rechaza, se te notifica el motivo dentro de los 30 días hábiles de recibida.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>Si rechazan mi sesión, ¿puedo apelar?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>No. Las decisiones del control de calidad son definitivas y no admiten apelación. Sí podés, por supuesto, grabar y enviar nuevas sesiones para las órdenes activas.</p>
+              </div>
+            </details>
+          </div>
         </details>
-        <details class="faq">
-          <summary><span class="q-num">11</span>¿Qué necesito para grabar y qué pasa con mis datos?<span class="caret">›</span></summary>
-          <div class="a">Necesitás una PC con Windows, teclado y mouse, y el Gameplay Recorder instalado. La app verifica automáticamente que la grabación esté sincronizada antes de dejarte subir. Tu contenido se almacena de forma segura y tu identidad se protege: los datasets se publican bajo un identificador anónimo, nunca con tu email ni tus datos personales.</div>
+        <details class="faq faq-tema">
+          <summary><span class="q-num">11</span>Privacidad y seguridad<span class="t-count">3</span><span class="caret">›</span></summary>
+          <div class="t-body">
+            <details class="faq-q">
+              <summary>¿Qué datos se capturan y cómo se protege mi privacidad?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>El Gameplay Recorder registra el video de la pantalla de tu partida (sin voces ni audio externo) y datos de tu actividad (teclas, mouse, tiempos, trayectorias). Vos revisás y verificás todo antes de subir. Al comercializarse, los datos van anónimos: sin tu gamertag y por categoría/género. Y el Gameplay Recorder es de código abierto, así que podés auditar qué hace.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Se puede saber quién generó los datos?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>No. Tu gamertag no forma parte de los datos que se comercializan. Internamente se te asigna un identificador (Provider ID) que no se comparte con nadie: los datasets se entregan sin ningún dato que permita vincularlos con tu identidad.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Qué pasa con mis datos de registro?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Los datos que das al registrarte se tratan según la Política de Privacidad, que forma parte de los T&amp;C. Podés ejercer tus derechos de acceso, rectificación y supresión escribiendo a soporte. Tené en cuenta que la supresión de tus datos personales no revierte lo que ya se haya incorporado de forma anónima a modelos ya entrenados, por ser técnicamente irreversible.</p>
+              </div>
+            </details>
+          </div>
+        </details>
+        <details class="faq faq-tema">
+          <summary><span class="q-num">12</span>Cuenta: faltas y suspensión<span class="t-count">1</span><span class="caret">›</span></summary>
+          <div class="t-body">
+            <details class="faq-q">
+              <summary>¿Qué puede hacer que suspendan o bloqueen mi cuenta?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Se consideran faltas graves, entre otras: grabar sesiones con largos períodos sin interactuar (AFK); grabar o subir contenido fuera de las categorías/géneros aceptados; y subir contenido que te haga identificable (por ejemplo, tu voz). La Empresa puede auditar todo el contenido subido y, ante incumplimientos reiterados, bloquear la cuenta de forma permanente y eliminar el contenido. La baja no afecta los pagos ya devengados por sesiones aprobadas.</p>
+              </div>
+            </details>
+          </div>
+        </details>
+        <details class="faq faq-tema">
+          <summary><span class="q-num">13</span>Soporte y novedades<span class="t-count">2</span><span class="caret">›</span></summary>
+          <div class="t-body">
+            <details class="faq-q">
+              <summary>¿Cómo contacto a soporte?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Escribí a <a href="mailto:gg_support@gameplayalliance.gg" class="faq-lk">gg_support@gameplayalliance.gg</a> para temas de cuenta, blanqueo de usuario, cambios de wallet o ejercicio de tus derechos sobre datos personales.</p>
+              </div>
+            </details>
+            <details class="faq-q">
+              <summary>¿Cómo me entero cuando abren nuevas órdenes o Playgrounds?<span class="caret">›</span></summary>
+              <div class="a">
+                <p>Te avisamos al email que registraste y por nuestras redes (Instagram y TikTok @gameplay.alliance). Además, las órdenes activas siempre aparecen en el Dashboard.</p>
+              </div>
+            </details>
+          </div>
         </details>
       </div>
 
@@ -2294,6 +2709,22 @@ function mockApi(action, p) {
               list_calls:{calls}, my_calls:{enrollments}, enroll_call:{ok:true} };
   return Promise.resolve({ ok:true, status:200, data: D[action] || {} });
 }
+
+// FAQ: acordeon exclusivo. Al abrir un tema se cierran los demas; al cerrar
+// uno, sus preguntas vuelven a colapsarse para que reabra limpio.
+(function () {
+  var temas = document.querySelectorAll("details.faq-tema");
+  temas.forEach(function (tema) {
+    tema.addEventListener("toggle", function () {
+      if (!tema.open) {
+        tema.querySelectorAll("details.faq-q[open]").forEach(function (q) { q.open = false; });
+        return;
+      }
+      temas.forEach(function (otro) { if (otro !== tema) otro.open = false; });
+    });
+  });
+})();
+
 </script>
 
 

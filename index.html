@@ -48,10 +48,17 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   .ga-reveal { animation:ga-rise both linear; animation-timeline:view(); animation-range:entry 2% entry 44%; }
   .ga-navlinks { display:flex; }
   .ga-burger { display:none; }
-  details.faq > summary { list-style:none; cursor:pointer; }
-  details.faq > summary::-webkit-details-marker { display:none; }
-  details.faq[open] .faq-ic { transform:rotate(135deg); }
-  details.faq .faq-ic { transition:transform 220ms cubic-bezier(0.22,1,0.36,1); }
+  details.faq > summary, details.faq-tema > summary { list-style:none; cursor:pointer; }
+  details.faq > summary::-webkit-details-marker,
+  details.faq-tema > summary::-webkit-details-marker { display:none; }
+  details.faq[open] > summary .faq-ic,
+  details.faq-tema[open] > summary .faq-ic { transform:rotate(135deg); }
+  details.faq .faq-ic, details.faq-tema .faq-ic { transition:transform 220ms cubic-bezier(0.22,1,0.36,1); }
+  details.faq-tema[open] { border-color:var(--line-strong) !important; }
+  details.faq-tema > summary:hover span:nth-child(2) { color:var(--violet-2); }
+  details.faq > summary:hover span:first-child { color:var(--ink); }
+  .faq-lk { color:var(--violet-2); text-decoration:none; font-weight:600; word-break:break-word; }
+  .faq-lk:hover { text-decoration:underline; }
   @media (max-width:1060px) {
     .ga-navlinks { display:none !important; }
     .ga-burger { display:inline-flex !important; }
@@ -352,84 +359,690 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         <div style="font-family:var(--display); font-weight:700; letter-spacing:.3em; font-size:11px; color:var(--violet-2); text-transform:uppercase;">Preguntas frecuentes</div>
         <h2 style="font-family:var(--display); font-weight:800; text-transform:uppercase; font-size:clamp(30px,4.4vw,48px); line-height:1.02; letter-spacing:.005em; color:var(--ink); margin:14px 0 0;">FAQ</h2>
       </div>
-      <div style="display:flex; flex-direction:column; gap:12px;">
-        <details class="faq" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
-          <summary style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:22px 24px;">
-            <span style="font-family:var(--ui); font-weight:600; font-size:17px; color:var(--ink);">¿Cómo puedo participar?</span>
+      <div class="faq-temas" style="display:flex; flex-direction:column; gap:12px;">
+        <details class="faq-tema" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
+          <summary style="display:flex; align-items:center; gap:16px; padding:20px 24px;">
+            <span style="flex:none; font-family:var(--mono); font-size:12px; color:var(--violet-2); min-width:22px;">01</span>
+            <span style="flex:1; font-family:var(--display); font-weight:800; text-transform:uppercase; letter-spacing:.03em; font-size:19px; color:var(--ink);">El programa</span>
+            <span style="flex:none; font-family:var(--mono); font-size:11px; color:var(--ink-4);">8</span>
             <span class="faq-ic" style="flex:none; width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.12); border:1px solid var(--line-strong); color:var(--violet-2);"><i data-lucide="plus" style="width:16px;height:16px;"></i></span>
           </summary>
-          <div style="margin:0; padding:0 24px 24px; font-size:15px; line-height:1.6; color:var(--ink-3);">
-            <p style="margin:0 0 14px;">Hay dos formas de jugar y generar ingresos en Gameplay Alliance:</p>
-            <p style="margin:0 0 12px;"><span style="font-weight:700; color:var(--violet-2);">Playgrounds</span> — Challenges propios de Gameplay Labs: entornos hechos para vos, con desafíos muy parecidos a los que ya jugás (reacción, navegación, estrategia y equipo). Elegís un Playground, lo jugás a tu manera y capturás tu sesión.</p>
-            <p style="margin:0 0 14px;"><span style="font-weight:700; color:var(--violet-2);">Marketplace</span> — Cuando haya demanda, vas a poder participar con los títulos que ya conocés, grabando gameplay y completando challenges específicos.</p>
-            <p style="margin:0;">En las dos modalidades el flujo es el mismo: elegís un challenge, lo jugás, enviás tu sesión y, si pasa la revisión de calidad, generás ingresos.</p>
+          <div style="padding:0 14px 14px; display:flex; flex-direction:column; gap:2px;">
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Qué es Gameplay Alliance?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Es un programa de comunidad para generar ingresos con tus habilidades gamer. Hay dos formas de participar: el Marketplace, donde grabás tu sesión con el Gameplay Recorder y la enviás; y los Gameplay Labs (Playgrounds), con desafíos (single o multiplayer) que se abren por tiempo limitado y se pagan de forma fija por completarlos. Podés elegir una modalidad o las dos.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Cómo puedo participar?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">En las dos modalidades el flujo es el mismo: elegís un desafío, lo jugás, enviás tu sesión y, si pasa la revisión de calidad, generás ingresos. En el Marketplace participás con el contenido que ya jugás (dentro de las categorías de cada orden); en los Gameplay Labs jugás Playgrounds propios.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Necesito ser pro?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">No. Lo que importa es completar la misión del desafío bajo los requisitos pedidos, no tu ranking ni tu nivel.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Qué necesito para empezar?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Una PC con Windows y ganas de jugar. Con eso te registrás, descargás el Gameplay Recorder y te inscribís en una orden activa.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Es gratis sumarse?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Sí. El registro es gratis y el Gameplay Recorder también.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Qué edad hay que tener?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Tenés que ser mayor de 18 años. Al aceptar los Términos y Condiciones declarás que cumplís ese requisito.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Desde qué países puedo participar?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">El programa de pagos está disponible para residentes de: Argentina, Bolivia, Chile, Colombia, Costa Rica, Ecuador, El Salvador, Guatemala, Honduras, México, Nicaragua, Panamá, Paraguay, Perú, Puerto Rico, República Dominicana, Uruguay y Venezuela. Esta lista puede ampliarse o restringirse avisando con 15 días de anticipación. Los usuarios ya registrados de estos países no serán dado de baja salvo que exista alguna restricción legal ajena a nuestro alcance.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Puedo tener más de una cuenta?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Corresponde una sola cuenta por persona: el registro se asocia a tu documento de identidad (DNI) y la cuenta no se puede transferir a otra persona.</p>
+              </div>
+            </details>
           </div>
         </details>
-        <details class="faq" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
-          <summary style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:22px 24px;">
-            <span style="font-family:var(--ui); font-weight:600; font-size:17px; color:var(--ink);">¿Necesito ser pro?</span>
+        <details class="faq-tema" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
+          <summary style="display:flex; align-items:center; gap:16px; padding:20px 24px;">
+            <span style="flex:none; font-family:var(--mono); font-size:12px; color:var(--violet-2); min-width:22px;">02</span>
+            <span style="flex:1; font-family:var(--display); font-weight:800; text-transform:uppercase; letter-spacing:.03em; font-size:19px; color:var(--ink);">Requisitos técnicos y equipo</span>
+            <span style="flex:none; font-family:var(--mono); font-size:11px; color:var(--ink-4);">6</span>
             <span class="faq-ic" style="flex:none; width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.12); border:1px solid var(--line-strong); color:var(--violet-2);"><i data-lucide="plus" style="width:16px;height:16px;"></i></span>
           </summary>
-          <p style="margin:0; padding:0 24px 24px; font-size:15px; line-height:1.6; color:var(--ink-3);">No. En cualquiera de las dos modalidades, lo que importa es completar la misión del challenge, no tu ranking.</p>
-        </details>
-        <details class="faq" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
-          <summary style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:22px 24px;">
-            <span style="font-family:var(--ui); font-weight:600; font-size:17px; color:var(--ink);">¿Qué necesito para empezar?</span>
-            <span class="faq-ic" style="flex:none; width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.12); border:1px solid var(--line-strong); color:var(--violet-2);"><i data-lucide="plus" style="width:16px;height:16px;"></i></span>
-          </summary>
-          <p style="margin:0; padding:0 24px 24px; font-size:15px; line-height:1.6; color:var(--ink-3);">Una PC y ganas de jugar.</p>
-        </details>
-        <details class="faq" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
-          <summary style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:22px 24px;">
-            <span style="font-family:var(--ui); font-weight:600; font-size:17px; color:var(--ink);">¿Es gratis sumarse?</span>
-            <span class="faq-ic" style="flex:none; width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.12); border:1px solid var(--line-strong); color:var(--violet-2);"><i data-lucide="plus" style="width:16px;height:16px;"></i></span>
-          </summary>
-          <p style="margin:0; padding:0 24px 24px; font-size:15px; line-height:1.6; color:var(--ink-3);">Sí, registrarse es gratis.</p>
-        </details>
-        <details class="faq" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
-          <summary style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:22px 24px;">
-            <span style="font-family:var(--ui); font-weight:600; font-size:17px; color:var(--ink);">¿Cuánto puedo generar?</span>
-            <span class="faq-ic" style="flex:none; width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.12); border:1px solid var(--line-strong); color:var(--violet-2);"><i data-lucide="plus" style="width:16px;height:16px;"></i></span>
-          </summary>
-          <p style="margin:0; padding:0 24px 24px; font-size:15px; line-height:1.6; color:var(--ink-3);">Los valores por sesión son variables: dependen de la demanda de cada challenge en ese momento y de tu reputación como participante. No prometemos montos: vas a poder previsualizar cada challenge antes de jugarlo.</p>
-        </details>
-        <details class="faq" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
-          <summary style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:22px 24px;">
-            <span style="font-family:var(--ui); font-weight:600; font-size:17px; color:var(--ink);">¿Cómo y cuándo cobro?</span>
-            <span class="faq-ic" style="flex:none; width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.12); border:1px solid var(--line-strong); color:var(--violet-2);"><i data-lucide="plus" style="width:16px;height:16px;"></i></span>
-          </summary>
-          <div style="margin:0; padding:0 24px 24px; font-size:15px; line-height:1.6; color:var(--ink-3);">
-            <p style="margin:0 0 14px;">Los trabajos realizados se pagan en <span style="font-weight:700; color:var(--violet-2);">USDT</span> (una stablecoin atada al dólar) directo a tu wallet, dentro de los <span style="font-weight:700; color:var(--violet-2);">45 días</span> de aprobado el trabajo. El pago se hace por la red <span style="font-weight:700; color:var(--violet-2);">BNB Chain (BEP20)</span>: es la red que vas a registrar junto con tu wallet.</p>
-            <p style="margin:0;">Para recibir los pagos solo necesitás una wallet gratuita que soporte USDT en la red que elijas. Una opción es <a href="https://metamask.io/" target="_blank" rel="noopener" style="color:var(--violet-2); font-weight:600; text-decoration:underline;">MetaMask</a>, la solución más descentralizada. También existen wallets gratuitas de uso masivo en Latam, como <a href="https://trustwallet.com/" target="_blank" rel="noopener" style="color:var(--violet-2); font-weight:600; text-decoration:underline;">Trust Wallet</a>, <a href="https://lemon.me/" target="_blank" rel="noopener" style="color:var(--violet-2); font-weight:600; text-decoration:underline;">Lemon</a>, <a href="https://belo.app/" target="_blank" rel="noopener" style="color:var(--violet-2); font-weight:600; text-decoration:underline;">Belo</a>, <a href="https://bitso.com/" target="_blank" rel="noopener" style="color:var(--violet-2); font-weight:600; text-decoration:underline;">Bitso</a> o <a href="https://www.binance.com/" target="_blank" rel="noopener" style="color:var(--violet-2); font-weight:600; text-decoration:underline;">Binance</a>. Todas son opciones válidas: la decisión es tuya, elegí la que te resulte más cómoda o la que ya uses. Lo único imprescindible es que soporte USDT en la red que uses para cobrar.</p>
+          <div style="padding:0 14px 14px; display:flex; flex-direction:column; gap:2px;">
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿En qué sistema operativo funciona el Gameplay Recorder?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Por ahora, solo en PC con Windows 10 (64 bits) o superior —el mismo piso que Steam requiere hoy para su cliente—. No hay versión para Mac ni Linux.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Necesito una PC potente? ¿Hay requisitos mínimos?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">No hay requisitos mínimos aunque el Gameplay Recorder captura video de pantalla mediante OBS junto con tus entradas de teclado y mouse, así que conviene que tu equipo corra con fluidez el contenido que vas a grabar. Tené también algo de espacio libre en disco: la sesión se graba en tu equipo antes de enviarse.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Puedo jugar con mando, joystick o control?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">No. Solo se juega con mouse y teclado. El uso de joystick/mando invalida la sesión, aunque el Gameplay Recorder te haya dejado grabar.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Puedo usar mods, cheats, trainers, macros o automatizaciones?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">No. Al enviar una sesión declarás que no usaste mods, cheats, trainers ni automatizaciones que alteren el comportamiento del contenido o de la captura, y que no usás bots ni scripts. Una sesión así no es válida y su subida puede provocar baneo permanente de la cuenta.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Puedo grabar desde una consola o con una capturadora de material de otra persona?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">No. La sesión tiene que ser jugada y capturada por vos, en tiempo real y en tu propia PC con Windows. No vale material derivado de grabaciones, transmisiones o capturas de terceros.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿El Gameplay Recorder afecta el rendimiento (FPS) de mi PC?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Como toda grabación por OBS, usa algo de recursos mientras corre. En equipos que cumplen los requisitos el impacto suele ser bajo.</p>
+              </div>
+            </details>
           </div>
         </details>
-        <details class="faq" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
-          <summary style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:22px 24px;">
-            <span style="font-family:var(--ui); font-weight:600; font-size:17px; color:var(--ink);">¿Cómo sé qué contenido grabar?</span>
+        <details class="faq-tema" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
+          <summary style="display:flex; align-items:center; gap:16px; padding:20px 24px;">
+            <span style="flex:none; font-family:var(--mono); font-size:12px; color:var(--violet-2); min-width:22px;">03</span>
+            <span style="flex:1; font-family:var(--display); font-weight:800; text-transform:uppercase; letter-spacing:.03em; font-size:19px; color:var(--ink);">Registro, cuenta y verificación</span>
+            <span style="flex:none; font-family:var(--mono); font-size:11px; color:var(--ink-4);">3</span>
             <span class="faq-ic" style="flex:none; width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.12); border:1px solid var(--line-strong); color:var(--violet-2);"><i data-lucide="plus" style="width:16px;height:16px;"></i></span>
           </summary>
-          <p style="margin:0; padding:0 24px 24px; font-size:15px; line-height:1.6; color:var(--ink-3);">Cada Orden Abierta indica qué categorías/géneros acepta. Entrá al <a href="https://catalogo.gameplayalliance.gg/" target="_top" style="color:var(--violet-2); font-weight:600; text-decoration:underline;">catálogo de géneros aceptados</a> y revisá la ficha de cada categoría para ver qué tipo de contenido entra. ¿No estás seguro de si un título califica? Verificá en su página de Steam que esté inscripto en esa categoría/género: si figura, entra.</p>
+          <div style="padding:0 14px 14px; display:flex; flex-direction:column; gap:2px;">
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Cómo me registro?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">El registro es gratis y priorizamos por orden de entrada. Te registrás desde el botón “Unite / Registrate” del sitio; después descargás el Gameplay Recorder y te inscribís en las Órdenes Abiertas desde el Dashboard.</p>
+                <p style="margin:0 0 10px;"><a href="https://gameplayalliance.gg/dashboard" target="_blank" rel="noopener" class="faq-lk">https://gameplayalliance.gg/dashboard</a></p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Qué datos me piden para poder cobrar?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Para participar del programa de pagos tenés que dar, de forma completa y veraz: nombre completo, un email válido, tu documento de identidad (DNI) válido y vigente, la dirección de tu wallet para cobrar en USDT (red BNB Chain) y tu país de residencia. La Empresa puede verificar esos datos y rechazar o suspender el acceso si hay información falsa o inconsistente.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">Al registrarme ingresé un email incorrecto y no me deja registrarme de nuevo con mi DNI. ¿Cómo lo corrijo?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Escribí a <a href="mailto:gg_support@gameplayalliance.gg" class="faq-lk">gg_support@gameplayalliance.gg</a> y solicitá el blanqueo de usuario. Esto podrá excepcionalmente por única vez.</p>
+              </div>
+            </details>
+          </div>
         </details>
-        <details class="faq" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
-          <summary style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:22px 24px;">
-            <span style="font-family:var(--ui); font-weight:600; font-size:17px; color:var(--ink);">¿Ya puedo empezar a jugar y generar ingresos?</span>
+        <details class="faq-tema" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
+          <summary style="display:flex; align-items:center; gap:16px; padding:20px 24px;">
+            <span style="flex:none; font-family:var(--mono); font-size:12px; color:var(--violet-2); min-width:22px;">04</span>
+            <span style="flex:1; font-family:var(--display); font-weight:800; text-transform:uppercase; letter-spacing:.03em; font-size:19px; color:var(--ink);">Órdenes Abiertas y contenido elegible</span>
+            <span style="flex:none; font-family:var(--mono); font-size:11px; color:var(--ink-4);">6</span>
             <span class="faq-ic" style="flex:none; width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.12); border:1px solid var(--line-strong); color:var(--violet-2);"><i data-lucide="plus" style="width:16px;height:16px;"></i></span>
           </summary>
-          <p style="margin:0; padding:0 24px 24px; font-size:15px; line-height:1.6; color:var(--ink-3);">Sí. El registro está abierto y las primeras Órdenes Abiertas del Marketplace ya se publican en el <a href="https://gameplayalliance.gg/dashboard" target="_top" style="color:var(--violet-2); font-weight:600; text-decoration:underline;">Dashboard</a>: registrate, descargá el Recorder e inscribite en una orden activa para empezar a grabar. Los challenges de los Playgrounds llegan próximamente; cuando se abran, te avisamos al email que registraste y por nuestras redes.</p>
+          <div style="padding:0 14px 14px; display:flex; flex-direction:column; gap:2px;">
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Cómo sé qué contenido puedo grabar?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Cada Orden Abierta indica qué categorías/géneros acepta. Como referencia usamos el catálogo de Steam. Entrá al catálogo de géneros aceptados y revisá la ficha de cada categoría:</p>
+                <p style="margin:0 0 10px;"><a href="https://catalogo.gameplayalliance.gg/" target="_blank" rel="noopener" class="faq-lk">https://catalogo.gameplayalliance.gg/</a></p>
+                <p style="margin:0 0 10px;">¿No estás seguro de si un contenido califica? Verificá en su página de Steam que figure dentro de esa categoría/género: si figura, entra.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Por qué en el Catálogo solo veo categorías y no un listado de contenidos?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Porque el sistema funciona por categorías de contenido, no por listados cerrados. Sos libre de aportar contenido dentro de las categorías que habilita cada Orden Abierta. Abrí la categoría correspondiente en el Catálogo y, para confirmar un caso puntual, usá la ficha de Steam como referencia.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">Veo contenido en el catálogo que no está en la orden activa. ¿Puedo subirlo igual?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">No. Solo se puede subir contenido cuando hay una Orden Abierta activa que acepte esa categoría. Subir contenido fuera de las categorías/géneros aceptados se considera una falta grave.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Puedo grabar antes y subir después, cuando se activen las órdenes?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Si. La subida se habilita solo cuando hay una orden activa que acepte ese contenido.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Por cuánto tiempo está activa una Orden Abierta?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">No está limitada por una fecha fija: la orden se cierra cuando se alcanza la totalidad de horas solicitadas.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Se puede participar con contenido multijugador?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Sí. Hay desafíos de equipo, y suelen estar entre los que más valen. Revisá los requisitos de cada orden para ver si admite modalidad multiplayer.</p>
+              </div>
+            </details>
+          </div>
         </details>
-        <details class="faq" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
-          <summary style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:22px 24px;">
-            <span style="font-family:var(--ui); font-weight:600; font-size:17px; color:var(--ink);">¿Qué pasa con mi sesión una vez capturada y enviada?</span>
+        <details class="faq-tema" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
+          <summary style="display:flex; align-items:center; gap:16px; padding:20px 24px;">
+            <span style="flex:none; font-family:var(--mono); font-size:12px; color:var(--violet-2); min-width:22px;">05</span>
+            <span style="flex:1; font-family:var(--display); font-weight:800; text-transform:uppercase; letter-spacing:.03em; font-size:19px; color:var(--ink);">Gameplay Recorder (instalación, seguridad y errores)</span>
+            <span style="flex:none; font-family:var(--mono); font-size:11px; color:var(--ink-4);">8</span>
             <span class="faq-ic" style="flex:none; width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.12); border:1px solid var(--line-strong); color:var(--violet-2);"><i data-lucide="plus" style="width:16px;height:16px;"></i></span>
           </summary>
-          <p style="margin:0; padding:0 24px 24px; font-size:15px; line-height:1.6; color:var(--ink-3);">Se revisa para ver si cumple con la calidad. Si está OK, el ingreso se acredita automáticamente en la cuenta que registraste.</p>
+          <div style="padding:0 14px 14px; display:flex; flex-direction:column; gap:2px;">
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Dónde descargo el Gameplay Recorder o cómo lo reinstalo?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Desde la página oficial del Gameplay Recorder, donde también está la guía de instalación. Es la única fuente oficial:</p>
+                <p style="margin:0 0 10px;"><a href="https://recorder.gameplayalliance.gg/" target="_blank" rel="noopener" class="faq-lk">https://recorder.gameplayalliance.gg/</a></p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Tengo que actualizar el Gameplay Recorder cada vez que me inscribo en una orden nueva?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">No siempre. La actualización es obligatoria cuando te la comunicamos (así pasó, por ejemplo, al abrir las primeras órdenes). Fuera de esos casos, igual recomendamos usar siempre la última versión disponible para evitar problemas de compatibilidad al grabar y subir.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">Mi antivirus detecta un troyano ¿Es verdad?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">No. Si tu antivirus detecta un troyano, es un falso positivo. Las herramientas que graban pantalla y registran teclado/mouse suelen disparar alertas de este tipo. Gameplay Recorder es de código abierto y auditable: podés revisar exactamente qué hace, línea por línea en GitHub. Para tu seguridad, descargálo solo desde la página oficial y, si querés, agregá una excepción en tu antivirus.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿El Gameplay Recorder hace data mining o extrae mis datos personales?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">No. Sólo genera dos cosas: un registro de video de la pantalla de tu partida (sin voces humanas ni audio externo) y datos de tu actividad (teclas, mouse, tiempos y trayectorias). No captura datos biométricos ni información que te identifique dentro del contenido. Además es de código abierto, así que podés auditar qué hace.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">Me aparece “Juego no detectado” aunque tengo el contenido abierto. ¿Qué puede ser?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Suele deberse a alguna de estas causas: (1) Permisos: el Gameplay Recorder no tiene los permisos necesarios para detectar la ventana del contenido. (2) Modo de pantalla: si estás en pantalla completa exclusiva, probá pasar a modo ventana o ventana sin bordes. (3) Permisos de administrador: cerrá el Gameplay Recorder y volvé a abrirlo como administrador. Para ver qué pasó, andá a Documentos → Pleiada Recordings: hay una carpeta por cada grabación (con fecha y hora en el nombre) y adentro están los logs con el detalle de qué se intentó y qué falló; si no existe esa carpeta, no se ejecutó ninguna grabación.</p>
+                <p style="margin:0 0 10px;">Si probaste todo y sigue igual, escribínos a <a href="mailto:gg_support@gameplayalliance.gg" class="faq-lk">gg_support@gameplayalliance.gg</a>.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Tengo que archivar las sesiones en mi PC? ¿Puedo borrarlas?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">No necesitás archivarlas: la sesión se graba en tu equipo (en Documentos → Pleiada Recordings, en una carpeta por grabación), se envía con el Gameplay Recorder y después podés borrar esa carpeta local. Tené en cuenta que, una vez enviada a la plataforma, el envío es irrevocable y no se puede retirar ni borrar del lado de la Empresa.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">La velocidad de subida (MB/s) que muestra el Gameplay Recorder es más baja que la de mi internet. ¿Está limitada?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">La velocidad puede verse afectada por el tamaño del archivo, la red y el servidor de subida. No hay un límite intencional de subida en la app.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">Tengo contenido grabado con una versión anterior del Gameplay Recorder. ¿Lo puedo enviar o tengo que grabarlo de nuevo?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Si la grabación cumple con los requisitos y corresponde a un contenido aceptado en una Orden Abierta, puedes enviarlo por medio de la nueva versión del Gameplay Recorder.</p>
+              </div>
+            </details>
+          </div>
         </details>
-        <details class="faq" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
-          <summary style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:22px 24px;">
-            <span style="font-family:var(--ui); font-weight:600; font-size:17px; color:var(--ink);">¿Puedo jugar con amigos?</span>
+        <details class="faq-tema" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
+          <summary style="display:flex; align-items:center; gap:16px; padding:20px 24px;">
+            <span style="flex:none; font-family:var(--mono); font-size:12px; color:var(--violet-2); min-width:22px;">06</span>
+            <span style="flex:1; font-family:var(--display); font-weight:800; text-transform:uppercase; letter-spacing:.03em; font-size:19px; color:var(--ink);">Reglas de la sesión de gameplay</span>
+            <span style="flex:none; font-family:var(--mono); font-size:11px; color:var(--ink-4);">6</span>
             <span class="faq-ic" style="flex:none; width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.12); border:1px solid var(--line-strong); color:var(--violet-2);"><i data-lucide="plus" style="width:16px;height:16px;"></i></span>
           </summary>
-          <p style="margin:0; padding:0 24px 24px; font-size:15px; line-height:1.6; color:var(--ink-3);">Sí, hay challenges de equipo.</p>
+          <div style="padding:0 14px 14px; display:flex; flex-direction:column; gap:2px;">
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Cuál es la duración mínima y máxima de una sesión?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">El mínimo para monetizar es una hora: menos de una hora se considera insuficiente y no paga. Por seguridad, para garantizar la hora completa, el Gameplay Recorder te permite grabar apenas unos minutos más de una hora y, pasado ese excedente, corta la grabación automáticamente.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">Si me paso de una hora, ¿cuánto se paga?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Se paga una hora por sesión, independientemente de los minutos adicionales.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Da lo mismo si gano o pierdo dentro de la sesión?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Lo que se evalúa es que la sesión cumpla los requisitos de la orden y pase el control de calidad, no si ganás o perdés en la partida.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Qué pasa con el contenido que tiene mucha cinemática o momentos sin jugar?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Lo que aporta valor es el gameplay activo: tu interacción con teclado y mouse. Grabar sesiones con largos períodos en los que no estás interactuando (AFK) puede hacer que la sesión subida sea rechazada.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿La sesión puede tener mi voz, mi cámara, overlays o el chat en pantalla?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">No. La sesión no puede contener voces humanas, rostros o imágenes de personas, datos personales, ni contenido superpuesto como marcas de agua, overlays, chats o comentarios. Debe ser solo el desarrollo de tu partida. Subir contenido que te haga identificable (por ejemplo, tu voz) es una falta grave.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Qué pasa si se corta internet o se cierra la app durante la grabación?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">La grabación se hace en tu equipo; la subida es un paso posterior.</p>
+              </div>
+            </details>
+          </div>
+        </details>
+        <details class="faq-tema" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
+          <summary style="display:flex; align-items:center; gap:16px; padding:20px 24px;">
+            <span style="flex:none; font-family:var(--mono); font-size:12px; color:var(--violet-2); min-width:22px;">07</span>
+            <span style="flex:1; font-family:var(--display); font-weight:800; text-transform:uppercase; letter-spacing:.03em; font-size:19px; color:var(--ink);">Marketplace, Playgrounds y Gameplay Labs</span>
+            <span style="flex:none; font-family:var(--mono); font-size:11px; color:var(--ink-4);">4</span>
+            <span class="faq-ic" style="flex:none; width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.12); border:1px solid var(--line-strong); color:var(--violet-2);"><i data-lucide="plus" style="width:16px;height:16px;"></i></span>
+          </summary>
+          <div style="padding:0 14px 14px; display:flex; flex-direction:column; gap:2px;">
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Qué diferencia hay entre el Marketplace y los Gameplay Labs?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">El Marketplace trabaja sobre gameplay del contenido que ya tenés: subís tu sesión y, si se aprueba, generás ingresos. Los Gameplay Labs usan nuestros propios Playgrounds (de descarga gratuita) y se pagan de forma fija por completarlos.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Qué son los Playgrounds? ¿Se pagan igual que una sesión del Marketplace?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Los Playgrounds son desafíos propios de los Gameplay Labs (reacción, navegación, estrategia y equipo). En ambos casos se paga por el monto publicado al aceptar la orden; la diferencia es el tipo de contenido: propio en los Labs, tuyo en el Marketplace.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Los Playgrounds se juegan online o hay que descargarlos?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Los Playgrounds son de descarga gratuita y se capturan con el mismo Gameplay Recorder y el mismo procedimiento que en el Marketplace.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Ya puedo empezar a jugar y generar ingresos?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Sí. El registro está abierto y las primeras Órdenes Abiertas del Marketplace ya se publican en el Dashboard. Los Playgrounds llegan próximamente; cuando se abran, te avisamos al email que registraste y por nuestras redes.</p>
+              </div>
+            </details>
+          </div>
+        </details>
+        <details class="faq-tema" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
+          <summary style="display:flex; align-items:center; gap:16px; padding:20px 24px;">
+            <span style="flex:none; font-family:var(--mono); font-size:12px; color:var(--violet-2); min-width:22px;">08</span>
+            <span style="flex:1; font-family:var(--display); font-weight:800; text-transform:uppercase; letter-spacing:.03em; font-size:19px; color:var(--ink);">Tu contenido una vez enviado</span>
+            <span style="flex:none; font-family:var(--mono); font-size:11px; color:var(--ink-4);">3</span>
+            <span class="faq-ic" style="flex:none; width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.12); border:1px solid var(--line-strong); color:var(--violet-2);"><i data-lucide="plus" style="width:16px;height:16px;"></i></span>
+          </summary>
+          <div style="padding:0 14px 14px; display:flex; flex-direction:column; gap:2px;">
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Puedo retirar o borrar una sesión después de subirla?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">No. Una vez que enviás la sesión a la plataforma, el envío es irrevocable: no se puede solicitar el retiro, la supresión ni la devolución del material desde los servidores de la Empresa. Por eso el momento en el que vos decidís qué compartir es antes de subir: revisá y verificá la sesión antes de enviarla.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Qué pasa con las sesiones que no se aprueban?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Las sesiones que no se aprueban se eliminan de los servidores de la Empresa (las rechazadas, dentro de los 30 días) y no se usan, licencian ni se incorporan al entrenamiento de sistemas de inteligencia artificial. Se te notificará en la Dashboard el estado (de aceptación o rechazo) del contenido.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Puedo transmitir en vivo o subir a YouTube/Twitch la misma sesión que envié?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">No mientras esa sesión esté en proceso en la plataforma o su licencia siga vigente: durante ese tiempo no podés publicar, transmitir en vivo ni poner a disposición del público ese mismo registro, salvo autorización previa y por escrito de la Empresa. Esto aplica a la sesión que enviás, no a tu actividad de streaming en general.</p>
+              </div>
+            </details>
+          </div>
+        </details>
+        <details class="faq-tema" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
+          <summary style="display:flex; align-items:center; gap:16px; padding:20px 24px;">
+            <span style="flex:none; font-family:var(--mono); font-size:12px; color:var(--violet-2); min-width:22px;">09</span>
+            <span style="flex:1; font-family:var(--display); font-weight:800; text-transform:uppercase; letter-spacing:.03em; font-size:19px; color:var(--ink);">Pagos y cobros</span>
+            <span style="flex:none; font-family:var(--mono); font-size:11px; color:var(--ink-4);">8</span>
+            <span class="faq-ic" style="flex:none; width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.12); border:1px solid var(--line-strong); color:var(--violet-2);"><i data-lucide="plus" style="width:16px;height:16px;"></i></span>
+          </summary>
+          <div style="padding:0 14px 14px; display:flex; flex-direction:column; gap:2px;">
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Cuánto puedo generar?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">El monto está preestablecido y es visible en la orden antes de que te suscribas, así que siempre sabés cuánto se paga antes de jugar. En las órdenes abiertas estándar ese valor es un piso: el pago arranca desde el monto publicado y puede subir según la demanda.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Por qué exactamente me pagan?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Se paga por tu aporte —tu ejecución, tu tiempo y la generación de los datos de tu sesión—, no por el contenido de terceros que aparezca en pantalla.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Cuándo se genera el derecho al pago?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Cada sesión pasa por un control de calidad. Solo las sesiones aprobadas generan derecho a pago; las que no se aprueban se eliminan y no se pagan.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Cómo y cuándo cobro?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Cobrás en USDT (una stablecoin atada al dólar) directo a tu wallet, dentro de los 45 días desde que la Empresa aprueba los importes. El pago se hace exclusivamente por la red BNB Chain (BEP20), a la wallet que hayas registrado en el programa.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Hay un monto mínimo para cobrar?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Sí. Si lo acumulado en el período es inferior a USD 5, se retiene hasta superar ese mínimo.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Quién paga las comisiones de red (gas)?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Las comisiones de red de la transferencia las asume la Empresa y no se descuentan de tu pago. Quedan a tu cargo las comisiones que te cobre tu propio exchange o wallet por recibir, custodiar o retirar, y cualquier costo por convertir a otra moneda.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Qué wallet necesito?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Una wallet BNB Chain (BEP20). Algunas opciones: MetaMask (la más descentralizada) y wallets de uso masivo en Latam como Trust Wallet, Lemon, Belo, Bitso o Binance. Lo único imprescindible es que soporte USDT en la red BNB Chain (BEP20).</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">Cometí un error en la dirección de mi wallet. ¿Cómo lo corrijo?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Escribí a <a href="mailto:gg_support@gameplayalliance.gg" class="faq-lk">gg_support@gameplayalliance.gg</a> para revisar tu caso. Considera que deberás ofrecer el consentimiento firmado del cambio solicitado.</p>
+              </div>
+            </details>
+          </div>
+        </details>
+        <details class="faq-tema" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
+          <summary style="display:flex; align-items:center; gap:16px; padding:20px 24px;">
+            <span style="flex:none; font-family:var(--mono); font-size:12px; color:var(--violet-2); min-width:22px;">10</span>
+            <span style="flex:1; font-family:var(--display); font-weight:800; text-transform:uppercase; letter-spacing:.03em; font-size:19px; color:var(--ink);">Revisión, calidad y estados</span>
+            <span style="flex:none; font-family:var(--mono); font-size:11px; color:var(--ink-4);">3</span>
+            <span class="faq-ic" style="flex:none; width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.12); border:1px solid var(--line-strong); color:var(--violet-2);"><i data-lucide="plus" style="width:16px;height:16px;"></i></span>
+          </summary>
+          <div style="padding:0 14px 14px; display:flex; flex-direction:column; gap:2px;">
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Qué pasa con mi sesión una vez enviada?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Se somete a un control de calidad, tanto humano como automatizado, que verifica los requisitos técnicos y de contenido. Si se aprueba, el pago se procesa según la sección de pagos.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿En cuánto tiempo sé si mi contenido es aceptado o rechazado?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Si una sesión se rechaza, se te notifica el motivo dentro de los 30 días hábiles de recibida.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">Si rechazan mi sesión, ¿puedo apelar?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">No. Las decisiones del control de calidad son definitivas y no admiten apelación. Sí podés, por supuesto, grabar y enviar nuevas sesiones para las órdenes activas.</p>
+              </div>
+            </details>
+          </div>
+        </details>
+        <details class="faq-tema" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
+          <summary style="display:flex; align-items:center; gap:16px; padding:20px 24px;">
+            <span style="flex:none; font-family:var(--mono); font-size:12px; color:var(--violet-2); min-width:22px;">11</span>
+            <span style="flex:1; font-family:var(--display); font-weight:800; text-transform:uppercase; letter-spacing:.03em; font-size:19px; color:var(--ink);">Privacidad y seguridad</span>
+            <span style="flex:none; font-family:var(--mono); font-size:11px; color:var(--ink-4);">3</span>
+            <span class="faq-ic" style="flex:none; width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.12); border:1px solid var(--line-strong); color:var(--violet-2);"><i data-lucide="plus" style="width:16px;height:16px;"></i></span>
+          </summary>
+          <div style="padding:0 14px 14px; display:flex; flex-direction:column; gap:2px;">
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Qué datos se capturan y cómo se protege mi privacidad?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">El Gameplay Recorder registra el video de la pantalla de tu partida (sin voces ni audio externo) y datos de tu actividad (teclas, mouse, tiempos, trayectorias). Vos revisás y verificás todo antes de subir. Al comercializarse, los datos van anónimos: sin tu gamertag y por categoría/género. Y el Gameplay Recorder es de código abierto, así que podés auditar qué hace.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Se puede saber quién generó los datos?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">No. Tu gamertag no forma parte de los datos que se comercializan. Internamente se te asigna un identificador (Provider ID) que no se comparte con nadie: los datasets se entregan sin ningún dato que permita vincularlos con tu identidad.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Qué pasa con mis datos de registro?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Los datos que das al registrarte se tratan según la Política de Privacidad, que forma parte de los T&amp;C. Podés ejercer tus derechos de acceso, rectificación y supresión escribiendo a soporte. Tené en cuenta que la supresión de tus datos personales no revierte lo que ya se haya incorporado de forma anónima a modelos ya entrenados, por ser técnicamente irreversible.</p>
+              </div>
+            </details>
+          </div>
+        </details>
+        <details class="faq-tema" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
+          <summary style="display:flex; align-items:center; gap:16px; padding:20px 24px;">
+            <span style="flex:none; font-family:var(--mono); font-size:12px; color:var(--violet-2); min-width:22px;">12</span>
+            <span style="flex:1; font-family:var(--display); font-weight:800; text-transform:uppercase; letter-spacing:.03em; font-size:19px; color:var(--ink);">Cuenta: faltas y suspensión</span>
+            <span style="flex:none; font-family:var(--mono); font-size:11px; color:var(--ink-4);">1</span>
+            <span class="faq-ic" style="flex:none; width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.12); border:1px solid var(--line-strong); color:var(--violet-2);"><i data-lucide="plus" style="width:16px;height:16px;"></i></span>
+          </summary>
+          <div style="padding:0 14px 14px; display:flex; flex-direction:column; gap:2px;">
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Qué puede hacer que suspendan o bloqueen mi cuenta?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Se consideran faltas graves, entre otras: grabar sesiones con largos períodos sin interactuar (AFK); grabar o subir contenido fuera de las categorías/géneros aceptados; y subir contenido que te haga identificable (por ejemplo, tu voz). La Empresa puede auditar todo el contenido subido y, ante incumplimientos reiterados, bloquear la cuenta de forma permanente y eliminar el contenido. La baja no afecta los pagos ya devengados por sesiones aprobadas.</p>
+              </div>
+            </details>
+          </div>
+        </details>
+        <details class="faq-tema" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(0,0,0,0.7);">
+          <summary style="display:flex; align-items:center; gap:16px; padding:20px 24px;">
+            <span style="flex:none; font-family:var(--mono); font-size:12px; color:var(--violet-2); min-width:22px;">13</span>
+            <span style="flex:1; font-family:var(--display); font-weight:800; text-transform:uppercase; letter-spacing:.03em; font-size:19px; color:var(--ink);">Soporte y novedades</span>
+            <span style="flex:none; font-family:var(--mono); font-size:11px; color:var(--ink-4);">2</span>
+            <span class="faq-ic" style="flex:none; width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.12); border:1px solid var(--line-strong); color:var(--violet-2);"><i data-lucide="plus" style="width:16px;height:16px;"></i></span>
+          </summary>
+          <div style="padding:0 14px 14px; display:flex; flex-direction:column; gap:2px;">
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Cómo contacto a soporte?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Escribí a <a href="mailto:gg_support@gameplayalliance.gg" class="faq-lk">gg_support@gameplayalliance.gg</a> para temas de cuenta, blanqueo de usuario, cambios de wallet o ejercicio de tus derechos sobre datos personales.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Cómo me entero cuando abren nuevas órdenes o Playgrounds?</span>
+                <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
+              </summary>
+              <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
+                <p style="margin:0 0 10px;">Te avisamos al email que registraste y por nuestras redes (Instagram y TikTok @gameplay.alliance). Además, las órdenes activas siempre aparecen en el Dashboard.</p>
+              </div>
+            </details>
+          </div>
         </details>
       </div>
     </div>
@@ -575,6 +1188,19 @@ class Component extends DCLogic {
   }
   _renderIcons() {
     const run = () => {
+      // FAQ: acordeon exclusivo. Al abrir un tema se cierran los demas; al
+      // cerrar uno, sus preguntas vuelven a colapsarse para que reabra limpio.
+      var faqTemas = document.querySelectorAll('details.faq-tema');
+      faqTemas.forEach(function (tema) {
+        tema.addEventListener('toggle', function () {
+          if (!tema.open) {
+            tema.querySelectorAll('details.faq[open]').forEach(function (q) { q.open = false; });
+            return;
+          }
+          faqTemas.forEach(function (otro) { if (otro !== tema) otro.open = false; });
+        });
+      });
+
       if (window.lucide && window.lucide.createIcons) {
         try { window.lucide.createIcons(); } catch (e) {}
       } else if (this._tries < 40) {
