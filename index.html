@@ -704,20 +704,20 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
           <div style="padding:0 14px 14px; display:flex; flex-direction:column; gap:2px;">
             <details class="faq">
               <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
-                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Cuál es la duración mínima y máxima de una sesión?</span>
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Cuál es la duración de una sesión?</span>
                 <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
               </summary>
               <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
-                <p style="margin:0 0 10px;">El mínimo para monetizar es una hora: menos de una hora se considera insuficiente y no paga. Por seguridad, para garantizar la hora completa, el Gameplay Recorder te permite grabar apenas unos minutos más de una hora y, pasado ese excedente, corta la grabación automáticamente.</p>
+                <p style="margin:0 0 10px;">La grabación tiene un máximo de 1 hora por sesión, para que el archivo no sea muy pesado y suba rápido. El Gameplay Recorder te permite grabar apenas unos minutos más de una hora y, pasado ese excedente, corta automáticamente. Podés grabar sesiones más cortas: no hay un mínimo de una hora.</p>
               </div>
             </details>
             <details class="faq">
               <summary style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 12px; border-top:1px solid var(--line);">
-                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">Si me paso de una hora, ¿cuánto se paga?</span>
+                <span style="font-family:var(--ui); font-weight:600; font-size:15.5px; line-height:1.45; color:var(--ink-2);">¿Cómo se calcula lo que se paga por una sesión?</span>
                 <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
               </summary>
               <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
-                <p style="margin:0 0 10px;">Se paga una hora por sesión, independientemente de los minutos adicionales.</p>
+                <p style="margin:0 0 10px;">El pago es proporcional al tiempo que subís, tomando el rate por hora de la orden como referencia. Por ejemplo, a USD 3 por hora, media hora equivale a USD 1,50. Como el máximo de grabación es 1 hora, cada sesión paga como mucho una hora al rate de la orden.</p>
               </div>
             </details>
             <details class="faq">
@@ -855,7 +855,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                 <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
               </summary>
               <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
-                <p style="margin:0 0 10px;">El monto está preestablecido y es visible en la orden antes de que te suscribas, así que siempre sabés cuánto se paga antes de jugar. En las órdenes abiertas estándar ese valor es un piso: el pago arranca desde el monto publicado y puede subir según la demanda.</p>
+                <p style="margin:0 0 10px;">Cada Orden tiene un rate por hora preestablecido y visible antes de que te suscribas. Tu pago se calcula de forma proporcional al tiempo que subís, tomando ese rate por hora como referencia. En las órdenes estándar el valor publicado es un piso que puede subir según la demanda.</p>
               </div>
             </details>
             <details class="faq">
@@ -882,7 +882,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                 <span class="faq-ic" style="flex:none; margin-top:2px; width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(139,92,246,0.10); border:1px solid var(--line); color:var(--violet-2);"><i data-lucide="plus" style="width:13px;height:13px;"></i></span>
               </summary>
               <div style="padding:0 12px 16px; font-size:15px; line-height:1.65; color:var(--ink-3);">
-                <p style="margin:0 0 10px;">Cobrás en USDT (una stablecoin atada al dólar) directo a tu wallet, dentro de los 45 días desde que la Empresa aprueba los importes. El pago se hace exclusivamente por la red BNB Chain (BEP20), a la wallet que hayas registrado en el programa.</p>
+                <p style="margin:0 0 10px;">Cobrás en USDT (una stablecoin atada al dólar) directo a la wallet que registraste, exclusivamente por la red BNB Chain (BEP20). El pago se acredita cuando tu cuenta acumula un mínimo de USD 5; si en el período no alcanzás ese monto, el saldo queda acumulado para el siguiente. Los pagos se procesan dentro de los 45 días desde que se aprueban los importes de tus sesiones.</p>
               </div>
             </details>
             <details class="faq">
