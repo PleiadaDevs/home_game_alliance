@@ -3,7 +3,6 @@
 <meta charset="utf-8">
 <title>Gameplay Alliance — Mi Perfil</title>
 <meta name="robots" content="noindex, nofollow">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 /* Fuentes self-hosted: reutiliza los mismos woff2 del root del site */
 @font-face {
@@ -424,7 +423,7 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 </style>
-<meta name="viewport" content="width=1280">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- TikTok Pixel Code Start -->
 <script>
 !function (w, d, t) {
@@ -574,7 +573,9 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     font-family: var(--ui);
     font-size: 14px;
     line-height: 1.45;
-    min-width: 1280px;
+    /* Era `min-width: 1280px` (bundle original de diseño). Con eso el celular
+       no podía achicar nada. Ver el bloque RESPONSIVE al final del head. */
+    min-width: 0;
     background-image:
       radial-gradient(1200px 700px at 85% -10%, rgba(139,92,246,0.18), transparent 60%),
       radial-gradient(900px 600px at -10% 30%, rgba(91,33,182,0.22), transparent 60%),
@@ -1173,6 +1174,80 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   .ga-footer a:hover { color: var(--ink); }
   .ga-social:hover { background: rgba(139,92,246,0.16) !important; border-color: var(--line-strong) !important; }
 
+</style>
+<style>
+/* ══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE (2026-08-05)
+   El diseño original venía con `min-width: 1280px` en el body: abajo de ese
+   ancho el navegador no achicaba nada, mostraba la página entera con scroll
+   horizontal. Por eso en el celular se veía "chiquita y corrida". Sacar esa
+   regla es lo que destraba todo; el resto son los quiebres de las grillas.
+   ══════════════════════════════════════════════════════════════════════════ */
+body { min-width: 0; }
+img, video, svg { max-width: 100%; }
+
+/* — Tablet / notebook chica — */
+@media (max-width: 1100px) {
+  .container { padding: 32px 20px 64px; }
+  .pg-grid, .login-grid, .soon-banner, .pedidos, .ganancias-grid, .tier-banner {
+    grid-template-columns: 1fr;
+  }
+  .hero-row { flex-direction: column; gap: 24px; }
+  .dl-card { max-width: none; }
+  /* La tarjeta de descarga y el botón dejan de estar pegados a la derecha */
+  .hero-row > div:last-child { width: 100%; align-items: stretch !important; }
+}
+
+/* — Celular — */
+@media (max-width: 700px) {
+  .container { padding: 22px 14px 52px; }
+  .section { margin-bottom: 44px; }
+  .h1 { font-size: clamp(28px, 8.5vw, 40px); line-height: 1.02; }
+  .section-head .h1 { font-size: clamp(24px, 7.5vw, 32px); }
+  .sub { font-size: 14px; }
+
+  /* Los encabezados de sección dejan de ser una fila: el título arriba y los
+     filtros abajo, en vez de aplastarse uno contra otro. */
+  .section-head { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .filter-tabs { flex-wrap: wrap; }
+
+  .stats-row { grid-template-columns: 1fr; gap: 12px; }
+
+  /* Header: menos padding y el logo más chico, para que entren logo + chip. */
+  .ga-header > div { padding: 11px 14px !important; gap: 12px !important; }
+  .ga-header img { height: 26px !important; }
+  .ga-uname { max-width: 92px; }
+  .ga-acceder { padding: 9px 13px; font-size: 12px; }
+
+  /* La tabla no entra en 360px: scrollea DENTRO de su tarjeta, nunca la página.
+     Las esquinas decorativas se dibujan en -1px y con overflow-x cuentan como
+     desborde (el mismo problema que tenían los modales), así que en la tabla se
+     ocultan. */
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table-wrap.corners::before, .table-wrap.corners::after,
+  .table-wrap > .c-bl, .table-wrap > .c-br { display: none; }
+  .table { min-width: 620px; }
+  .table th, .table td { padding: 12px 14px; }
+  .motivo-qa { max-width: 240px; }
+
+  .modal { padding: 22px 18px; }
+  .modal h3 { font-size: 20px; }
+  .modal-actions { flex-wrap: wrap; }
+  .modal-actions .btn { flex: 1 1 auto; }
+
+  .field-row { flex-direction: column; }
+  .field-row .btn { width: 100%; }
+
+  .ga-footer > div { padding: 44px 18px 28px !important; gap: 32px !important; }
+  .ga-footer > div > div:nth-child(2) { gap: 28px !important; }
+}
+
+/* — Celular angosto (360px y menos) — */
+@media (max-width: 380px) {
+  .container { padding: 18px 11px 44px; }
+  .ga-uname { max-width: 70px; }
+  .stat .value { font-size: 30px; }
+}
 </style>
 <style>
 /* --- Cabling: modal de inscripción (el diseño base no lo traía) --- */
