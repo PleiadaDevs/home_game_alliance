@@ -2014,13 +2014,22 @@ function statusCat(u) {
   return "pendientes";
 }
 
+// Fila de una orden en la que el usuario se inscribió y no subió nada. Si la
+// orden ya cerró, decirle "sin subidas aún" es engañoso: no va a poder subir
+// nunca más. `call_estado` distingue abierta de completada/cerrada.
 function mineRow(m) {
-  const est = !m.call_activo ? "Orden cerrada" : "Sin subidas aún";
+  const estado = m.call_estado || (m.call_activo ? "activo" : "cerrado");
+  const chip = estado === "completado" ? "Sin subidas. Orden completada"
+             : estado === "cerrado"    ? "Sin subidas. Orden cerrada"
+             : "Sin subidas aún";
+  const leyenda = estado === "activo"
+    ? "Inscripto — todavía no subiste sesiones para esta orden."
+    : "Inscripto — no subiste sesiones para esta orden.";
   return `<tr>
     <td><div class="game-cell"><div class="mini-cover">${esc(glyph(m.titulo))}</div>
       <div><div class="gname">${esc(m.titulo)}</div><div class="gsub">${esc(m.call_id)} · ${esc(m.tipo||"")}</div></div></div></td>
-    <td class="mono muted" colspan="2">Inscripto — todavía no subiste sesiones para esta orden.</td>
-    <td><span class="status plain"><span class="pip"></span>${est}</span></td>
+    <td class="mono muted" colspan="2">${leyenda}</td>
+    <td><span class="status plain"><span class="pip"></span>${chip}</span></td>
     <td style="text-align:right;" class="amount-cell">${m.precio_hora_usd?fmtUSD(m.precio_hora_usd):"—"}</td>
   </tr>`;
 }
@@ -2234,7 +2243,11 @@ function mockApi(action, p) {
         { call_id:"GA-2026-005", titulo:"Shooters", tipo:"Marketplace", call_activo:true,
           used_seconds: 21800, precio_hora_usd:5, uploads: ups },
         { call_id:"GA-2026-006", titulo:"Acción y Aventura", tipo:"Marketplace", call_activo:true,
-          used_seconds: 0, precio_hora_usd:5, uploads:[] },
+          call_estado:"activo", used_seconds: 0, precio_hora_usd:5, uploads:[] },
+        { call_id:"GA-2026-004", titulo:"Playground Test", tipo:"Marketplace", call_activo:true,
+          call_estado:"completado", used_seconds: 0, precio_hora_usd:5, uploads:[] },
+        { call_id:"GA-2026-003", titulo:"RPG (vieja)", tipo:"Marketplace", call_activo:false,
+          call_estado:"cerrado", used_seconds: 0, precio_hora_usd:0, uploads:[] },
       ] } });
   }
   return Promise.resolve({ ok:false, status:400, data:{ error:"mock: action desconocida" } });
