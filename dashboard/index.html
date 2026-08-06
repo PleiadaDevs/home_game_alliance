@@ -1241,6 +1241,45 @@ img, video, svg { max-width: 100%; }
   .ga-footer > div > div:nth-child(2) { gap: 28px !important; }
 }
 
+/* Botón de descarga cuando el dispositivo no es Windows: sigue viéndose, pero
+   apagado y sin acción. Es más claro que esconderlo. */
+.btn-gh.no-disp {
+  background: rgba(139,92,246,0.07); border-color: var(--line-strong);
+  box-shadow: none; color: var(--ink-3); cursor: default; pointer-events: none;
+}
+.btn-gh.no-disp .s { color: var(--warn); }
+.btn-gh.no-disp .g { color: var(--ink-2); font-size: 15px; }
+
+/* — Tarjeta de orden en celular — */
+@media (max-width: 700px) {
+  /* La portada bajaba a 140px por estilo inline, y dejaba una columna de texto
+     tan angosta que el subtítulo y los chips caían uno por renglón. */
+  .pedido .cover {
+    width: 64px !important; height: 64px !important; flex-basis: 64px !important;
+  }
+  .pedido .cover .cat-ico { width: 40px; height: 40px; }
+  .pedido .cover .serial-badge { display: none; }   /* el ID ya está en el subtítulo */
+  .pedido .row1 { gap: 12px; align-items: flex-start; }
+
+  /* Título arriba y precio abajo, los dos a lo ancho: dejan de pelear por el
+     espacio horizontal. */
+  .pedido .title-row { flex-direction: column; gap: 10px; }
+  .pedido h3 { font-size: 19px; padding-right: 84px; }   /* deja lugar al badge */
+  .pedido .platform { padding-right: 84px; line-height: 1.5; }
+  .pedido .reward-now { text-align: left; margin-top: 0; font-size: 20px; }
+  .pedido .reward-now.completed-badge { font-size: 24px; }
+
+  .chips { margin-top: 10px; gap: 5px; }
+  .goal { font-size: 9.5px; padding: 4px 8px; letter-spacing: .06em; }
+
+  .hours-row { flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .hours-row .muted { margin-left: 0 !important; width: 100%; }
+
+  /* Botones de la orden a lo ancho, para el pulgar. */
+  .pedido .deadline + .row { flex-direction: column; }
+  .pedido .deadline + .row .btn { width: 100%; justify-content: center; }
+}
+
 /* — Celular angosto (360px y menos) — */
 @media (max-width: 380px) {
   .container { padding: 18px 11px 44px; }
@@ -1326,7 +1365,7 @@ img, video, svg { max-width: 100%; }
           <div class="eyebrow">Gameplay Alliance</div>
           <h1 class="h1">ÓRDENES <em>ABIERTAS</em>.</h1>
           <p class="sub">Las órdenes abiertas son pedidos de contenido para la comunidad Gameplay Alliance. Inscribite en una orden que esté activa, grabá cualquiera de los juegos que entran en el pedido con el <strong style="color:var(--violet-2)">Gameplay Recorder</strong> y subí tus sesiones. Solo el contenido de juegos elegibles, y de las órdenes en las que te inscribiste, son los que van a poder subirse a través del Recorder.</p>
-          <p class="sub" style="margin-top:8px;color:var(--ink-3);">¿Todavía no sos parte? <a href="https://gameplayalliance.gg/join" style="color:var(--violet-2);text-decoration:none;font-weight:600;">Registrate gratis ya!</a></p>
+          <p class="sub solo-anon" style="margin-top:8px;color:var(--ink-3);">¿Todavía no sos parte? <a href="https://gameplayalliance.gg/join" style="color:var(--violet-2);text-decoration:none;font-weight:600;">Registrate gratis ya!</a></p>
         </div>
         <div style="display:flex; flex-direction:column; gap:18px; align-items:flex-end; flex:0 0 auto;">
           <div class="card corners glow dl-card">
@@ -1340,13 +1379,13 @@ img, video, svg { max-width: 100%; }
               <span class="tag hot">Gratuito</span>
               <span class="tag hot">Open source</span>
             </div>
-            <a class="btn-gh" href="https://github.com/PleiadaAI/pleiada-recorder/releases/latest/download/PleiadaRecorder_Setup.exe" rel="noopener">
+            <a class="btn-gh" id="btn-descarga" href="https://github.com/PleiadaAI/pleiada-recorder/releases/latest/download/PleiadaRecorder_Setup.exe" rel="noopener">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"></path></svg>
               <span class="tx"><span class="s">Descarga directa para Windows</span><span class="g">Descargar</span></span>
             </a>
-            <div class="dl-note">Descargá la última versión y ejecutá el instalador. Al finalizar se abre el asistente de configuración.</div>
+            <div class="dl-note" id="dl-note">Descargá la última versión y ejecutá el instalador. Al finalizar se abre el asistente de configuración.</div>
           </div>
-          <div class="row" style="gap: 10px;">
+          <div class="row solo-anon" style="gap: 10px;">
             <a class="btn primary" href="https://web.miniextensions.com/W32TyrnaWMUHtnazd4oT" target="_blank" rel="noopener" style="text-decoration:none;">Registrate gratis <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"></path></svg></a>
           </div>
         </div>
@@ -1459,8 +1498,8 @@ img, video, svg { max-width: 100%; }
                   <h3>Shooters PvP</h3>
                   <div class="platform">Orden GA-2026-001 · Marketplace · PC · teclado y mouse</div>
                   <div class="chips">
-                    <span class="goal">Categoría: Shooter</span>
-                    <span class="goal">Categoría: Battle Royale</span>
+                    <span class="goal">Shooter</span>
+                    <span class="goal">Battle Royale</span>
                     <span class="diff media"><span class="pip"></span>Máx. 10 h por usuario</span>
                   </div>
                 </div>
@@ -2470,7 +2509,32 @@ function applySession() {
   document.getElementById("auth-logged").style.display = logged ? "" : "none";
   document.getElementById("mis-calls-section").style.display = "";  // siempre visible; vacía si no hay sesión
   if (logged) document.getElementById("logged-email").textContent = auth.email() || "";
+  // Invitaciones a registrarse: al que ya está adentro no le sirven y le ocupan
+  // pantalla, sobre todo en el celular.
+  document.querySelectorAll(".solo-anon").forEach(el => el.style.display = logged ? "none" : "");
   renderPerfil();  // la sección Perfil solo se ve con sesión iniciada
+}
+
+// El Recorder es un .exe de Windows: bajarlo desde un celular no sirve para nada
+// y deja al usuario con un archivo que no puede abrir. Se avisa en el propio
+// botón en vez de dejar que la descarga arranque.
+function ajustarDescargaMobile() {
+  const ua = navigator.userAgent || "";
+  // iPadOS moderno se declara como Mac: se lo detecta por los puntos táctiles.
+  const esMobil = /Android|iPhone|iPad|iPod/i.test(ua)
+    || (/Mac/.test(navigator.platform || "") && navigator.maxTouchPoints > 1);
+  if (!esMobil) return;
+  const btn = document.getElementById("btn-descarga");
+  const nota = document.getElementById("dl-note");
+  if (btn) {
+    btn.removeAttribute("href");          // sin href no navega ni ofrece "abrir en…"
+    btn.classList.add("no-disp");
+    const s = btn.querySelector(".s"), g = btn.querySelector(".g");
+    if (s) s.textContent = "Solo para Windows PC";
+    if (g) g.textContent = "No disponible en este dispositivo";
+  }
+  if (nota) nota.textContent = "El Gameplay Recorder es un programa para Windows 10 u 11. "
+    + "Entrá desde tu PC para descargarlo.";
 }
 
 // ── Render: cards de calls ─────────────────────────────────────────────────────
@@ -2510,7 +2574,7 @@ function callCard(c) {
   const pctBar = c.completo ? 100 : pct;
   const chips = (c.targeting_mode === "juegos_especificos")
     ? (c.juegos||[]).map(j => `<span class="goal">Juego: ${esc(j)}</span>`).join("")
-    : (c.categorias||[]).map(x => `<span class="goal">Categoría: ${esc(x)}</span>`).join("");
+    : (c.categorias||[]).map(x => `<span class="goal">${esc(x)}</span>`).join("");
   const maxChip = c.max_horas_por_usuario > 0
     ? `<span class="diff media"><span class="pip"></span>Máx. ${nf(c.max_horas_por_usuario)} h por usuario</span>` : "";
   const reward = c.completo
@@ -2745,6 +2809,7 @@ async function loadMine() {
 
 (async function init() {
   applySession();
+  ajustarDescargaMobile();
   await Promise.all([loadCalls(), loadMine(), loadProfile()]);
   renderAll(); renderPerfil();
 })();

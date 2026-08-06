@@ -1242,6 +1242,45 @@ img, video, svg { max-width: 100%; }
   .ga-footer > div > div:nth-child(2) { gap: 28px !important; }
 }
 
+/* Botón de descarga cuando el dispositivo no es Windows: sigue viéndose, pero
+   apagado y sin acción. Es más claro que esconderlo. */
+.btn-gh.no-disp {
+  background: rgba(139,92,246,0.07); border-color: var(--line-strong);
+  box-shadow: none; color: var(--ink-3); cursor: default; pointer-events: none;
+}
+.btn-gh.no-disp .s { color: var(--warn); }
+.btn-gh.no-disp .g { color: var(--ink-2); font-size: 15px; }
+
+/* — Tarjeta de orden en celular — */
+@media (max-width: 700px) {
+  /* La portada bajaba a 140px por estilo inline, y dejaba una columna de texto
+     tan angosta que el subtítulo y los chips caían uno por renglón. */
+  .pedido .cover {
+    width: 64px !important; height: 64px !important; flex-basis: 64px !important;
+  }
+  .pedido .cover .cat-ico { width: 40px; height: 40px; }
+  .pedido .cover .serial-badge { display: none; }   /* el ID ya está en el subtítulo */
+  .pedido .row1 { gap: 12px; align-items: flex-start; }
+
+  /* Título arriba y precio abajo, los dos a lo ancho: dejan de pelear por el
+     espacio horizontal. */
+  .pedido .title-row { flex-direction: column; gap: 10px; }
+  .pedido h3 { font-size: 19px; padding-right: 84px; }   /* deja lugar al badge */
+  .pedido .platform { padding-right: 84px; line-height: 1.5; }
+  .pedido .reward-now { text-align: left; margin-top: 0; font-size: 20px; }
+  .pedido .reward-now.completed-badge { font-size: 24px; }
+
+  .chips { margin-top: 10px; gap: 5px; }
+  .goal { font-size: 9.5px; padding: 4px 8px; letter-spacing: .06em; }
+
+  .hours-row { flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .hours-row .muted { margin-left: 0 !important; width: 100%; }
+
+  /* Botones de la orden a lo ancho, para el pulgar. */
+  .pedido .deadline + .row { flex-direction: column; }
+  .pedido .deadline + .row .btn { width: 100%; justify-content: center; }
+}
+
 /* — Celular angosto (360px y menos) — */
 @media (max-width: 380px) {
   .container { padding: 18px 11px 44px; }
