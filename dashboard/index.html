@@ -2519,11 +2519,14 @@ function applySession() {
 // y deja al usuario con un archivo que no puede abrir. Se avisa en el propio
 // botón en vez de dejar que la descarga arranque.
 function ajustarDescargaMobile() {
-  const ua = navigator.userAgent || "";
-  // iPadOS moderno se declara como Mac: se lo detecta por los puntos táctiles.
-  const esMobil = /Android|iPhone|iPad|iPod/i.test(ua)
-    || (/Mac/.test(navigator.platform || "") && navigator.maxTouchPoints > 1);
-  if (!esMobil) return;
+  const ua = navigator.userAgent || "", pf = navigator.platform || "";
+  // Android, iOS y también macOS: ninguno puede correr un .exe. Windows, Linux
+  // o un dispositivo que no se pueda identificar quedan habilitados (ante la
+  // duda, mejor dejar descargar que bloquear a alguien que sí puede instalarlo).
+  const noEsWindows = /Android/i.test(ua)
+    || /iPhone|iPad|iPod/i.test(ua)
+    || /Mac/i.test(ua) || /Mac/i.test(pf);
+  if (!noEsWindows) return;
   const btn = document.getElementById("btn-descarga");
   const nota = document.getElementById("dl-note");
   if (btn) {
