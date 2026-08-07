@@ -2,6 +2,9 @@
 <html lang="es"><head>
 <meta charset="utf-8">
 <title>Gameplay Alliance — Dashboard · Órdenes abiertas</title>
+<!-- Sesión + login por modal, compartido con /profile. Va PRIMERO para que el
+     CSS propio de esta página (los overrides responsive) pueda pisarlo. -->
+<link rel="stylesheet" href="/ga-auth.css?v=1">
 <style>
 /* Fuentes self-hosted: reutiliza los mismos woff2 del root del site */
 @font-face {
@@ -1056,7 +1059,9 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
 
   /* === Login card ==================================================== */
-  .login-grid { display:grid; grid-template-columns: 1.2fr 1fr; gap: 20px; align-items: stretch; }
+  /* Era de dos columnas (login + "Cómo funciona"). El login se fue al modal del
+     header, así que la tarjeta que queda ocupa todo el ancho. */
+  .login-grid { display:grid; grid-template-columns: 1fr; gap: 20px; align-items: stretch; }
   .input {
     width: 100%; background: rgba(7,6,13,0.8); border: 1px solid var(--line-strong);
     border-radius: 8px; color: var(--ink); font-family: var(--mono); font-size: 14px;
@@ -1304,15 +1309,8 @@ img, video, svg { max-width: 100%; }
 .cover .cat-ico{width:88px;height:88px;color:var(--violet-2);position:relative;z-index:2;filter:drop-shadow(0 4px 14px rgba(139,92,246,.45));}
 /* Orden completada: la palabra bien grande, senal a la comunidad */
 .reward-now.completed-badge{color:var(--violet-2);font-family:var(--display);font-weight:900;font-size:30px;line-height:.95;text-transform:uppercase;letter-spacing:.01em;}
-/* Control de sesion en el header (Acceder / usuario + luz verde + salir) */
-.ga-acceder{font-family:var(--display);font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:13px;padding:11px 20px;border-radius:11px;border:1px solid var(--line-strong);background:rgba(139,92,246,0.08);color:var(--ink);cursor:pointer;transition:border-color .15s,background .15s;}
-.ga-acceder:hover{border-color:var(--violet);background:rgba(139,92,246,0.16);}
-.ga-userchip{display:inline-flex;align-items:center;gap:9px;padding:7px 8px 7px 13px;border:1px solid var(--line-strong);border-radius:11px;background:rgba(16,12,31,0.65);font-family:var(--mono);font-size:13px;color:var(--ink);}
-.ga-dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 9px var(--ok);flex:0 0 auto;animation:gaPulse 2.4s ease-in-out infinite;}
-@keyframes gaPulse{0%,100%{opacity:1}50%{opacity:.45}}
-.ga-uname{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.ga-logout{width:26px;height:26px;border-radius:7px;border:1px solid var(--line);background:transparent;color:var(--ink-3);cursor:pointer;font-size:12px;line-height:1;display:grid;place-items:center;transition:color .15s,border-color .15s;}
-.ga-logout:hover{color:var(--bad);border-color:var(--bad);}
+/* El control de sesion del header vive en /ga-auth.css (compartido con /profile).
+   Los overrides responsive de .ga-uname / .ga-acceder de mas arriba se quedan. */
 </style>
 </head>
 <body>
@@ -1410,33 +1408,10 @@ img, video, svg { max-width: 100%; }
         
       </div>
 
-      <!-- ============ LOGIN ============ -->
+      <!-- El login ya no vive acá: se entra desde "Ingresar a mi perfil" en el
+           header (modal de /ga-auth.js). Mis Órdenes y la wallet están en /profile.
+           Queda solo "Cómo funciona", que ahora ocupa todo el ancho. -->
       <div class="login-grid">
-        <div class="card corners glow" id="auth-card">
-          <div class="c-bl"></div><div class="c-br"></div>
-          <div id="auth-form">
-            <div class="eyebrow">Acceso</div>
-            <h2 style="font-family:var(--display);font-weight:800;font-size:26px;text-transform:uppercase;margin:8px 0 0;">INICIAR <em style="font-style:normal;color:var(--violet-2);">SESIÓN</em></h2>
-            <p class="sub" style="font-size:14px;">Ingresá el email con el que te registraste en el programa. Te mandaremos un código de acceso.</p>
-            <div class="field-row">
-              <input class="input" type="email" id="in-email" placeholder="tu@email.com" autocomplete="email" onkeydown="if(event.key==='Enter')auth.requestOtp()">
-              <button class="btn primary" id="btn-send" onclick="auth.requestOtp()">Enviar código</button>
-            </div>
-            <div class="form-note ok" id="note-sent" style="display:none;">Código enviado. Revisá tu correo (y carpeta de Spam por las dudas).</div>
-            <div class="field-row" id="code-row" style="display:none;">
-              <input class="input" type="text" id="in-code" inputmode="numeric" maxlength="6" placeholder="Código de 6 dígitos" style="text-align:center;letter-spacing:.3em;" autocomplete="one-time-code" onkeydown="if(event.key==='Enter')auth.verifyOtp()">
-              <button class="btn" id="btn-verify" onclick="auth.verifyOtp()">Ingresar</button>
-            </div>
-            <div class="form-note" id="note-hint" style="display:none;"></div>
-            <div class="form-note" id="note-err" style="color:var(--bad);display:none;"></div>
-          </div>
-          <div id="auth-logged" style="display:none;">
-            <div class="eyebrow">Acceso</div>
-            <h2 style="font-family:var(--display);font-weight:800;font-size:26px;text-transform:uppercase;margin:8px 0 0;">SESIÓN <em style="font-style:normal;color:var(--violet-2);">INICIADA</em></h2>
-            <p class="sub" style="font-size:14px;">Ingresaste como <strong id="logged-email" style="color:var(--ink);"></strong>. Ya podés inscribirte en las órdenes abiertas y seguir tus subidas en <em style="font-style:normal;color:var(--violet-2);">Mis Órdenes</em>.</p>
-            <div class="field-row"><button class="btn ghost" onclick="auth.logout()">Cerrar sesión</button></div>
-          </div>
-        </div>
         <div class="card corners" style="display:flex;flex-direction:column;justify-content:flex-start;">
           <div class="c-bl"></div><div class="c-br"></div>
           <div class="eyebrow">Cómo funciona</div>
@@ -1625,165 +1600,9 @@ img, video, svg { max-width: 100%; }
       </div>
     </section>
 
-    <!-- ============ MIS CALLS ============ -->
-    <section class="section" id="mis-calls-section" style="display:none;">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">Historial</div>
-          <h1 class="h1" style="font-size:32px;">MIS <em>ÓRDENES</em>.</h1>
-          <p class="sub">Tus inscripciones, las sesiones que subiste para cada orden y su estado.</p>
-        </div>
-        <div class="filter-tabs" id="mis-calls-tabs"></div>
-      </div>
-
-      <div class="card corners table-wrap">
-        <div class="c-bl"></div><div class="c-br"></div>
-        <table class="table">
-          <thead>
-            <tr>
-              <th style="width:34%;">Orden</th>
-              <th>Enviado</th>
-              <th>Duración</th>
-              <th>Estado</th>
-              <th style="text-align:right;">Pago por hora</th>
-            </tr>
-          </thead>
-          <tbody id="mis-calls-body">
-            <tr>
-              <td>
-                <div class="game-cell">
-                  <div class="mini-cover">SP</div>
-                  <div>
-                    <div class="gname">Shooters PvP</div>
-                    <div class="gsub">GA-2026-001 · Marketplace</div>
-                  </div>
-                </div>
-              </td>
-              <td class="mono">14 Jul 2026</td>
-              <td class="mono"><strong style="color:var(--ink)">58 min</strong></td>
-              <td><span class="status warn"><span class="pip spin"></span>Subido</span></td>
-              <td style="text-align:right;" class="amount-cell">US$ 4,50</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="game-cell">
-                  <div class="mini-cover">SP</div>
-                  <div>
-                    <div class="gname">Shooters PvP</div>
-                    <div class="gsub">GA-2026-001 · Marketplace</div>
-                  </div>
-                </div>
-              </td>
-              <td class="mono muted">Apex Legends</td>
-              <td class="mono">12 Jul 2026</td>
-              <td class="mono"><strong style="color:var(--ink)">1 h 42 min</strong></td>
-              <td><span class="status ok"><span class="pip"></span>Disponible p/ Comercializar</span></td>
-              <td style="text-align:right;" class="amount-cell">US$ 4,50</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="game-cell">
-                  <div class="mini-cover" style="color:#a78bfa;">RPG</div>
-                  <div>
-                    <div class="gname">RPG de mundo abierto</div>
-                    <div class="gsub">GA-2026-003 · Marketplace</div>
-                  </div>
-                </div>
-              </td>
-              <td class="mono muted">Elden Ring</td>
-              <td class="mono">09 Jul 2026</td>
-              <td class="mono"><strong style="color:var(--ink)">2 h 05 min</strong></td>
-              <td><span class="status sold"><span class="pip"></span>Comercializado</span></td>
-              <td style="text-align:right;" class="amount-cell">US$ 5,00</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="game-cell">
-                  <div class="mini-cover" style="color:#a78bfa;">RPG</div>
-                  <div>
-                    <div class="gname">RPG de mundo abierto</div>
-                    <div class="gsub">GA-2026-003 · Marketplace</div>
-                  </div>
-                </div>
-              </td>
-              <td class="mono muted">Baldur's Gate 3</td>
-              <td class="mono">05 Jul 2026</td>
-              <td class="mono"><strong style="color:var(--ink)">1 h 18 min</strong></td>
-              <td><span class="status ok"><span class="pip"></span>Disponible p/ Comercializar</span></td>
-              <td style="text-align:right;" class="amount-cell">US$ 5,00</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="table-foot">
-          <div id="mis-calls-foot"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ PERFIL (datos de pago) ============ -->
-    <section class="section" id="perfil-section" style="display:none;">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">Perfil</div>
-          <h1 class="h1" style="font-size:32px;">DATOS DE <em>PAGO</em>.</h1>
-          <p class="sub">Los pagos se hacen en <strong style="color:var(--violet-2)">USDT</strong> por <strong style="color:var(--ink)">BNB Chain (BEP20)</strong>. Informanos acá la wallet donde querés recibir tus pagos.<br>
-            <span style="color:var(--warn)">El pago se libera a partir de US$ 5 acumulados.</span> Si tu saldo es menor, se suma al siguiente pago.</p>
-        </div>
-      </div>
-
-      <div class="login-grid">
-        <div class="card corners glow">
-          <div class="c-bl"></div><div class="c-br"></div>
-
-          <div id="wallet-form">
-            <div class="eyebrow">Tu wallet de pagos</div>
-            <p class="sub" style="font-size:14px;">Todavía no cargaste tu wallet. Elegí la red y pegá la dirección <strong style="color:var(--ink)">directo desde tu billetera</strong>.</p>
-            <div class="row" style="gap:12px; margin:14px 0;">
-              <button type="button" class="net-chip" id="chip-bep20" onclick="perfil.pick('BEP20')"><span class="nn">BNB Chain</span><span class="nd">USDT · red BEP20</span></button>
-            </div>
-            <div style="display:flex; flex-direction:column; gap:10px;">
-              <input class="input" type="text" id="wal-addr1" placeholder="Dirección de tu wallet" autocomplete="off" spellcheck="false">
-              <input class="input" type="text" id="wal-addr2" placeholder="Repetí la dirección (pegala de nuevo)" autocomplete="off" spellcheck="false">
-            </div>
-            <div class="form-note" id="wal-err" style="color:var(--bad); display:none;"></div>
-            <div class="field-row" style="margin-top:12px;">
-              <button class="btn primary" id="btn-wallet" onclick="perfil.review()">Guardar wallet</button>
-            </div>
-          </div>
-
-          <div id="wallet-set" style="display:none;">
-            <div class="eyebrow">Tu wallet de pagos</div>
-            <div id="wal-aviso-tron" style="display:none; margin:12px 0 4px; padding:14px 16px;
-                 background:rgba(251,191,36,0.08); border:1px solid var(--warn); border-radius:12px;">
-              <div style="font-weight:700; color:var(--warn); margin-bottom:6px;">Actualizá tu red para poder cobrar</div>
-              <div style="font-size:13.5px; line-height:1.55; color:var(--ink-2);">
-                Dejamos de pagar por <strong style="color:var(--ink)">TRON (TRC20)</strong>: el costo de cada
-                transferencia se llevaba una parte importante del pago. Ahora pagamos únicamente por
-                <strong style="color:var(--ink)">BNB Chain (BEP20)</strong>.
-                <br><br>Tu saldo está reservado y no se pierde. Cambiá tu wallet acá abajo por una de
-                BNB Chain y lo liberamos en el próximo pago.
-              </div>
-            </div>
-            <div style="display:flex; align-items:center; gap:10px; margin:12px 0 10px;">
-              <span class="tag hot" id="wal-net-tag"></span>
-              <span style="font-family:var(--mono); font-size:12px; color:var(--ink-3);" id="wal-updated"></span>
-            </div>
-            <div class="wal-addr" id="wal-current"></div>
-            <p class="sub" style="font-size:13px; margin-top:14px;">Una vez informada tu wallet, para cambiarla escribinos al <a href="mailto:gg_support@gameplayalliance.gg" style="color:var(--violet-2); text-decoration:none; font-weight:600;">soporte de Gameplay Alliance</a> con al menos <strong style="color:var(--ink)">una semana de anticipación</strong> al próximo pago.</p>
-          </div>
-        </div>
-
-        <div class="card corners" style="display:flex; flex-direction:column; justify-content:flex-start;">
-          <div class="c-bl"></div><div class="c-br"></div>
-          <div class="eyebrow">Sobre las wallets</div>
-          <div style="display:flex; flex-direction:column; gap:12px; margin-top:14px;">
-            <span style="color:var(--ink-2); font-size:13.5px;">Podés usar billeteras como <strong style="color:var(--ink)">MetaMask, Trust Wallet, Lemon, Belo, Bitso o Binance</strong>, entre otras — no recomendamos ninguna en particular. Asegurate de que tu billetera soporte <strong style="color:var(--ink)">USDT en BNB Chain (BEP20)</strong>.</span>
-            <span style="color:var(--ink-2); font-size:13.5px;">Verificá la dirección antes de guardar: <strong style="color:var(--ink)">una dirección equivocada significa perder el pago</strong> — las transferencias en blockchain no se pueden revertir.</span>
-            <span style="color:var(--ink-2); font-size:13.5px;">Los pagos se procesan según los términos de cada orden, dentro de los <strong style="color:var(--ink)">45 días</strong> desde la aprobación de tus datasets.</span>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- 'Mis Ordenes' y la wallet de pagos se mudaron a /profile (ver
+         _programa/perfil_seccion_plan_v1.md). El chip del header lleva ahi.
+         Este dashboard solo muestra las ordenes abiertas. -->
 
     <!-- ============ FAQS ============ -->
     <section class="section" id="faqs">
@@ -2255,23 +2074,7 @@ img, video, svg { max-width: 100%; }
     </div>
   </div>
 
-  <!-- ============ MODAL CONFIRMAR WALLET ============ -->
-  <div class="modal-bg" id="wal-modal-bg">
-    <div class="modal card corners">
-      <div class="c-bl"></div><div class="c-br"></div>
-      <h3>Confirmá tu wallet</h3>
-      <p class="sub" style="font-size:13.5px;">Red <strong style="color:var(--violet-2)" id="wal-m-net"></strong>. Revisá la dirección completa — especialmente los <strong style="color:var(--ink)">primeros y últimos caracteres</strong>:</p>
-      <div class="wal-big" id="wal-m-addr"></div>
-      <label style="display:flex; gap:10px; align-items:flex-start; font-size:13px; color:var(--ink-2); cursor:pointer;">
-        <input type="checkbox" id="wal-m-check" style="margin-top:2px;"> Verifiqué que la dirección es mía, es de la red elegida y soporta USDT.
-      </label>
-      <div class="modal-err" id="wal-m-err"></div>
-      <div class="modal-actions">
-        <button class="btn ghost" onclick="perfil.closeModal()">Cancelar</button>
-        <button class="btn primary" id="btn-wal-confirm" onclick="perfil.confirm()">Confirmar y guardar</button>
-      </div>
-    </div>
-  </div>
+  <!-- El modal de la wallet se fue con la seccion de pagos a /profile. -->
 
   <!-- ============ FOOTER (home site) ============ -->
   <footer class="ga-footer" style="position:relative; background:rgba(7,6,13,0.55); border-top:1px solid var(--line);">
@@ -2309,26 +2112,26 @@ img, video, svg { max-width: 100%; }
 
 </div>
 
+<script src="/ga-auth.js?v=1"></script>
 <script>
 "use strict";
 // ════════════════════════════════════════════════════════════════════════════
-//  Dashboard de Órdenes abiertas — lógica funcional (habla con la Lambda pleiada-api).
+//  Dashboard de Órdenes abiertas — habla con la Lambda pleiada-api.
 //  El gate real vive en el backend; acá solo mostramos y facilitamos.
-//  ?mock=1 en la URL usa datos de ejemplo (para QA sin backend deployado).
+//
+//  La sesión (cookies), el cliente de la API y el modal de login viven en
+//  /ga-auth.js, compartidos con /profile. "Mis Órdenes" y la wallet de pagos
+//  se mudaron a /profile: acá solo quedan las órdenes abiertas.
 // ════════════════════════════════════════════════════════════════════════════
-const API = "https://hdk2i43wuiw3272mtnjgwwsaby0bkood.lambda-url.sa-east-1.on.aws/";
-// Sesión en COOKIE de dominio (.gameplayalliance.gg) para compartirla entre el
-// dashboard y el catálogo (subdominios distintos: localStorage no alcanza).
-const CK_TOKEN = "ga_session", CK_EMAIL = "ga_email", CK_NAME = "ga_name";
-function ckDomain(){ return location.hostname.endsWith("gameplayalliance.gg") ? "; domain=.gameplayalliance.gg" : ""; }
-function ckSet(n,v,days){ const e=new Date(Date.now()+days*864e5).toUTCString(); document.cookie=`${n}=${encodeURIComponent(v)}; expires=${e}; path=/${ckDomain()}; SameSite=Lax${location.protocol==="https:"?"; Secure":""}`; }
-function ckGet(n){ return document.cookie.split("; ").reduce((a,c)=>{const i=c.indexOf("="); return c.slice(0,i)===n?decodeURIComponent(c.slice(i+1)):a;},""); }
-function ckDel(n){ document.cookie=`${n}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${ckDomain()}`; }
+const api = GA.api, auth = GA.auth;
 const RECORDER_URL = "https://recorder.gameplayalliance.gg/";
 const SIGNUP_URL = "https://web.miniextensions.com/W32TyrnaWMUHtnazd4oT";
-const MOCK = new URLSearchParams(location.search).has("mock");
 
-const state = { calls: [], mine: [], enrolledIds: new Set(), pending: null, tab: "todos", _email: "", profile: null };
+// `calls` es data pública y no depende de quién esté logueado; el resto sí, y
+// por eso en cada cambio de sesión se reemplaza entero (ver GA.init al final).
+const ESTADO_VACIO = () => ({ calls: [], mine: [], enrolledIds: new Set(),
+                              pending: null, tab: "todos" });
+let state = ESTADO_VACIO();
 
 const MESES = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -2339,180 +2142,17 @@ const fmtDate = ts => { const d = new Date((Number(ts)||0)*1000); return d.getDa
 const fmtUSD = n => "US$ " + (Number(n)||0).toFixed(2).replace(".", ",");
 const glyph = t => (String(t||"").trim().split(/\s+/).map(w => w[0]).join("").toUpperCase().replace(/[^A-Z0-9]/g,"") || "GA").slice(0,3);
 
-// ── API ──────────────────────────────────────────────────────────────────────
-async function api(action, payload) {
-  if (MOCK) return mockApi(action, payload);
-  let res;
-  try {
-    res = await fetch(API, { method:"POST", headers:{"Content-Type":"application/json"},
-                             body: JSON.stringify(Object.assign({action}, payload||{})) });
-  } catch (e) {
-    return { ok:false, status:0, data:{ error:"No pudimos conectar con el servidor. Revisá tu conexión y probá de nuevo." } };
-  }
-  let data = {}; try { data = await res.json(); } catch (e) {}
-  if (res.status === 401 && action !== "verify_otp") auth.logout(false);
-  return { ok: res.ok, status: res.status, data };
-}
-
-// ── Auth ─────────────────────────────────────────────────────────────────────
-const auth = {
-  token: () => ckGet(CK_TOKEN),
-  email: () => ckGet(CK_EMAIL),
-  _busy(btn, on, label) { const b = document.getElementById(btn); b.disabled = on; if (label) b.textContent = label; },
-  _err(msg) { const e = document.getElementById("note-err"); e.style.display = msg ? "" : "none"; e.textContent = msg || ""; },
-
-  async requestOtp() {
-    const email = (document.getElementById("in-email").value || "").trim().toLowerCase();
-    this._err("");
-    if (!email.includes("@") || !email.includes(".")) { this._err("Ingresá un email válido."); return; }
-    this._busy("btn-send", true, "Enviando…");
-    const r = await api("request_otp", { email });
-    this._busy("btn-send", false, "Enviar código");
-    if (r.ok) {
-      state._email = email;
-      document.getElementById("note-sent").style.display = "";
-      document.getElementById("code-row").style.display = "";
-      const hint = document.getElementById("note-hint");
-      hint.style.display = ""; hint.textContent = "Te enviamos un código a " + email + ". Vence en 10 minutos.";
-      document.getElementById("in-code").focus();
-    } else {
-      this._err(r.data.message || r.data.error || "No pudimos enviar el código. Probá de nuevo.");
-    }
-  },
-
-  async verifyOtp() {
-    const code = (document.getElementById("in-code").value || "").trim();
-    this._err("");
-    if (code.length < 6) { this._err("El código tiene 6 dígitos."); return; }
-    this._busy("btn-verify", true, "Verificando…");
-    const r = await api("verify_otp", { email: state._email, code });
-    this._busy("btn-verify", false, "Ingresar");
-    if (r.ok && r.data.token) {
-      ckSet(CK_TOKEN, r.data.token, 30);
-      ckSet(CK_EMAIL, r.data.email, 30);
-      ckSet(CK_NAME, r.data.nombre || "", 30);
-      applySession();
-      await Promise.all([loadMine(), loadProfile()]);
-      renderAll(); renderPerfil();
-    } else {
-      this._err(r.data.message || r.data.error || "Código incorrecto.");
-    }
-  },
-
-  logout(reload = true) {
-    ckDel(CK_TOKEN); ckDel(CK_EMAIL); ckDel(CK_NAME);
-    state.mine = []; state.enrolledIds = new Set(); state.profile = null;
-    if (reload) { applySession(); renderAll(); }
-  },
-};
-
-// ── Perfil: wallet de pagos (una sola; el cambio posterior es vía soporte) ────
-const RE_TRC20 = /^T[1-9A-HJ-NP-Za-km-z]{33}$/;
-const RE_BEP20 = /^0x[0-9a-fA-F]{40}$/;
-const perfil = {
-  net: "", addr: "",
-  _err(msg) { const e = document.getElementById("wal-err"); e.style.display = msg ? "" : "none"; e.textContent = msg || ""; },
-  _merr(msg) { const e = document.getElementById("wal-m-err"); e.textContent = msg || ""; },
-  pick(n) {
-    this.net = n;
-    document.getElementById("chip-bep20").classList.toggle("sel", n === "BEP20");
-    this._err("");
-  },
-  review() {
-    this._err("");
-    const a1 = (document.getElementById("wal-addr1").value || "").trim();
-    const a2 = (document.getElementById("wal-addr2").value || "").trim();
-    if (!this.net) { this._err("Elegí la red: BNB Chain (BEP20)."); return; }
-    const re = this.net === "TRC20" ? RE_TRC20 : RE_BEP20;
-    if (!re.test(a1)) {
-      this._err(this.net === "TRC20"
-        ? "La dirección no parece de TRON: son 34 caracteres y empieza con T. Copiala directo desde tu billetera."
-        : "La dirección no parece de BNB Chain: empieza con 0x y sigue con 40 caracteres. Copiala directo desde tu billetera.");
-      return;
-    }
-    if (a1 !== a2) { this._err("Las dos direcciones no coinciden. Pegá la misma dirección en los dos campos."); return; }
-    this.addr = a1;
-    document.getElementById("wal-m-net").textContent = this.net === "TRC20" ? "TRON (TRC20)" : "BNB Chain (BEP20)";
-    document.getElementById("wal-m-addr").innerHTML =
-      `<span class="wal-hl">${esc(a1.slice(0, 6))}</span>${esc(a1.slice(6, -6))}<span class="wal-hl">${esc(a1.slice(-6))}</span>`;
-    document.getElementById("wal-m-check").checked = false;
-    this._merr("");
-    document.getElementById("wal-modal-bg").classList.add("open");
-  },
-  closeModal() { document.getElementById("wal-modal-bg").classList.remove("open"); },
-  async confirm() {
-    if (!document.getElementById("wal-m-check").checked) { this._merr("Marcá la casilla de verificación para continuar."); return; }
-    const b = document.getElementById("btn-wal-confirm"); b.disabled = true; b.textContent = "Guardando…";
-    const r = await api("set_wallet", { token: auth.token(), network: this.net, address: this.addr });
-    b.disabled = false; b.textContent = "Confirmar y guardar";
-    if (r.ok && r.data.wallet) {
-      state.profile = r.data.wallet;
-      this.closeModal();
-      renderPerfil();
-    } else {
-      this._merr(r.data.message || r.data.error || "No pudimos guardar la wallet. Probá de nuevo en un momento.");
-    }
-  },
-};
-
-async function loadProfile() {
-  if (!auth.token()) { state.profile = null; return; }
-  const r = await api("get_profile", { token: auth.token() });
-  if (r.ok) state.profile = r.data.wallet || null;
-}
-
-function walletHtml(addr) {
-  const a = String(addr || "");
-  return `<span class="wal-hl">${esc(a.slice(0, 6))}</span>${esc(a.slice(6, -6))}<span class="wal-hl">${esc(a.slice(-6))}</span>`;
-}
-
-function renderPerfil() {
-  const sec = document.getElementById("perfil-section"); if (!sec) return;
-  const logged = !!auth.token();
-  sec.style.display = logged ? "" : "none";
-  if (!logged) return;
-  const w = state.profile;
-  document.getElementById("wallet-form").style.display = w ? "none" : "";
-  document.getElementById("wallet-set").style.display = w ? "" : "none";
-  if (w) {
-    document.getElementById("wal-net-tag").textContent = w.network === "TRC20" ? "TRON · TRC20" : "BNB CHAIN · BEP20";
-    document.getElementById("wal-current").innerHTML = walletHtml(w.address);
-    document.getElementById("wal-updated").textContent = w.updated_at ? "informada el " + fmtDate(w.updated_at) : "";
-    // Ya no pagamos por TRON: el costo de cada transferencia se comia una parte
-    // grande del pago. A quien tenga una wallet TRC20 guardada hay que decirle
-    // que la cambie, no borrarsela por atras.
-    const avisoTron = document.getElementById("wal-aviso-tron");
-    if (avisoTron) avisoTron.style.display = (w.network === "TRC20") ? "" : "none";
-  }
-}
-
-// Control de sesión en el header: Acceder / usuario + luz verde + salir.
-function renderHeaderAuth() {
-  const el = document.getElementById("ga-auth"); if (!el) return;
-  const email = auth.email() || "";
-  if (auth.token() && email) {
-    const uname = (ckGet(CK_NAME) || "").trim() || email.split("@")[0];
-    const short = uname.length > 16 ? uname.slice(0, 15) + "…" : uname;
-    el.innerHTML = `<span class="ga-userchip" title="${esc(email)}">
-        <span class="ga-dot"></span><span class="ga-uname">${esc(short)}</span>
-        <button class="ga-logout" onclick="auth.logout()" aria-label="Cerrar sesión" title="Cerrar sesión">✕</button>
-      </span>`;
-  } else {
-    el.innerHTML = `<button class="ga-acceder" onclick="scrollToLogin()">Acceder</button>`;
-  }
-}
+// ── Sesión ───────────────────────────────────────────────────────────────────
+// El login (modal), las cookies y renderHeaderAuth viven en /ga-auth.js.
+// La wallet de pagos y "Mis Órdenes" se mudaron a /profile.
+const renderHeaderAuth = GA.renderHeaderAuth;
 
 function applySession() {
   renderHeaderAuth();
   const logged = !!auth.token();
-  document.getElementById("auth-form").style.display = logged ? "none" : "";
-  document.getElementById("auth-logged").style.display = logged ? "" : "none";
-  document.getElementById("mis-calls-section").style.display = "";  // siempre visible; vacía si no hay sesión
-  if (logged) document.getElementById("logged-email").textContent = auth.email() || "";
   // Invitaciones a registrarse: al que ya está adentro no le sirven y le ocupan
   // pantalla, sobre todo en el celular.
   document.querySelectorAll(".solo-anon").forEach(el => el.style.display = logged ? "none" : "");
-  renderPerfil();  // la sección Perfil solo se ve con sesión iniciada
 }
 
 // El Recorder es un .exe de Windows: bajarlo desde un celular no sirve para nada
@@ -2677,70 +2317,9 @@ function mineRow(m) {
   </tr>`;
 }
 
-function renderMine() {
-  const body = document.getElementById("mis-calls-body");
-  const tabsEl = document.getElementById("mis-calls-tabs");
-  const footEl = document.getElementById("mis-calls-foot");
-
-  // Deslogueado: la sección se ve igual, pero vacía y con invitación a entrar.
-  if (!auth.token()) {
-    tabsEl.innerHTML = "";
-    body.innerHTML = `<tr><td colspan="5" class="mono muted" style="text-align:center;padding:36px 20px;">
-      Iniciá sesión para ver las órdenes en las que te inscribiste y el estado de tus subidas.
-      <div style="margin-top:16px;"><button class="btn primary" onclick="scrollToLogin()">Iniciar sesión</button></div></td></tr>`;
-    footEl.innerHTML = "";
-    return;
-  }
-
-  // Una fila por subida...
-  let uploadRows = [];
-  state.mine.forEach(m => (m.uploads||[]).forEach(u => uploadRows.push({ m, u })));
-  uploadRows.sort((a,b) => (b.u.uploaded_at||0) - (a.u.uploaded_at||0));
-  // ...y las órdenes inscriptas SIN subidas (el bug: antes no se veían).
-  const emptyEnroll = state.mine.filter(m => !(m.uploads && m.uploads.length));
-
-  // Las claves tienen que cubrir TODO lo que devuelve statusCat: si falta una,
-  // counts[cat]++ da NaN y la pestaña muestra "undefined".
-  const counts = { todos: uploadRows.length + emptyEnroll.length,
-                   subidos:0, disponibles:0, comercializados:0,
-                   pagados:0, no_aprobados:0 };
-  uploadRows.forEach(r => counts[statusCat(r.u)]++);
-
-  const tabs = [["todos","Todos"],["subidos","Subidos"],["disponibles","Disponibles"],
-                ["comercializados","Comercializados"],["pagados","Pagados"],
-                ["no_aprobados","No aprobados"]];
-  tabsEl.innerHTML = tabs.map(([k,label]) =>
-    `<button class="${state.tab===k?"active":""}" onclick="setTab('${k}')">${label} · ${counts[k]}</button>`).join("");
-
-  const html = [];
-  // En "Todos" van primero las inscripciones sin subidas, para que se vean sí o sí.
-  if (state.tab === "todos") emptyEnroll.forEach(m => html.push(mineRow(m)));
-  uploadRows
-    .filter(r => state.tab === "todos" || statusCat(r.u) === state.tab)
-    .forEach(({m,u}) => {
-      const st = uploadStatus(u);
-      html.push(`<tr>
-        <td><div class="game-cell"><div class="mini-cover">${esc(glyph(m.titulo))}</div>
-          <div><div class="gname">${esc(m.titulo)}</div><div class="gsub">${esc(m.call_id)} · ${esc(m.tipo||"")}</div></div></div></td>
-        <td class="mono">${fmtDate(u.uploaded_at)}</td>
-        <td class="mono"><strong style="color:var(--ink)">${fmtDur(u.duration_seconds)}</strong></td>
-        <td><span class="status ${st.cls}"><span class="pip${st.spin}"></span>${st.txt}</span>
-          ${u.qa_reason_text ? `<span class="motivo-qa">${esc(u.qa_reason_text)}</span>` : ""}</td>
-        <td style="text-align:right;" class="amount-cell">${m.precio_hora_usd?fmtUSD(m.precio_hora_usd):"—"}</td>
-      </tr>`);
-    });
-
-  body.innerHTML = html.length ? html.join("")
-    : `<tr><td colspan="5" class="mono muted" style="text-align:center;padding:28px;">No hay subidas para este filtro.</td></tr>`;
-
-  // foot: solo la invitacion cuando no hay inscripciones. El resumen por orden
-  // ("X h subidas · sin tope") se saco: mezclaba ordenes y generos distintos en
-  // una linea suelta bajo la tabla y no habia forma de saber a que correspondia
-  // cada numero.
-  footEl.innerHTML = state.mine.length ? ""
-    : `<span class="muted">Todavía no estás inscripto en ninguna orden. Inscribite en una de arriba para empezar.</span>`;
-}
-window.setTab = k => { state.tab = k; renderMine(); };
+// renderMine() y setTab() se fueron con la seccion 'Mis Ordenes' a /profile.
+// loadMine() se queda: enrolledIds es lo que marca las ordenes ya inscriptas
+// en las tarjetas de aca, y state.mine alimenta el stat de horas subidas.
 
 // ── Render: stats ──────────────────────────────────────────────────────────────
 function renderStats() {
@@ -2758,7 +2337,7 @@ function renderStats() {
   } else { up.textContent = "—"; meta.textContent = "iniciá sesión para ver"; }
 }
 
-function renderAll() { renderStats(); renderCalls(); renderMine(); }
+function renderAll() { renderStats(); renderCalls(); }
 
 // ── Inscripción (modal) ─────────────────────────────────────────────────────────
 const enroll = {
@@ -2788,7 +2367,10 @@ const enroll = {
   },
 };
 window.enroll = enroll;
-window.scrollToLogin = () => { document.getElementById("auth-card").scrollIntoView({behavior:"smooth", block:"center"}); document.getElementById("in-email").focus(); };
+// Se llamaba "scrollToLogin" porque bajaba a la tarjeta de login del dashboard.
+// Esa tarjeta ya no existe: ahora abre el modal. Se conserva el nombre porque
+// está cableado en el HTML de las tarjetas de órdenes.
+window.scrollToLogin = () => gaAuth.open();
 
 // ── Animación de barras ────────────────────────────────────────────────────────
 function animateBars() {
@@ -2811,48 +2393,28 @@ async function loadMine() {
 }
 
 (async function init() {
+  GA.init({
+    // Corre en CADA cambio de sesión, login y logout. Nada del usuario anterior
+    // puede sobrevivir al que entra: por eso se reemplaza el estado entero en
+    // vez de limpiar campo por campo. `calls` se conserva porque es data pública
+    // y no depende de quién esté logueado.
+    reset() {
+      const calls = state.calls;
+      state = ESTADO_VACIO();   // incluye pending: el modal de inscripción muere acá
+      state.calls = calls;
+      enroll.close();
+    },
+    load: loadMine,
+    render() { applySession(); renderAll(); },
+  });
   applySession();
   ajustarDescargaMobile();
-  await Promise.all([loadCalls(), loadMine(), loadProfile()]);
-  renderAll(); renderPerfil();
+  await Promise.all([loadCalls(), loadMine()]);
+  renderAll();
 })();
 
-// ── Datos mock (solo con ?mock=1, para QA sin backend) ──────────────────────────
-function mockApi(action, p) {
-  const calls = [
-    { call_id:"GA-2026-001", titulo:"Shooters PvP", tipo:"Marketplace", targeting_mode:"categorias",
-      categorias:["Shooter","Battle Royale"], juegos:[], horas_totales:200, sin_limite:false,
-      max_horas_por_usuario:10, horas_subidas:48.5, precio_hora_usd:4.5 },
-    { call_id:"GA-2026-003", titulo:"RPG de mundo abierto", tipo:"Marketplace", targeting_mode:"juegos_especificos",
-      categorias:[], juegos:["Elden Ring","Baldur's Gate 3","The Witcher 3"], horas_totales:500, sin_limite:false,
-      max_horas_por_usuario:0, horas_subidas:390, precio_hora_usd:0 },
-  ];
-  const enrollments = [
-    { call_id:"GA-2026-003", titulo:"RPG de mundo abierto", tipo:"Marketplace", status:"activa", call_activo:true,
-      used_seconds:12240, remaining_seconds:null, precio_hora_usd:0, targeting_mode:"juegos_especificos",
-      categorias:[], juegos:["Elden Ring","Baldur's Gate 3","The Witcher 3"],
-      uploads:[
-        { juego:"Elden Ring", duration_seconds:7500, uploaded_at:1752600000, qa_status:"APROBADO", sale_status:"VENDIDO" },
-        { juego:"Baldur's Gate 3", duration_seconds:4680, uploaded_at:1752200000, qa_status:"APROBADO", sale_status:"DISPONIBLE" },
-        // Uno por estado, para poder revisar los 6 chips con ?mock=1 sin backend.
-        { juego:"The Witcher 3", duration_seconds:3600, uploaded_at:1752500000, qa_status:"SUBIDO", sale_status:"DISPONIBLE" },
-        { juego:"The Witcher 3", duration_seconds:3200, uploaded_at:1752400000, qa_status:"RECHAZADO", sale_status:"NO_DISPONIBLE",
-          qa_reason_text:"La sesión tiene un tramo largo seguido sin actividad de teclado ni mouse." },
-        { juego:"Elden Ring", duration_seconds:2900, uploaded_at:1752300000, qa_status:"RECUPERABLE", sale_status:"NO_DISPONIBLE",
-          qa_reason_text:"La subida no se completó: llegaron los datos de input pero el video no. Si todavía tenés la carpeta de la sesión en tu PC y la orden continúa abierta, volvé a subirla desde el Recorder y se acredita." },
-        { juego:"Baldur's Gate 3", duration_seconds:3900, uploaded_at:1752100000, qa_status:"APROBADO", sale_status:"VENDIDO",
-          pago_estado:"ENVIADO", pago_monto_usd:5.42, pago_fecha:"2026-07-25" },
-      ] },
-  ];
-  if (action === "get_profile") return Promise.resolve({ ok:true, status:200, data:{ wallet: mockApi._w || null } });
-  if (action === "set_wallet") {
-    mockApi._w = { network: p.network, address: p.address, updated_at: Math.floor(Date.now()/1000) };
-    return Promise.resolve({ ok:true, status:200, data:{ ok:true, wallet: mockApi._w } });
-  }
-  const D = { request_otp:{ok:true}, verify_otp:{token:"MOCK",email:p&&p.email||"qa@test.com"},
-              list_calls:{calls}, my_calls:{enrollments}, enroll_call:{ok:true} };
-  return Promise.resolve({ ok:true, status:200, data: D[action] || {} });
-}
+// El modo ?mock=1 y sus datos de ejemplo se sacaron al pasar a produccion:
+// esta pagina habla siempre con la Lambda de verdad.
 
 // FAQ: acordeon exclusivo. Al abrir un tema se cierran los demas; al cerrar
 // uno, sus preguntas vuelven a colapsarse para que reabra limpio.

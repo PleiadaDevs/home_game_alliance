@@ -3,6 +3,9 @@
 <meta charset="utf-8">
 <title>Gameplay Alliance — Mi Perfil</title>
 <meta name="robots" content="noindex, nofollow">
+<!-- Sesión + login por modal, compartido con /dashboard. Va PRIMERO para que
+     el CSS propio de esta página pueda pisarlo. -->
+<link rel="stylesheet" href="/ga-auth.css?v=1">
 <style>
 /* Fuentes self-hosted: reutiliza los mismos woff2 del root del site */
 @font-face {
@@ -1305,15 +1308,7 @@ img, video, svg { max-width: 100%; }
 .cover .cat-ico{width:88px;height:88px;color:var(--violet-2);position:relative;z-index:2;filter:drop-shadow(0 4px 14px rgba(139,92,246,.45));}
 /* Orden completada: la palabra bien grande, senal a la comunidad */
 .reward-now.completed-badge{color:var(--violet-2);font-family:var(--display);font-weight:900;font-size:30px;line-height:.95;text-transform:uppercase;letter-spacing:.01em;}
-/* Control de sesion en el header (Acceder / usuario + luz verde + salir) */
-.ga-acceder{font-family:var(--display);font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:13px;padding:11px 20px;border-radius:11px;border:1px solid var(--line-strong);background:rgba(139,92,246,0.08);color:var(--ink);cursor:pointer;transition:border-color .15s,background .15s;}
-.ga-acceder:hover{border-color:var(--violet);background:rgba(139,92,246,0.16);}
-.ga-userchip{display:inline-flex;align-items:center;gap:9px;padding:7px 8px 7px 13px;border:1px solid var(--line-strong);border-radius:11px;background:rgba(16,12,31,0.65);font-family:var(--mono);font-size:13px;color:var(--ink);}
-.ga-dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 9px var(--ok);flex:0 0 auto;animation:gaPulse 2.4s ease-in-out infinite;}
-@keyframes gaPulse{0%,100%{opacity:1}50%{opacity:.45}}
-.ga-uname{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.ga-logout{width:26px;height:26px;border-radius:7px;border:1px solid var(--line);background:transparent;color:var(--ink-3);cursor:pointer;font-size:12px;line-height:1;display:grid;place-items:center;transition:color .15s,border-color .15s;}
-.ga-logout:hover{color:var(--bad);border-color:var(--bad);}
+/* El control de sesion del header vive en /ga-auth.css (compartido con /dashboard) */
 </style>
 
 <style>
@@ -1345,26 +1340,12 @@ img, video, svg { max-width: 100%; }
 .pager{display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%;
   font-family:var(--mono);font-size:12px;}
 .pager .btn{padding:7px 14px;font-size:12px;}
-/* Banner de entorno de QA — se saca al pasar a /profile definitivo */
-.qa-banner{position:sticky;top:0;z-index:60;background:#f59e0b;color:#1a1206;text-align:center;
-  font-family:var(--display);font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:7px 12px;}
-/* Panel para saltar entre estados sin tocar la URL — solo preview */
-#qa-switch{position:fixed;right:16px;bottom:16px;z-index:90;background:rgba(16,12,31,.94);
-  border:1px solid var(--line-strong);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:6px;
-  box-shadow:0 20px 50px -20px #000;backdrop-filter:blur(10px);}
-#qa-switch .qa-switch-t{font-family:var(--display);font-weight:800;font-size:10px;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--ink-4);margin-bottom:2px;}
-#qa-switch button{font-family:var(--mono);font-size:12px;color:var(--ink-2);background:rgba(139,92,246,.08);
-  border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer;text-align:left;}
-#qa-switch button:hover{color:var(--ink);border-color:var(--violet);}
-@media (max-width:700px){ #qa-switch{display:none !important;} }
 </style>
 </head>
 
 <body>
 <div class="bg-grid"></div>
 <div class="bg-dots"></div>
-<div class="qa-banner">Entorno de QA · esta es la versión de prueba del perfil (no es la definitiva)</div>
 
 <div class="shell">
   <!-- ============ HEADER (home site) ============ -->
@@ -1614,49 +1595,7 @@ img, video, svg { max-width: 100%; }
 
   </main>
 
-  <!-- ============ PANEL DE REVISIÓN (solo preview, se saca en producción) ==== -->
-  <div id="qa-switch" style="display:none;">
-    <div class="qa-switch-t">Vista de prueba</div>
-    <button onclick="qaView('normal')">Normal</button>
-    <button onclick="qaView('nowallet')">Sin wallet</button>
-    <button onclick="qaView('lock')">Wallet bloqueada</button>
-    <button onclick="qaView('tron')">Wallet TRON</button>
-    <button onclick="qaView('out')">Deslogueado</button>
-  </div>
-
-  <!-- ============ MODAL LOGIN ============ -->
-  <div class="modal-bg" id="login-modal-bg">
-    <div class="modal card corners">
-      <div class="c-bl"></div><div class="c-br"></div>
-      <button class="modal-x" onclick="gaAuth.close()" aria-label="Cerrar">✕</button>
-
-      <div id="lg-step-email">
-        <div class="eyebrow">Acceso</div>
-        <h3>Ingresar al perfil</h3>
-        <p class="sub" style="font-size:13.5px;">Ingresá el email con el que te registraste en el programa. Te mandamos un código de acceso.</p>
-        <input class="input" type="email" id="lg-email" placeholder="tu@email.com" autocomplete="email" style="margin-top:6px;">
-        <div class="modal-err" id="lg-err-1"></div>
-        <div class="modal-actions">
-          <button class="btn primary" id="lg-btn-send" onclick="gaAuth.requestOtp()">Enviar código</button>
-        </div>
-      </div>
-
-      <div id="lg-step-code" style="display:none;">
-        <div class="eyebrow">Acceso</div>
-        <h3>Tu código de acceso</h3>
-        <p class="sub" style="font-size:13.5px;">Te mandamos un código de 6 dígitos a <strong style="color:var(--ink)" id="lg-mail-echo"></strong>. Vence en 10 minutos. Revisá también la carpeta de Spam.</p>
-        <input class="input" type="text" id="lg-code" inputmode="numeric" maxlength="6" placeholder="000000" autocomplete="one-time-code" style="text-align:center; letter-spacing:.35em; margin-top:6px;">
-        <div class="modal-err" id="lg-err-2"></div>
-        <div class="modal-actions" style="justify-content:space-between;">
-          <button class="btn ghost" id="lg-btn-resend" onclick="gaAuth.resend()">Reenviar código</button>
-          <div style="display:flex; gap:10px;">
-            <button class="btn ghost" onclick="gaAuth.back()">Cambiar email</button>
-            <button class="btn primary" id="lg-btn-verify" onclick="gaAuth.verifyOtp()">Ingresar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- El modal de login lo inyecta /ga-auth.js (compartido con /dashboard) -->
 
   <!-- ============ MODAL CONFIRMAR WALLET ============ -->
   <div class="modal-bg" id="wal-modal-bg">
@@ -1718,34 +1657,22 @@ img, video, svg { max-width: 100%; }
   </footer>
 
 </div>
+<script src="/ga-auth.js?v=1"></script>
 <script>
 "use strict";
 // ════════════════════════════════════════════════════════════════════════════
 //  /profile — perfil del usuario (datos, wallet de pagos y Mis Órdenes).
 //  Habla con la Lambda pleiada-api. El gate real vive en el backend.
-//  ?mock=1 usa datos de ejemplo. Modificadores del mock, para revisar estados:
-//     &out=1        arranca deslogueado
-//     &nowallet=1   todavía no cargó wallet
-//     &lock=1       wallet bloqueada por pago en proceso
-//     &tron=1       wallet vieja en TRC20 (banner de migración)
+//
+//  La sesión (cookies), el cliente de la API y el modal de login NO viven acá:
+//  están en /ga-auth.js, compartidos con /dashboard. Acá solo el render propio.
 // ════════════════════════════════════════════════════════════════════════════
-const API = "https://hdk2i43wuiw3272mtnjgwwsaby0bkood.lambda-url.sa-east-1.on.aws/";
-const CK_TOKEN = "ga_session", CK_EMAIL = "ga_email", CK_NAME = "ga_name";
-const QS = new URLSearchParams(location.search);
-// Por defecto habla con la Lambda de verdad. Con ?mock=1 (o en el build
-// standalone que se manda para revisar diseño) corre con datos de ejemplo.
-const MOCK = !!window.__GA_FORCE_MOCK || QS.has("mock");
-// En modo mock la sesión vive en memoria: así la preview anda también abierta
-// como archivo local (file://), donde el navegador no deja escribir cookies.
-const _memck = {};
-function ckDomain(){ return location.hostname.endsWith("gameplayalliance.gg") ? "; domain=.gameplayalliance.gg" : ""; }
-function ckSet(n,v,days){ if (MOCK) { _memck[n]=v; return; } const e=new Date(Date.now()+days*864e5).toUTCString(); document.cookie=`${n}=${encodeURIComponent(v)}; expires=${e}; path=/${ckDomain()}; SameSite=Lax${location.protocol==="https:"?"; Secure":""}`; }
-function ckGet(n){ if (MOCK) return _memck[n] || ""; return document.cookie.split("; ").reduce((a,c)=>{const i=c.indexOf("="); return c.slice(0,i)===n?decodeURIComponent(c.slice(i+1)):a;},""); }
-function ckDel(n){ if (MOCK) { delete _memck[n]; return; } document.cookie=`${n}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${ckDomain()}`; }
+const api = GA.api, auth = GA.auth;
 
 const POR_PAGINA = 20;   // líneas de Mis Órdenes por página
-const state = { mine: [], tab: "todos", page: 0, profile: null,
-                tieneWallet: true, _email: "" };
+const ESTADO_VACIO = () => ({ mine: [], tab: "todos", page: 0, profile: null,
+                              tieneWallet: true });
+let state = ESTADO_VACIO();
 
 const MESES = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -1761,128 +1688,12 @@ const fmtFechaCorta = v => {
 const fmtUSD = n => "US$ " + (Number(n)||0).toFixed(2).replace(".", ",");
 const glyph = t => (String(t||"").trim().split(/\s+/).map(w => w[0]).join("").toUpperCase().replace(/[^A-Z0-9]/g,"") || "GA").slice(0,3);
 
-// ── API ──────────────────────────────────────────────────────────────────────
-async function api(action, payload) {
-  if (MOCK) return mockApi(action, payload);
-  let res;
-  try {
-    res = await fetch(API, { method:"POST", headers:{"Content-Type":"application/json"},
-                             body: JSON.stringify(Object.assign({action}, payload||{})) });
-  } catch (e) {
-    return { ok:false, status:0, data:{ error:"No pudimos conectar con el servidor. Revisá tu conexión y probá de nuevo." } };
-  }
-  let data = {}; try { data = await res.json(); } catch (e) {}
-  // Sesión vencida (dura 30 días): se limpia y se vuelve a pedir login en el
-  // acto, en vez de dejar la pantalla a medio cargar sin explicación.
-  if (res.status === 401 && action !== "verify_otp") {
-    auth.logout(false);
-    renderAll();
-    gaAuth.open();
-  }
-  return { ok: res.ok, status: res.status, data };
-}
-
-const auth = {
-  token: () => ckGet(CK_TOKEN),
-  email: () => ckGet(CK_EMAIL),
-  logout(reload = true) {
-    ckDel(CK_TOKEN); ckDel(CK_EMAIL); ckDel(CK_NAME);
-    state.mine = []; state.profile = null;
-    if (reload) renderAll();
-  },
-};
-window.auth = auth;
-
-// ── Login por modal ──────────────────────────────────────────────────────────
-// Un solo modal para todo el site: mail → código → adentro, sin recargar.
-const gaAuth = {
-  _after: null,
-  open(after) {
-    this._after = after || null;
-    document.getElementById("lg-step-email").style.display = "";
-    document.getElementById("lg-step-code").style.display = "none";
-    this._err(1, ""); this._err(2, "");
-    document.getElementById("login-modal-bg").classList.add("open");
-    setTimeout(() => document.getElementById("lg-email").focus(), 60);
-  },
-  close() { document.getElementById("login-modal-bg").classList.remove("open"); },
-  back() {
-    document.getElementById("lg-step-email").style.display = "";
-    document.getElementById("lg-step-code").style.display = "none";
-    document.getElementById("lg-email").focus();
-  },
-  _err(step, msg) { const e = document.getElementById("lg-err-" + step); e.textContent = msg || ""; },
-  _busy(id, on, label) { const b = document.getElementById(id); b.disabled = on; if (label) b.textContent = label; },
-
-  async requestOtp() {
-    const email = (document.getElementById("lg-email").value || "").trim().toLowerCase();
-    this._err(1, "");
-    if (!email.includes("@") || !email.includes(".")) { this._err(1, "Ingresá un email válido."); return; }
-    this._busy("lg-btn-send", true, "Enviando…");
-    const r = await api("request_otp", { email });
-    this._busy("lg-btn-send", false, "Enviar código");
-    if (!r.ok) { this._err(1, r.data.message || r.data.error || "No pudimos enviar el código. Probá de nuevo."); return; }
-    state._email = email;
-    document.getElementById("lg-mail-echo").textContent = email;
-    document.getElementById("lg-step-email").style.display = "none";
-    document.getElementById("lg-step-code").style.display = "";
-    document.getElementById("lg-code").value = "";
-    document.getElementById("lg-code").focus();
-  },
-
-  async resend() {
-    this._busy("lg-btn-resend", true, "Reenviando…");
-    const r = await api("request_otp", { email: state._email });
-    this._busy("lg-btn-resend", false, "Reenviar código");
-    this._err(2, r.ok ? "" : (r.data.message || r.data.error || "No pudimos reenviar el código."));
-  },
-
-  async verifyOtp() {
-    const code = (document.getElementById("lg-code").value || "").trim();
-    this._err(2, "");
-    if (code.length < 6) { this._err(2, "El código tiene 6 dígitos."); return; }
-    this._busy("lg-btn-verify", true, "Verificando…");
-    const r = await api("verify_otp", { email: state._email, code });
-    this._busy("lg-btn-verify", false, "Ingresar");
-    if (!(r.ok && r.data.token)) { this._err(2, r.data.message || r.data.error || "Código incorrecto."); return; }
-    ckSet(CK_TOKEN, r.data.token, 30);
-    ckSet(CK_EMAIL, r.data.email, 30);
-    ckSet(CK_NAME, r.data.nombre || "", 30);
-    this.close();
-    await loadAll();
-    renderAll();
-    const cb = this._after; this._after = null; if (cb) cb();
-  },
-};
-window.gaAuth = gaAuth;
-
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape") { gaAuth.close(); perfil.closeModal(); }
-});
-document.getElementById("login-modal-bg").addEventListener("click", e => {
-  if (e.target.id === "login-modal-bg") gaAuth.close();
-});
-document.getElementById("lg-email").addEventListener("keydown", e => { if (e.key === "Enter") gaAuth.requestOtp(); });
-document.getElementById("lg-code").addEventListener("keydown", e => { if (e.key === "Enter") gaAuth.verifyOtp(); });
-
-// ── Header: uno u otro, nunca los dos ────────────────────────────────────────
-// Deslogueado → botón "Ingresar a mi perfil" (abre el modal).
-// Logueado    → solo el chip (username + luz verde), y el chip ES el link al
-//               perfil. La ✕ cierra sesión sin disparar la navegación.
-function renderHeaderAuth() {
-  const el = document.getElementById("ga-auth"); if (!el) return;
-  const email = auth.email() || "";
-  if (auth.token() && email) {
-    const uname = (ckGet(CK_NAME) || "").trim() || email.split("@")[0];
-    const short = uname.length > 16 ? uname.slice(0, 15) + "…" : uname;
-    el.innerHTML = `<a class="ga-userchip" href="/profile" title="Ir a mi perfil — ${esc(email)}">
-        <span class="ga-dot"></span><span class="ga-uname">${esc(short)}</span>
-        <button class="ga-logout" onclick="event.preventDefault();event.stopPropagation();auth.logout()" aria-label="Cerrar sesión" title="Cerrar sesión">✕</button>
-      </a>`;
-  } else {
-    el.innerHTML = `<button class="ga-acceder" onclick="gaAuth.open()">Ingresar a mi perfil</button>`;
-  }
-}
+// ── Sesión, API y login ──────────────────────────────────────────────────────
+// api / auth / gaAuth / renderHeaderAuth viven en /ga-auth.js, compartidos con
+// /dashboard. Acá solo el alias y el Escape del modal de la wallet, que es
+// propio de esta página (el del login lo maneja ga-auth.js).
+const renderHeaderAuth = GA.renderHeaderAuth;
+document.addEventListener("keydown", e => { if (e.key === "Escape") perfil.closeModal(); });
 
 // ── Sección 01: mis datos ────────────────────────────────────────────────────
 const RE_NOMBRE = /^[\wÀ-ÿñÑ .'-]{3,24}$/;
@@ -1962,7 +1773,7 @@ const datos = {
                                     origen_editable: r.data.origen_editable !== undefined
                                                      ? r.data.origen_editable : p.origen_editable });
     this._pintarOrigen();
-    ckSet(CK_NAME, r.data.nombre_usuario || "", 30);
+    auth.setName(r.data.nombre_usuario || "");
     renderHeaderAuth(); renderHero();
     this._lock(true);          // se vuelve a bloquear al guardar
     this._ok(true);
@@ -2122,8 +1933,8 @@ function plazoQaVencido(uploadedAt) {
   return habiles > QA_DIAS_HABILES;
 }
 function qaEfectivo(u) {
-  // Lo manda el backend (my_calls → qa_efectivo). El cálculo local es solo el
-  // fallback de la preview con datos mock.
+  // Lo manda el backend (my_calls → qa_efectivo). El cálculo local queda como
+  // fallback defensivo por si una respuesta vieja no lo trae.
   if (u.qa_efectivo !== undefined) return u.qa_efectivo;
   if (u.qa_status) return u.qa_status;
   return plazoQaVencido(u.uploaded_at) ? "APROBADO" : "";
@@ -2264,7 +2075,7 @@ function renderHero() {
   const el = document.getElementById("hero-session");
   if (!auth.token()) { el.innerHTML = ""; return; }
   const p = state.profile || {};
-  const uname = p.nombre_usuario || ckGet(CK_NAME) || (auth.email() || "").split("@")[0];
+  const uname = p.nombre_usuario || auth.name() || (auth.email() || "").split("@")[0];
   const horas = state.mine.reduce((s,m) => s + (m.used_seconds||0), 0) / 3600;
   el.innerHTML = `<div class="card corners" style="min-width:260px;">
       <div class="c-bl"></div><div class="c-br"></div>
@@ -2316,11 +2127,29 @@ async function loadAll() {
 
 (async function init() {
   try {
-    // Preview: arranca logueado con datos de ejemplo (con ?out=1, deslogueado).
-    if (MOCK && !QS.has("out")) {
-      ckSet(CK_TOKEN, "mock-token", 30); ckSet(CK_EMAIL, "vos@ejemplo.com", 30); ckSet(CK_NAME, "NightRaider", 30);
-    }
-    if (MOCK) document.getElementById("qa-switch").style.display = "";
+    GA.init({
+      // Corre en CADA cambio de sesión, login y logout. Nada del usuario
+      // anterior puede sobrevivir al que entra: por eso el estado se reemplaza
+      // entero en vez de limpiar campo por campo (con campos nuevos, limpiar a
+      // mano se olvida uno y vuelve el bug).
+      // `datos.editando` va acá a propósito: si el usuario anterior dejó el
+      // formulario en modo edición, renderAll() NO repinta los inputs y el que
+      // entra ve los datos del otro hasta que recargue.
+      reset() {
+        state = ESTADO_VACIO();
+        datos.editando = false;
+        datos._lock(true);
+        perfil.closeModal();
+        // Los inputs se repintan al renderizar logueado, pero si el que se va no
+        // deja a nadie atrás quedarían con sus datos en el DOM (ocultos, pero
+        // ahí). Se vacían para no dejar rastro del usuario anterior.
+        ["in-uname", "in-team", "in-origen"].forEach(id => {
+          const el = document.getElementById(id); if (el) el.value = "";
+        });
+      },
+      load: loadAll,
+      render: renderAll,
+    });
     await loadAll();
     renderAll();
     // Entrar a /profile sin sesión abre el login directamente.
@@ -2336,111 +2165,8 @@ async function loadAll() {
   }
 })();
 
-// ── Datos mock (solo con ?mock=1) ────────────────────────────────────────────
-function mockApi(action, p) {
-  const D = 86400, hoy = Math.floor(Date.now()/1000);
-  if (action === "request_otp") return Promise.resolve({ ok:true, status:200, data:{ ok:true } });
-  if (action === "request_wallet_otp") return Promise.resolve({ ok:true, status:200, data:{ ok:true } });
-  if (action === "verify_otp") return Promise.resolve({ ok:true, status:200,
-    data:{ token:"mock-token", email:"vos@ejemplo.com", nombre:"NightRaider" } });
-  if (action === "get_profile") {
-    if (mockApi._p === undefined) {
-      mockApi._p = {
-        email: "vos@ejemplo.com",
-        nombre_usuario: "NightRaider",
-        equipo: "Los Pixeleros",
-        // ?origen=fijo en la URL simula a alguien que eligió algo concreto al
-        // registrarse y por lo tanto NO puede corregirlo.
-        origen: QS.has("origen") ? "UADE" : "Ninguna",
-        origen_editable: !QS.has("origen"),
-        origen_opciones: ["Yellow","UADE","OLA.gg","Instagram","TikTok",
-                          "YouTube / Twitch","Un amigo o conocido",
-                          "Búsqueda en Google","Otra","Ninguna"],
-        wallet: QS.has("nowallet") ? null : {
-          network: QS.has("tron") ? "TRC20" : "BEP20",
-          address: QS.has("tron") ? "TF7f8WFLaqYXATPPs8jkERFKBWLDC1dAoY"
-                                  : "0x4bE1cA9E0f5B8d3a7C2f6091aD3b7e5C81f0aE29",
-          updated_at: hoy - 12*D },
-        wallet_editable: !QS.has("lock"),
-        wallet_lock_reason: QS.has("lock") ? "pago_en_proceso" : null,
-      };
-    }
-    return Promise.resolve({ ok:true, status:200, data: mockApi._p });
-  }
-  if (action === "update_profile") {
-    mockApi._p.nombre_usuario = p.nombre_usuario; mockApi._p.equipo = p.equipo;
-    if (p.origen) {
-      if (!mockApi._p.origen_editable)
-        return Promise.resolve({ ok:false, status:403, data:{ error:"origen_no_editable",
-          message:"Este dato no se puede cambiar." } });
-      mockApi._p.origen = p.origen;
-      mockApi._p.origen_editable = false;   // se gasta el único cambio
-    }
-    return Promise.resolve({ ok:true, status:200, data:{ ok:true,
-      nombre_usuario:p.nombre_usuario, equipo:p.equipo,
-      origen: mockApi._p.origen, origen_editable: mockApi._p.origen_editable } });
-  }
-  if (action === "set_wallet") {
-    if (mockApi._p.wallet_editable === false)
-      return Promise.resolve({ ok:false, status:403, data:{ error:"wallet_locked_pago",
-        message:"Tenés un pago en curso hacia tu wallet actual. Vas a poder cambiarla apenas se acredite." } });
-    mockApi._p.wallet = { network:p.network, address:p.address, updated_at: hoy };
-    return Promise.resolve({ ok:true, status:200, data:{ ok:true, wallet: mockApi._p.wallet } });
-  }
-  if (action === "my_calls") {
-    const ups = [
-      // sin QA y dentro del plazo → "Subido. Pendiente de QA"
-      { juego:"Apex Legends", duration_seconds:3620, uploaded_at:hoy-1*D, qa_status:"" },
-      { juego:"DOOM Eternal", duration_seconds:2950, uploaded_at:hoy-4*D, qa_status:"RECUPERABLE",
-        qa_reason_text:"La subida no se completó: falta parte del video de la sesión." },
-      { juego:"Halo MCC", duration_seconds:3600, uploaded_at:hoy-9*D, qa_status:"APROBADO", sale_status:"DISPONIBLE" },
-      { juego:"Metro 2033", duration_seconds:3100, uploaded_at:hoy-16*D, qa_status:"RECHAZADO", sale_status:"NO_DISPONIBLE",
-        qa_reason_text:"La sesión tiene períodos largos sin actividad del jugador." },
-      // NUNCA lo auditó nadie, pero vencieron los 30 días hábiles → QA OK automático
-      { juego:"Left 4 Dead 2", duration_seconds:3580, uploaded_at:hoy-70*D, qa_status:"" },
-      // venta confirmada A MANO → recién acá se habilita el pago
-      { juego:"Cuphead", duration_seconds:3600, uploaded_at:hoy-80*D, qa_status:"APROBADO",
-        sale_status:"VENDIDO", pago_estado:"PENDIENTE", pago_monto_usd:5.00 },
-      { juego:"Elden Ring", duration_seconds:3540, uploaded_at:hoy-100*D, qa_status:"APROBADO",
-        sale_status:"VENDIDO", pago_estado:"ENVIADO", pago_monto_usd:4.92, pago_fecha:"2026-08-04" },
-    ];
-    // Relleno para ver el paginado (20 por página).
-    const juegos = ["Rocket League","Hades","Hollow Knight","Valorant","Dead Cells",
-                    "Forza Horizon 5","Stardew Valley","Celeste","Rimworld","Terraria",
-                    "Portal 2","Subnautica","Factorio","Slay the Spire","Outer Wilds",
-                    "Hitman 3","Sekiro","Dishonored 2","Prey","Control"];
-    juegos.forEach((j, i) => ups.push({
-      juego: j, duration_seconds: 2400 + i * 97, uploaded_at: hoy - (110 + i * 3) * D,
-      qa_status: "APROBADO", sale_status: "DISPONIBLE" }));
-    return Promise.resolve({ ok:true, status:200, data:{
-      tiene_wallet: !!(mockApi._p && mockApi._p.wallet),
-      enrollments: [
-        { call_id:"GA-2026-005", titulo:"Shooters", tipo:"Marketplace", call_activo:true,
-          used_seconds: 21800, precio_hora_usd:5, uploads: ups },
-        { call_id:"GA-2026-006", titulo:"Acción y Aventura", tipo:"Marketplace", call_activo:true,
-          call_estado:"activo", used_seconds: 0, precio_hora_usd:5, uploads:[] },
-        { call_id:"GA-2026-004", titulo:"Playground Test", tipo:"Marketplace", call_activo:true,
-          call_estado:"completado", used_seconds: 0, precio_hora_usd:5, uploads:[] },
-        { call_id:"GA-2026-003", titulo:"RPG (vieja)", tipo:"Marketplace", call_activo:false,
-          call_estado:"cerrado", used_seconds: 0, precio_hora_usd:0, uploads:[] },
-      ] } });
-  }
-  return Promise.resolve({ ok:false, status:400, data:{ error:"mock: action desconocida" } });
-}
-
-// ── Panel de revisión (solo preview): cambiar de estado sin tocar la URL ──────
-window.qaView = async function (kind) {
-  const p = mockApi._p;
-  if (kind === "out")      { auth.logout(false); renderAll(); return; }
-  if (!auth.token()) { ckSet(CK_TOKEN,"mock-token",30); ckSet(CK_EMAIL,"vos@ejemplo.com",30); ckSet(CK_NAME,"NightRaider",30); await loadAll(); }
-  perfil.cambio = false;
-  if (kind === "normal")   { p.wallet = { network:"BEP20", address:"0x4bE1cA9E0f5B8d3a7C2f6091aD3b7e5C81f0aE29", updated_at: Math.floor(Date.now()/1000)-12*86400 }; p.wallet_editable = true; }
-  if (kind === "nowallet") { p.wallet = null; p.wallet_editable = true; }
-  if (kind === "lock")     { p.wallet = { network:"BEP20", address:"0x4bE1cA9E0f5B8d3a7C2f6091aD3b7e5C81f0aE29", updated_at: Math.floor(Date.now()/1000)-12*86400 }; p.wallet_editable = false; }
-  if (kind === "tron")     { p.wallet = { network:"TRC20", address:"TF7f8WFLaqYXATPPs8jkERFKBWLDC1dAoY", updated_at: Math.floor(Date.now()/1000)-40*86400 }; p.wallet_editable = true; }
-  state.profile = Object.assign({}, state.profile, p);
-  renderAll();
-};
+// El modo mock (?mock=1) y el panel de vista de prueba se sacaron al pasar a
+// produccion: esta pagina habla siempre con la Lambda de verdad.
 
 </script>
 </body></html>

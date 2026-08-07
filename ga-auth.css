@@ -1,0 +1,25 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   ga-auth.css — estilos del control de sesión del header y del modal de login.
+   Compartido por /dashboard y /profile. Se carga con <link rel="stylesheet">
+   ANTES del CSS propio de la página, así la página puede pisar algo si hace
+   falta.
+
+   Solo lo que es exclusivo del auth. Las primitivas .modal-bg / .modal / .btn /
+   .input / .card viven en cada página: las comparte con sus otros modales
+   (wallet, inscripción) y moverlas acá arrastraría medio design system.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Control de sesión en el header (Acceder / usuario + luz verde + salir) */
+.ga-acceder{font-family:var(--display);font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:13px;padding:11px 20px;border-radius:11px;border:1px solid var(--line-strong);background:rgba(139,92,246,0.08);color:var(--ink);cursor:pointer;transition:border-color .15s,background .15s;}
+.ga-acceder:hover{border-color:var(--violet);background:rgba(139,92,246,0.16);}
+.ga-userchip{display:inline-flex;align-items:center;gap:9px;padding:7px 8px 7px 13px;border:1px solid var(--line-strong);border-radius:11px;background:rgba(16,12,31,0.65);font-family:var(--mono);font-size:13px;color:var(--ink);text-decoration:none;}
+.ga-userchip:hover{border-color:var(--violet);}
+.ga-dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 9px var(--ok);flex:0 0 auto;animation:gaPulse 2.4s ease-in-out infinite;}
+@keyframes gaPulse{0%,100%{opacity:1}50%{opacity:.45}}
+.ga-uname{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ga-logout{width:26px;height:26px;border-radius:7px;border:1px solid var(--line);background:transparent;color:var(--ink-3);cursor:pointer;font-size:12px;line-height:1;display:grid;place-items:center;transition:color .15s,border-color .15s;}
+.ga-logout:hover{color:var(--bad);border-color:var(--bad);}
+
+/* El modal de login lo inyecta ga-auth.js; estos son los pocos estilos que no
+   salen de las primitivas de la página. */
+#login-modal-bg .lg-code-input{text-align:center;letter-spacing:.35em;}
