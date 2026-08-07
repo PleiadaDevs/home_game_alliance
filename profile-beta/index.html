@@ -1436,13 +1436,20 @@ img, video, svg { max-width: 100%; }
             </div>
             <div>
               <label class="fld-label" for="in-team">Nombre de tu equipo <span style="color:var(--ink-4); font-weight:400;">(opcional)</span></label>
-              <input class="input" type="text" id="in-team" maxlength="40" placeholder="Si grabás con un equipo o guild" autocomplete="off">
+              <input class="input" type="text" id="in-team" maxlength="40" placeholder="Si grabás con un equipo" autocomplete="off">
               <div class="fld-hint">Dejalo vacío si grabás por tu cuenta.</div>
+            </div>
+            <!-- Se muestra solo si el backend manda el campo (Lambda ≥ 2026-08-06.1).
+                 Con una versión anterior queda oculto en vez de mostrarse vacío. -->
+            <div id="origen-campo" style="display:none;">
+              <label class="fld-label" for="in-origen">¿Cómo te enteraste del programa Gameplay Alliance?</label>
+              <select class="input" id="in-origen" disabled></select>
+              <div class="fld-hint" id="origen-hint"></div>
             </div>
             <div>
               <label class="fld-label" for="in-mail-ro">Email de tu cuenta</label>
               <input class="input" type="text" id="in-mail-ro" disabled>
-              <div class="fld-hint">El email no se puede cambiar desde acá: es con el que ingresás y con el que te avisamos de los pagos. Si necesitás cambiarlo, escribinos a <a href="mailto:gg_support@gameplayalliance.gg" style="color:var(--violet-2); text-decoration:none; font-weight:600;">soporte</a>.</div>
+              <div class="fld-hint">El email no se puede cambiar: es la identidad con la que se vinculan todos tus data sets y tus pagos.</div>
             </div>
           </div>
 
@@ -1890,9 +1897,34 @@ const datos = {
     this.editando = !on;
     document.getElementById("in-uname").disabled = on;
     document.getElementById("in-team").disabled = on;
+    // El origen sigue una regla propia: aunque se esté editando, solo se
+    // habilita si el backend dice que todavía se puede corregir.
+    const p = state.profile || {};
+    document.getElementById("in-origen").disabled = on || !p.origen_editable;
     document.getElementById("btn-datos-edit").style.display   = on ? "" : "none";
     document.getElementById("btn-datos-save").style.display   = on ? "none" : "";
     document.getElementById("btn-datos-cancel").style.display = on ? "none" : "";
+  },
+  // Pinta el select con las opciones que manda el backend. Si el valor guardado
+  // no está en la lista (una opción vieja de Airtable), se agrega igual: primero
+  // no perderle el dato al usuario.
+  _pintarOrigen() {
+    const p = state.profile || {};
+    const sel = document.getElementById("in-origen");
+    const hint = document.getElementById("origen-hint");
+    // Backend viejo (< 2026-08-06.1): no manda las opciones. Se esconde el campo
+    // entero en vez de mostrar un desplegable vacío y bloqueado, que se leería
+    // como un error. Cuando salga el deploy aparece solo, sin tocar el site.
+    const hayCampo = Array.isArray(p.origen_opciones) && p.origen_opciones.length > 0;
+    document.getElementById("origen-campo").style.display = hayCampo ? "" : "none";
+    if (!hayCampo) return;
+    const ops = (p.origen_opciones || []).slice();
+    if (p.origen && ops.indexOf(p.origen) === -1) ops.unshift(p.origen);
+    sel.innerHTML = (p.origen ? "" : `<option value="">Elegí una opción</option>`)
+      + ops.map(o => `<option value="${esc(o)}"${o === p.origen ? " selected" : ""}>${esc(o)}</option>`).join("");
+    hint.textContent = p.origen_editable
+      ? "Podés corregirlo una sola vez. Una vez guardado, ya no se puede cambiar."
+      : "Este dato lo elegiste al registrarte y no se puede modificar.";
   },
   edit() {
     this._err(""); this._ok(false);
@@ -1904,6 +1936,7 @@ const datos = {
     const p = state.profile || {};
     document.getElementById("in-uname").value = p.nombre_usuario || "";
     document.getElementById("in-team").value = p.equipo || "";
+    this._pintarOrigen();
     this._lock(true);
   },
   async save() {
@@ -1912,12 +1945,23 @@ const datos = {
     this._err(""); this._ok(false);
     if (!RE_NOMBRE.test(nombre)) { this._err("El nombre de usuario tiene que tener entre 3 y 24 caracteres, sin símbolos raros."); return; }
     if (!RE_EQUIPO.test(equipo)) { this._err("El nombre del equipo puede tener hasta 40 caracteres, sin símbolos raros."); return; }
+    const p = state.profile || {};
+    const payload = { token: auth.token(), nombre_usuario: nombre, equipo };
+    // El origen solo se manda si el usuario podía tocarlo Y eligió algo distinto:
+    // mandarlo de más gastaría su único cambio sin que él lo pidiera.
+    const origen = (document.getElementById("in-origen").value || "").trim();
+    if (p.origen_editable && origen && origen !== (p.origen || "")) payload.origen = origen;
+
     const b = document.getElementById("btn-datos-save"); b.disabled = true; b.textContent = "Guardando…";
-    const r = await api("update_profile", { token: auth.token(), nombre_usuario: nombre, equipo });
+    const r = await api("update_profile", payload);
     b.disabled = false; b.textContent = "Guardar cambios";
     if (!r.ok) { this._err(r.data.message || r.data.error || "No pudimos guardar tus datos. Probá de nuevo en un momento."); return; }
     state.profile = Object.assign({}, state.profile,
-                                  { nombre_usuario: r.data.nombre_usuario, equipo: r.data.equipo });
+                                  { nombre_usuario: r.data.nombre_usuario, equipo: r.data.equipo,
+                                    origen: r.data.origen !== undefined ? r.data.origen : p.origen,
+                                    origen_editable: r.data.origen_editable !== undefined
+                                                     ? r.data.origen_editable : p.origen_editable });
+    this._pintarOrigen();
     ckSet(CK_NAME, r.data.nombre_usuario || "", 30);
     renderHeaderAuth(); renderHero();
     this._lock(true);          // se vuelve a bloquear al guardar
@@ -2247,6 +2291,7 @@ function renderAll() {
     if (!datos.editando) {
       document.getElementById("in-uname").value = p.nombre_usuario || "";
       document.getElementById("in-team").value = p.equipo || "";
+      datos._pintarOrigen();
       datos._lock(true);
     }
     document.getElementById("in-mail-ro").value = auth.email() || "";
@@ -2304,6 +2349,13 @@ function mockApi(action, p) {
         email: "vos@ejemplo.com",
         nombre_usuario: "NightRaider",
         equipo: "Los Pixeleros",
+        // ?origen=fijo en la URL simula a alguien que eligió algo concreto al
+        // registrarse y por lo tanto NO puede corregirlo.
+        origen: QS.has("origen") ? "UADE" : "Ninguna",
+        origen_editable: !QS.has("origen"),
+        origen_opciones: ["Yellow","UADE","OLA.gg","Instagram","TikTok",
+                          "YouTube / Twitch","Un amigo o conocido",
+                          "Búsqueda en Google","Otra","Ninguna"],
         wallet: QS.has("nowallet") ? null : {
           network: QS.has("tron") ? "TRC20" : "BEP20",
           address: QS.has("tron") ? "TF7f8WFLaqYXATPPs8jkERFKBWLDC1dAoY"
@@ -2317,7 +2369,16 @@ function mockApi(action, p) {
   }
   if (action === "update_profile") {
     mockApi._p.nombre_usuario = p.nombre_usuario; mockApi._p.equipo = p.equipo;
-    return Promise.resolve({ ok:true, status:200, data:{ ok:true, nombre_usuario:p.nombre_usuario, equipo:p.equipo } });
+    if (p.origen) {
+      if (!mockApi._p.origen_editable)
+        return Promise.resolve({ ok:false, status:403, data:{ error:"origen_no_editable",
+          message:"Este dato no se puede cambiar." } });
+      mockApi._p.origen = p.origen;
+      mockApi._p.origen_editable = false;   // se gasta el único cambio
+    }
+    return Promise.resolve({ ok:true, status:200, data:{ ok:true,
+      nombre_usuario:p.nombre_usuario, equipo:p.equipo,
+      origen: mockApi._p.origen, origen_editable: mockApi._p.origen_editable } });
   }
   if (action === "set_wallet") {
     if (mockApi._p.wallet_editable === false)
